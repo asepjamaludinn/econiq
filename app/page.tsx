@@ -1,65 +1,231 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const dataAwan = [
+  { id: 1, top: "10%", left: "5%", width: 300, opacity: 0.9 },
+  { id: 2, top: "25%", left: "40%", width: 200, opacity: 0.7 },
+  { id: 3, top: "8%", left: "75%", width: 280, opacity: 0.8 },
+  { id: 4, top: "35%", left: "85%", width: 150, opacity: 0.6 },
+  { id: 5, top: "18%", left: "-10%", width: 320, opacity: 0.85 },
+];
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tanamanJendelaRef = useRef<HTMLDivElement>(null);
+  const penutupTenantRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const awanElements = gsap.utils.toArray<HTMLDivElement>(".awan-terbang");
+
+      awanElements.forEach((awan) => {
+        const driftRight = () => {
+          gsap.to(awan, {
+            x: window.innerWidth + 400,
+            duration: gsap.utils.random(40, 70),
+            ease: "none",
+            onComplete: () => {
+              gsap.set(awan, { x: -window.innerWidth - 400 });
+              driftRight();
+            },
+          });
+        };
+
+        gsap.to(awan, {
+          y: `+=${gsap.utils.random(-10, 10)}`,
+          duration: gsap.utils.random(4, 8),
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        driftRight();
+      });
+
+      if (tanamanJendelaRef.current) {
+        gsap.to(tanamanJendelaRef.current, {
+          rotation: 3,
+          transformOrigin: "bottom center",
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!penutupTenantRef.current) return;
+
+        const yPos = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        gsap.to(penutupTenantRef.current, {
+          scaleY: 1 + yPos * 0.04,
+          rotationX: yPos * -15,
+          transformOrigin: "50% 0%",
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      };
+
+      window.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+      };
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="overflow-hidden">
+      <section
+        ref={containerRef}
+        className="relative w-full h-screen flex flex-col items-center justify-start overflow-hidden"
+      >
+        {/* Layer Background Langit */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image
+            src="/images/Biru langit.svg"
+            alt="Langit Biru"
+            fill
+            className="object-cover object-top"
+            priority
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Layer Awan */}
+        {dataAwan.map((awan) => (
+          <div
+            key={awan.id}
+            className="awan-terbang absolute z-10"
+            style={{
+              top: awan.top,
+              left: awan.left,
+              width: `${awan.width}px`,
+              height: `${awan.width / 2}px`,
+              opacity: awan.opacity,
+            }}
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/images/awan1.svg"
+              alt={`Awan ${awan.id}`}
+              fill
+              className="object-contain"
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+        ))}
+
+        <div className="absolute -top-[45%] -right-15 w-[30%] h-[100%] z-[15] pointer-events-none">
+          <Image
+            src="/images/Pohon.svg"
+            alt="Pohon di belakang rumah kanan"
+            fill
+            className="object-contain object-bottom"
+          />
         </div>
-      </main>
-    </div>
+
+        <div
+          className="absolute top-[5%] left-1/2 -translate-x-1/2 
+                w-[90%] max-w-3xl 
+                z-50 pointer-events-none 
+                flex flex-col items-center justify-center text-center"
+        >
+          <h1
+            className="text-3xl md:text-4xl lg:text-6xl
+             font-semibold
+             tracking-tight
+             text-white
+             leading-snug
+             drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+          >
+            Know Your Money. <br className="hidden md:block" />
+            <span className="text-white">Grow Your Money.</span>
+          </h1>
+        </div>
+
+        <div className="absolute bottom-[10%] w-[100%] h-[100%] z-20">
+          <Image
+            src="/images/Rumah bersatu.svg"
+            alt="Rumah Bersatu"
+            fill
+            className="object-cover object-bottom scale-[1.02]"
+            priority
+          />
+
+          <div className="absolute top-[65%] left-15 w-[12%] h-[12%] z-30">
+            <Image
+              src="/images/Jendela tanpa.svg"
+              alt="Jendela Kiri"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          <div
+            ref={tanamanJendelaRef}
+            className="absolute top-[70%] left-22 w-[8%] h-[8%] z-40"
+          >
+            <Image
+              src="/images/tanaman jendela kiri.svg"
+              alt="Tanaman Jendela"
+              fill
+              className="object-contain object-bottom"
+            />
+          </div>
+          <div className="absolute top-[74%] left-22 w-[8%] h-[8%] z-50">
+            <Image
+              src="/images/wadah tanaman jendela kiri.svg"
+              alt="Wadah Tanaman Jendela"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[60%] h-[60%] z-30">
+            <Image
+              src="/images/Tenant.svg"
+              alt="Tenant"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          <div
+            className="absolute top-[56.5%] left-1/2 -translate-x-1/2 w-[35%] aspect-[16/9] z-40 pointer-events-none"
+            style={{ perspective: "800px" }}
+          >
+            <div ref={penutupTenantRef} className="relative w-full h-full">
+              <Image
+                src="/images/Penutup depan tenant.svg"
+                alt="Penutup Depan Tenant"
+                fill
+                className="object-contain object-top"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Layer Jalan */}
+        <div className="absolute bottom-0 left-0 w-full h-[10%] z-40">
+          <Image
+            src="/images/Jalan.svg"
+            alt="Jalan"
+            fill
+            className="object-cover object-bottom"
+            priority
+          />
+        </div>
+      </section>
+    </main>
   );
 }
