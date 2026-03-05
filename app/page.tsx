@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,23 +19,35 @@ const dataAwan = [
   { id: 5, top: "18%", left: "-10%", width: 320, opacity: 0.85 },
 ];
 
+const sumberUang = [
+  "/images/Uang1 blur.svg",
+  "/images/Uang2 blur.svg",
+  "/images/Uang3 blur.svg",
+];
+
+const uangHujan = Array.from({ length: 5 }).map((_, i) => ({
+  id: i + 1,
+  src: sumberUang[i % sumberUang.length],
+  size: 40 + (i % 3) * 15,
+}));
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tanamanJendelaRef = useRef<HTMLDivElement>(null);
   const penutupTenantRef = useRef<HTMLDivElement>(null);
+  const penutupShadowRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const awanElements = gsap.utils.toArray<HTMLDivElement>(".awan-terbang");
-
       awanElements.forEach((awan) => {
         const driftRight = () => {
           gsap.to(awan, {
-            x: window.innerWidth + 400,
+            x: "150vw",
             duration: gsap.utils.random(40, 70),
             ease: "none",
             onComplete: () => {
-              gsap.set(awan, { x: -window.innerWidth - 400 });
+              gsap.set(awan, { x: "-50vw" });
               driftRight();
             },
           });
@@ -62,25 +75,117 @@ export default function Home() {
         });
       }
 
-      const handleMouseMove = (e: MouseEvent) => {
-        if (!penutupTenantRef.current) return;
-
-        const yPos = (e.clientY / window.innerHeight - 0.5) * 2;
-
-        gsap.to(penutupTenantRef.current, {
-          scaleY: 1 + yPos * 0.04,
-          rotationX: yPos * -15,
-          transformOrigin: "50% 0%",
-          duration: 0.8,
-          ease: "power2.out",
+      const daunElements = gsap.utils.toArray<HTMLDivElement>(".daun-angin");
+      daunElements.forEach((daun) => {
+        gsap.to(daun, {
+          rotation: gsap.utils.random(-5, 5),
+          x: `+=${gsap.utils.random(-5, 5)}`,
+          y: `+=${gsap.utils.random(-2, 2)}`,
+          transformOrigin: "top center",
+          duration: gsap.utils.random(5, 9),
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
         });
-      };
+      });
 
-      window.addEventListener("mousemove", handleMouseMove);
+      const orangJalan = gsap.utils.toArray<HTMLDivElement>(".orang-jalan");
+      orangJalan.forEach((orang) => {
+        gsap.fromTo(
+          orang,
+          { x: "50vw", display: "flex", opacity: 1 },
+          {
+            x: "150vw",
+            duration: 8,
+            ease: "none",
+            onComplete: () => {
+              gsap.set(orang, { display: "none" });
+            },
+          },
+        );
+      });
 
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-      };
+      const uangElements = gsap.utils.toArray<HTMLDivElement>(".uang-jatuh");
+
+      uangElements.forEach((uang) => {
+        const dropUang = () => {
+          gsap.fromTo(
+            uang,
+            {
+              y: -150,
+              x: () => gsap.utils.random(0, window.innerWidth),
+              opacity: 1,
+            },
+            {
+              y: window.innerHeight + 150,
+              x: `+=${gsap.utils.random(-150, 150)}`,
+              duration: gsap.utils.random(7, 12),
+              ease: "none",
+              onComplete: () => {
+                const nextDelay = gsap.utils.random(2, 12);
+                gsap.delayedCall(nextDelay, dropUang);
+              },
+            },
+          );
+        };
+
+        gsap.delayedCall(gsap.utils.random(0, 6), dropUang);
+      });
+
+      const penutupElement = penutupTenantRef.current;
+      const shadowElement = penutupShadowRef.current;
+
+      if (penutupElement && shadowElement) {
+        const handleMouseMove = (e: MouseEvent) => {
+          const rect = penutupElement.getBoundingClientRect();
+          const relativeY = (e.clientY - rect.top) / rect.height;
+          const yPos = (relativeY - 0.5) * 2;
+
+          gsap.to(penutupElement, {
+            scaleY: 1 + yPos * 0.06,
+            rotationX: yPos * -25,
+            transformOrigin: "50% 0%",
+            duration: 0.4,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+
+          gsap.to(shadowElement, {
+            scaleY: 1 + yPos * 0.06,
+            rotationX: yPos * -25,
+            transformOrigin: "50% 0%",
+            duration: 0.4,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(penutupElement, {
+            scaleY: 1,
+            rotationX: 0,
+            duration: 1.2,
+            ease: "elastic.out(1.2, 0.2)",
+            overwrite: "auto",
+          });
+
+          gsap.to(shadowElement, {
+            scaleY: 1,
+            rotationX: 0,
+            duration: 1.2,
+            ease: "elastic.out(1.2, 0.2)",
+            overwrite: "auto",
+          });
+        };
+
+        penutupElement.addEventListener("mousemove", handleMouseMove);
+        penutupElement.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+          penutupElement.removeEventListener("mousemove", handleMouseMove);
+          penutupElement.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      }
     },
     { scope: containerRef },
   );
@@ -91,7 +196,6 @@ export default function Home() {
         ref={containerRef}
         className="relative w-full h-screen flex flex-col items-center justify-start overflow-hidden"
       >
-        {/* Layer Background Langit */}
         <div className="absolute inset-0 w-full h-full z-0">
           <Image
             src="/images/Biru langit.svg"
@@ -102,7 +206,6 @@ export default function Home() {
           />
         </div>
 
-        {/* Layer Awan */}
         {dataAwan.map((awan) => (
           <div
             key={awan.id}
@@ -120,17 +223,25 @@ export default function Home() {
               alt={`Awan ${awan.id}`}
               fill
               className="object-contain"
-              priority
             />
           </div>
         ))}
 
-        <div className="absolute -top-[45%] -right-15 w-[30%] h-[100%] z-[15] pointer-events-none">
+        <div className="absolute -top-[30%] -right-5 w-[30%] h-[100%] z-[15] pointer-events-none">
           <Image
             src="/images/Pohon.svg"
             alt="Pohon di belakang rumah kanan"
             fill
             className="object-contain object-bottom"
+          />
+        </div>
+
+        <div className="daun-angin absolute -top-[3%] -right-35 w-[40%] h-[40%] z-[20] pointer-events-none opacity-90">
+          <Image
+            src="/images/Daun.svg"
+            alt="Daun cluster 1"
+            fill
+            className="object-contain"
           />
         </div>
 
@@ -162,7 +273,7 @@ export default function Home() {
             priority
           />
 
-          <div className="absolute top-[65%] left-15 w-[12%] h-[12%] z-30">
+          <div className="absolute top-[65%] left-10 w-[20%] h-[20%] z-30">
             <Image
               src="/images/Jendela tanpa.svg"
               alt="Jendela Kiri"
@@ -173,8 +284,25 @@ export default function Home() {
 
           <div
             ref={tanamanJendelaRef}
-            className="absolute top-[70%] left-22 w-[8%] h-[8%] z-40"
+            className="absolute top-[73%] left-25 w-[12%] h-[12%] z-40"
           >
+            <div
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{
+                transform: "translate(25px, 10px) skewX(25deg)",
+                transformOrigin: "bottom center",
+                opacity: 0.2,
+                zIndex: -1,
+              }}
+            >
+              <Image
+                src="/images/tanaman jendela kiri.svg"
+                alt="Shadow Tanaman"
+                fill
+                className="object-contain object-bottom brightness-0"
+              />
+            </div>
+
             <Image
               src="/images/tanaman jendela kiri.svg"
               alt="Tanaman Jendela"
@@ -182,7 +310,25 @@ export default function Home() {
               className="object-contain object-bottom"
             />
           </div>
-          <div className="absolute top-[74%] left-22 w-[8%] h-[8%] z-50">
+
+          <div className="absolute top-[80%] left-25 w-[12%] h-[12%] z-50">
+            <div
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{
+                transform: "translate(30px, 10px) skewX(20deg)",
+                transformOrigin: "bottom center",
+                opacity: 0.2,
+                zIndex: -1,
+              }}
+            >
+              <Image
+                src="/images/wadah tanaman jendela kiri.svg"
+                alt="Shadow Wadah"
+                fill
+                className="object-contain brightness-0"
+              />
+            </div>
+
             <Image
               src="/images/wadah tanaman jendela kiri.svg"
               alt="Wadah Tanaman Jendela"
@@ -191,7 +337,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[60%] h-[60%] z-30">
+          <div className="absolute top-[55%] left-1/2 -translate-x-1/2 w-[45%] h-[45%] z-30 pointer-events-none">
             <Image
               src="/images/Tenant.svg"
               alt="Tenant"
@@ -201,10 +347,62 @@ export default function Home() {
           </div>
 
           <div
-            className="absolute top-[56.5%] left-1/2 -translate-x-1/2 w-[35%] aspect-[16/9] z-40 pointer-events-none"
+            className="absolute top-[36.2%] left-1/2 -translate-x-1/2 w-[40%] aspect-[16/9] z-40 pointer-events-none"
             style={{ perspective: "800px" }}
           >
-            <div ref={penutupTenantRef} className="relative w-full h-full">
+            <div
+              className="absolute inset-0 w-full h-full"
+              style={{
+                transform: "translate(2px, 20px) skewX(25deg)",
+                transformOrigin: "top left",
+                opacity: 0.2,
+                zIndex: -1,
+              }}
+            >
+              <Image
+                src="/images/Penutup Atas Tenant.svg"
+                alt="Shadow Penutup Atas"
+                fill
+                className="object-contain object-top brightness-0"
+              />
+            </div>
+
+            <div className="relative w-full h-full">
+              <Image
+                src="/images/Penutup Atas Tenant.svg"
+                alt="Penutup Atas Tenant"
+                fill
+                className="object-contain object-top"
+              />
+            </div>
+          </div>
+
+          <div
+            className="absolute top-[55%] left-1/2 -translate-x-1/2 w-[38%] aspect-[16/9] z-40"
+            style={{ perspective: "800px" }}
+          >
+            <div
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{
+                transform: "translate(80px, 18px)",
+                opacity: 0.2,
+                zIndex: -1,
+              }}
+            >
+              <div ref={penutupShadowRef} className="w-full h-full">
+                <Image
+                  src="/images/Penutup depan tenant.svg"
+                  alt="Shadow Penutup Depan"
+                  fill
+                  className="object-contain object-top brightness-0"
+                />
+              </div>
+            </div>
+
+            <div
+              ref={penutupTenantRef}
+              className="absolute inset-0 w-full h-full cursor-pointer"
+            >
               <Image
                 src="/images/Penutup depan tenant.svg"
                 alt="Penutup Depan Tenant"
@@ -215,8 +413,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Layer Jalan */}
-        <div className="absolute bottom-0 left-0 w-full h-[10%] z-40">
+        <div className="absolute bottom-0 left-0 w-full h-[10%] z-40 pointer-events-none">
           <Image
             src="/images/Jalan.svg"
             alt="Jalan"
@@ -225,6 +422,56 @@ export default function Home() {
             priority
           />
         </div>
+
+        <div className="orang-jalan absolute bottom-[4%] md:bottom-[10%] left-0 z-50 pointer-events-none">
+          <div className="w-[300px] md:w-[400px] flex flex-col justify-end items-center translate-y-[15%] relative">
+            <div className="relative w-full aspect-square z-10">
+              <DotLottieReact
+                src="/animations/man walking.json"
+                loop
+                autoplay
+              />
+            </div>
+
+            <div
+              className="absolute z-0"
+              style={{
+                bottom: "0%",
+                left: "15%",
+                width: "70%",
+                height: "20%",
+                background:
+                  "radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 70%)",
+                borderRadius: "50%",
+                filter: "blur(5px)",
+                transform: "scaleY(0.5)",
+              }}
+            ></div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 w-full h-[15%] md:h-[25%] z-[60] pointer-events-none">
+          <Image
+            src="/images/Pager.svg"
+            alt="Pagar Depan"
+            fill
+            className="object-cover object-bottom"
+            priority
+          />
+        </div>
+
+        {uangHujan.map((uang) => (
+          <div
+            key={`uang-${uang.id}`}
+            className="uang-jatuh absolute top-[-100px] left-0 pointer-events-none z-[65] opacity-0"
+            style={{
+              width: `${uang.size}px`,
+              height: `${uang.size}px`,
+            }}
+          >
+            <Image src={uang.src} alt="Uang" fill className="object-contain" />
+          </div>
+        ))}
       </section>
     </main>
   );
