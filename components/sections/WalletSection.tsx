@@ -6,18 +6,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { MdVerified } from "react-icons/md";
+import { walletAssetsData } from "@/constants";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const walletAssets = [
-  "/images/card.svg",
-  "/images/BitCoin.svg",
-  "/images/100Rp.svg",
-  "/images/Dolar.svg",
-  "/images/75Rp.svg",
-];
 
 export default function WalletSection() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -37,7 +30,7 @@ export default function WalletSection() {
       });
 
       // 2. Posisi Awal Aset
-      walletAssets.forEach((_, i) => {
+      walletAssetsData.forEach((_, i) => {
         gsap.set(assetRefs.current[i], {
           x: i % 2 === 0 ? -150 : 150,
           y: -120,
@@ -47,17 +40,25 @@ export default function WalletSection() {
         });
       });
 
-      // 3. Timeline Utama
+      // 3. Setting Awal Teks
+      gsap.set(textContainerRef.current, {
+        y: "20vh",
+        opacity: 0,
+        rotationY: -40,
+        rotationX: 25,
+        transformOrigin: "center center",
+      });
+
+      // 4. Timeline Utama untuk Scroll
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: nextSectionRef.current,
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: 1.5,
+          start: "top 85%",
+          end: "bottom top",
+          scrub: 2.5,
         },
       });
 
-      // Animasi Dompet Jatuh
       tl.to(
         dompetRef.current,
         { y: "103vh", left: "50%", scale: 8, ease: "none", duration: 1 },
@@ -77,86 +78,86 @@ export default function WalletSection() {
       tl.to(
         textContainerRef.current,
         {
-          rotationX: 10,
-          rotationY: -10,
-          x: 60,
-          z: -100,
-          scale: 0.95,
-          transformOrigin: "bottom center",
-          duration: 0.4,
-          ease: "power2.out",
+          opacity: 1,
+          duration: 0.9,
+          ease: "power2.inOut",
         },
-        0.1,
-      )
+        0,
+      );
 
-        .to(
-          textContainerRef.current,
-          {
-            rotationX: 0,
-            rotationY: 0,
-            x: 0,
-            z: 0,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.5)",
-          },
-          0.5,
-        );
+      tl.to(
+        textContainerRef.current,
+        {
+          y: "-35vh",
+          rotationY: 10,
+          rotationX: -15,
+          duration: 1,
+          ease: "none",
+        },
+        0,
+      );
 
-      // 4. Trigger Terpisah untuk Aset masuk ke dompet
+      tl.fromTo(
+        textContainerRef.current,
+        {
+          filter: "opacity(85%) brightness(90%)",
+        },
+        {
+          filter: "opacity(100%) brightness(100%)",
+          duration: 1,
+          ease: "none",
+        },
+        0,
+      );
+
+      tl.to(
+        textContainerRef.current,
+        {
+          opacity: 1,
+          duration: 1,
+        },
+        0.85,
+      );
+
+      // 5. Timeline Animasi Aset
       const assetTL = gsap.timeline({ paused: true });
 
       assetTL.to(assetRefs.current, {
         keyframes: [
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-
+          { opacity: 1, duration: 0.01 },
           {
             x: 0,
             y: -10,
             opacity: 1,
             rotation: 0,
-            scale: 0.6,
+            scale: 0.5,
             duration: 1.4,
             ease: "power1.out",
           },
-
-          {
-            y: 15,
-            opacity: 0,
-            scale: 0.3,
-            duration: 1.2,
-            ease: "power2.in",
-          },
+          { y: 15, opacity: 0, scale: 0.2, duration: 1.2, ease: "power2.in" },
         ],
         stagger: 0.8,
       });
 
-      ScrollTrigger.create({
-        trigger: nextSectionRef.current,
-        start: "bottom bottom",
-
-        onEnter: () => {
-          assetTL.restart();
-        },
-
-        onLeaveBack: () => {
-          const progress = assetTL.progress();
-
-          if (progress < 1) {
+      // 6. TRIGGER ASET MASUK TEPAT SAAT DOMPET SELESAI
+      tl.to(
+        {},
+        {
+          duration: 0.1,
+          onStart: () => {
+            assetTL.restart();
+          },
+          onReverseComplete: () => {
             gsap.to(assetRefs.current, {
               opacity: 0,
-              duration: 0.1,
+              duration: 0.2,
               ease: "power1.out",
-              onComplete: () => {
-                assetTL.pause(0);
-              },
+              onComplete: () => assetTL.pause(0),
             });
-          }
+          },
         },
-      });
+        1.0,
+      );
     },
     { scope: wrapperRef },
   );
@@ -165,10 +166,9 @@ export default function WalletSection() {
     <div ref={wrapperRef}>
       <div
         ref={dompetRef}
-        className="absolute left-[30%] top-[75vh] md:top-[79vh] z-[100] w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
+        className="absolute left-[30%] top-[75vh] md:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
       >
-        {/* Kontainer Aset */}
-        {walletAssets.map((src, i) => (
+        {walletAssetsData.map((src, i) => (
           <Image
             key={i}
             ref={(el) => {
@@ -178,47 +178,43 @@ export default function WalletSection() {
             alt={`Asset Web3 ${i}`}
             width={35}
             height={35}
-            className="absolute object-contain z-[90]"
+            className="absolute object-contain z-90"
           />
         ))}
 
-        {/* Gambar Dompet Utama */}
         <Image
           src="/images/Dompet.svg"
           alt="Dompet Eqonic"
           width={60}
           height={60}
-          className="relative z-[110] object-contain"
+          className="relative z-110 object-contain"
           priority
         />
       </div>
 
       <section
         ref={nextSectionRef}
-        className="relative w-full h-screen flex flex-col items-center justify-start pt-32 bg-[#B36EE6] text-white z-20"
-        style={{ perspective: "800px" }}
+        className="relative w-full h-screen flex flex-col items-center justify-start pt-32 bg-[#B36EE6] text-white z-80"
+        style={{ perspective: "1500px" }}
       >
         <div
           ref={textContainerRef}
-          className="flex flex-col items-center text-center px-4"
-          style={{ transformStyle: "preserve-3d" }}
+          className="relative z-10 flex flex-col items-center text-center px-4"
+          style={{ willChange: "transform, opacity, filter" }}
         >
           <div className="border-[2px] border-[#0A7B5E] text-[#0A7B5E] bg-transparent rounded-full px-5 py-1 mb-10 flex items-center gap-2">
             <MdVerified className="w-5 h-5" />
-
             <span className="text-xs md:text-sm font-extrabold uppercase tracking-widest">
               WEB3 FINANCIAL
             </span>
           </div>
 
-          {/* Main Title */}
-          <h2 className="text-6xl md:text-8xl lg:text-[110px] font-black uppercase tracking-normal leading-[1.1] text-[#3D2616] mb-8 relative z-20">
-            Aset Terkumpul
-            <br className="hidden md:block" /> Di Dompetmu
+          <h2 className="text-[clamp(48px,8vw,120px)] font-black uppercase tracking-normal leading-[1.1] text-[#3D2616] mb-8 relative z-20 whitespace-nowrap">
+            Learn, Manage, Grow
           </h2>
-          {/* Subtitle Typography */}
+
           <p className="text-[#3D2616] font-bold text-base md:text-xl mt-2 relative z-20">
-            Kelola keuangan Web3 kamu secara transparan 24h / 365 hari
+            Manage your Web3 finances with full transparency, anytime, anywhere.
           </p>
         </div>
       </section>

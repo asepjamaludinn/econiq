@@ -1,19 +1,6 @@
-export default function FeatureSection() {
-  const features = [
-    {
-      title: "Transparan",
-      desc: "Setiap aliran dana tercatat dengan jelas menggunakan teknologi blockchain.",
-    },
-    {
-      title: "Edukasi Web3",
-      desc: "Pelajari cara kerja aset digital dan tingkatkan literasi finansialmu.",
-    },
-    {
-      title: "Investasi Cerdas",
-      desc: "Optimalkan portofoliomu dengan panduan data analitik yang akurat.",
-    },
-  ];
+import { featuresData } from "@/constants";
 
+export default function FeatureSection() {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#660DFF] text-white z-20 py-24 px-4">
       <div className="max-w-6xl mx-auto w-full flex flex-col items-center">
@@ -29,7 +16,7 @@ export default function FeatureSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-          {features.map((item, index) => (
+          {featuresData.map((item, index) => (
             <div
               key={index}
               className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl hover:bg-white/20 transition-all duration-300 shadow-xl"

@@ -9,6 +9,17 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-plus-jakarta), sans-serif;
+
+  --z-15: 15;
+  --z-25: 25;
+  --z-60: 60;
+  --z-65: 65;
+  --z-70: 70;
+  --z-80: 80;
+  --z-90: 90;
+  --z-100: 100;
+  --z-110: 110;
+  --z-max: 999999;
 }
 
 @media (prefers-color-scheme: dark) {

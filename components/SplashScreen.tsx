@@ -40,18 +40,7 @@ export default function SplashScreen() {
   return (
     <div
       ref={containerRef}
-      style={{
-        backgroundColor: "#660DFF",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: 999999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#660DFF] w-screen h-screen"
     >
       <Image
         src="/images/Logo.svg"
