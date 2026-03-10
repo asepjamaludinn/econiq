@@ -54,9 +54,9 @@ export default function TenantInteraction() {
   });
 
   return (
-    <>
-      {/* Container Tenant Utama (Statis) */}
-      <div className="absolute bottom-0 md:bottom-[0%] left-1/2 -translate-x-1/2 w-[70%] md:w-[35%] h-[45%] md:h-[55%] z-30 pointer-events-none flex justify-center items-end">
+    <div className="absolute bottom-0 md:bottom-[0%] left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] aspect-[3/4] z-30 pointer-events-none">
+      {/* 1. Base Tenant */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-[60%] flex justify-center items-end">
         <Image
           src="/images/Tenant.svg"
           alt="Tenant"
@@ -65,9 +65,9 @@ export default function TenantInteraction() {
         />
       </div>
 
-      {/* Bagian Atap Tenant */}
+      {/* 2. Bagian Atap Tenant */}
       <div
-        className="absolute top-[57%] md:top-[40%] left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] aspect-[16/9] z-40 pointer-events-none"
+        className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[100%] h-[30%]"
         style={{ perspective: "800px" }}
       >
         <div
@@ -96,11 +96,12 @@ export default function TenantInteraction() {
         </div>
       </div>
 
-      {/* Bagian Depan Penutup Tenant */}
+      {/* 3. Bagian Depan Penutup Tenant */}
       <div
-        className="absolute top-[70%] md:top-[58.9%] left-1/2 -translate-x-1/2 w-[80%] md:w-[38%] aspect-[16/9] z-40"
+        className="absolute top-[59%] left-1/2 -translate-x-1/2 w-[95%] h-[30%] pointer-events-auto"
         style={{ perspective: "800px" }}
       >
+        {/* Shadow Penutup Depan */}
         <div
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{
@@ -118,6 +119,8 @@ export default function TenantInteraction() {
             />
           </div>
         </div>
+
+        {/* Gambar Penutup Depan Utama */}
         <div
           ref={penutupTenantRef}
           className="absolute inset-0 w-full h-full cursor-pointer md:cursor-default"
@@ -130,6 +133,6 @@ export default function TenantInteraction() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -75,7 +75,6 @@ export default function WalletSection() {
           )
           .to(
             dompetRef.current,
-
             { rotation: 4, ease: "sine.inOut", duration: 0.2 },
             0.4,
           );
@@ -139,7 +138,9 @@ export default function WalletSection() {
                 opacity: 0,
                 duration: 0.2,
                 ease: "power1.out",
-                onComplete: () => assetTL.pause(0),
+                onComplete: () => {
+                  assetTL.pause(0);
+                },
               });
             },
           },
@@ -208,7 +209,7 @@ export default function WalletSection() {
     <div ref={wrapperRef}>
       <div
         ref={dompetRef}
-        className="absolute left-[30%] top-[83vh] md:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
+        className="absolute left-[30%] top-[83dvh] md:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
       >
         <div className="hidden lg:flex absolute inset-0 w-full h-full items-center justify-center">
           {walletAssetsData.map((src, i) => (
@@ -253,11 +254,11 @@ export default function WalletSection() {
             </span>
           </div>
 
-          <h2 className="text-[clamp(32px,7vw,120px)] font-black uppercase tracking-normal leading-[1.1] text-[#3D2616] mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap">
+          <h2 className="text-[clamp(32px,7vw,120px)] font-black uppercase tracking-normal leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap">
             Learn, Manage, Grow
           </h2>
 
-          <p className="text-[#3D2616] font-bold text-sm md:text-xl mt-2 relative z-20 max-w-2xl px-2">
+          <p className="text-white font-bold text-sm md:text-xl mt-2 relative z-20 max-w-2xl px-2">
             Manage your Web3 finances with full transparency, anytime, anywhere.
           </p>
         </div>
