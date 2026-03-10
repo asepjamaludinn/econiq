@@ -222,7 +222,6 @@ export default function FeatureSection() {
   return (
     <section
       ref={sectionRef}
-      // Ubah py-32 menjadi pt-20 pb-32 sm:py-32
       className="relative w-full min-h-screen flex flex-col items-center justify-center z-[120] pt-20 pb-32 sm:py-32 px-4"
       style={{ perspective: "1500px" }}
     >
@@ -238,7 +237,7 @@ export default function FeatureSection() {
           style={{ perspective: "1500px" }}
         >
           <div className="relative inline-block w-full text-left sm:text-center mb-6 sm:mb-8 -mt-10 sm:mt-0">
-            <h2 className="text-[44px] leading-[1.05] sm:text-[clamp(40px,5vw,80px)] sm:leading-[1.1] font-black uppercase tracking-normal text-white drop-shadow-md relative z-10">
+            <h2 className="text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] leading-[1.05] md:leading-[1.1] font-black uppercase tracking-normal text-white drop-shadow-md relative z-10">
               <div className="reveal-item will-change-transform">
                 THE NEXT GENERATION
               </div>
@@ -251,7 +250,14 @@ export default function FeatureSection() {
               <div className="reveal-item will-change-transform">ECONIQ</div>
             </h2>
 
-            <div className="reveal-item will-change-transform absolute -top-4 right-0 sm:top-0 sm:-right-16 md:right-15 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 pointer-events-none drop-shadow-2xl z-20">
+            <div
+              className="reveal-item will-change-transform absolute pointer-events-none drop-shadow-2xl z-20 
+              w-20 h-20 -top-4 right-0 
+              sm:w-24 sm:h-24 sm:-top-6 sm:-right-12 
+              md:w-32 md:h-32 md:-top-30 md:-right-5
+              lg:w-36 lg:h-36 lg:-top-35 lg:-right-5
+              xl:w-44 xl:h-44 xl:-top-30 xl:-right-10"
+            >
               <svg
                 ref={badgeRef}
                 viewBox="0 0 168 168"
@@ -376,7 +382,7 @@ export default function FeatureSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 w-full mt-8 reveal-item">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-10 w-full mt-8 reveal-item">
           {featuresData.map((item, index) => {
             const Icon = featureIcons[index % featureIcons.length];
 

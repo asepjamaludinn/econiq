@@ -27,7 +27,7 @@ export default function HeroSection() {
     () => {
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
+      mm.add("(min-width: 1280px)", () => {
         const tlScroll = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
@@ -38,7 +38,6 @@ export default function HeroSection() {
           },
         });
 
-        // Animasi Pagar & Ekstensi (Terangkat)
         if (pagarRef.current && ekstensiRef.current) {
           tlScroll.to(
             [pagarRef.current, ekstensiRef.current],
@@ -52,7 +51,6 @@ export default function HeroSection() {
           );
         }
 
-        // Animasi Perspektif Jalan
         if (jalanRef.current) {
           tlScroll.to(
             jalanRef.current,
@@ -72,7 +70,7 @@ export default function HeroSection() {
         };
       });
 
-      mm.add("(max-width: 1023px)", () => {
+      mm.add("(max-width: 1279px)", () => {
         gsap.set(
           [
             pagarRef.current,
@@ -110,22 +108,13 @@ export default function HeroSection() {
       {/* 2. Partikel & Dekorasi (Awan/Daun) */}
       <div className="hidden md:block">
         <HeroClouds />
-        <AnimatedLeaves />
       </div>
 
-      {/* 3. Dekorasi Pohon */}
-      <div className="hidden md:block absolute -top-[30%] -right-5 w-[30%] h-[100%] z-15 pointer-events-none">
-        <Image
-          src="/images/Pohon.svg"
-          alt="Pohon Kanan"
-          fill
-          className="object-contain object-bottom"
-        />
-      </div>
+      <AnimatedLeaves />
 
       {/* 4. Headline */}
-      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[80%] max-w-3xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl md:text-3xl lg:text-5xl font-black uppercase tracking-normal leading-[1.1] text-white drop-shadow-lg">
+      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] max-w-3xl lg:max-w-5xl xl:max-w-7xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-black uppercase tracking-normal leading-[1.1] text-white drop-shadow-lg">
           Know Your Money. <br className="hidden md:block" />
           <span className="text-white">Grow Your Money.</span>
         </h1>
@@ -133,8 +122,7 @@ export default function HeroSection() {
 
       {/* 5. Midground (Rumah & Bangunan) */}
       <div className="nempel-jalan absolute bottom-[10%] w-full h-full z-20">
-        {/* Rumah Kiri & Kanan */}
-        <div className="hidden md:block absolute bottom-0 -left-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
+        <div className="hidden xl:block absolute bottom-0 -left-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
           <Image
             src="/images/Rumah kiri.svg"
             alt="Rumah Kiri"
@@ -142,7 +130,7 @@ export default function HeroSection() {
             className="object-contain object-left-bottom"
           />
         </div>
-        <div className="hidden md:block absolute bottom-0 -right-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
+        <div className="hidden xl:block absolute bottom-0 -right-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
           <Image
             src="/images/Rumah kanan.svg"
             alt="Rumah Kanan"
@@ -153,22 +141,24 @@ export default function HeroSection() {
 
         <WindowPlant />
 
-        {/* Purple Background Block (Tengah) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full md:w-[50%] h-full bg-[#8644F7] z-25 pointer-events-none md:shadow-[0_0_40px_rgba(102,13,255,0.4)]">
-          <div className="absolute top-0 -left-10 md:-left-1 w-[15%] h-full z-30">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full xl:w-[50%] h-full z-25 pointer-events-none">
+          <div className="absolute inset-0 bg-[#8644F7] xl:shadow-[0_0_40px_rgba(102,13,255,0.4)]" />
+
+          <div className="absolute bottom-0 left-0 w-[15%] md:w-[10%] xl:w-[15%] h-full z-30 transform -translate-x-[45%] md:-translate-x-[50%] xl:-translate-x-[5%]">
             <Image
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kiri"
               fill
-              className="object-contain object-left"
+              className="object-cover xl:object-contain object-left-bottom"
             />
           </div>
-          <div className="absolute top-0 -right-10 md:-right-2 w-[15%] h-full z-30">
+
+          <div className="absolute bottom-0 right-0 w-[15%] md:w-[10%] xl:w-[15%] h-full z-30 transform translate-x-[45%] md:translate-x-[60%] xl:translate-x-[8%]">
             <Image
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kanan"
               fill
-              className="object-contain object-right"
+              className="object-cover xl:object-contain object-right-bottom"
             />
           </div>
         </div>
@@ -204,17 +194,16 @@ export default function HeroSection() {
       {/* 8. Pagar & Overlay */}
       <div
         ref={pagarRef}
-        className="absolute bottom-0 left-0 w-full h-[15%] md:h-[20%] z-60 pointer-events-none origin-bottom will-change-transform"
+        className="absolute bottom-0 left-0 w-full h-[15%] xl:h-[20%] z-60 pointer-events-none origin-bottom will-change-transform"
       >
         <Image
           src="/images/Pager.svg"
           alt="Pagar Depan"
           fill
-          className="object-cover md:object-contain object-bottom"
+          className="object-cover xl:object-contain object-bottom"
           priority
         />
       </div>
-
       <MoneyRain />
 
       <div

@@ -22,21 +22,21 @@ export default function WindowPlant() {
   });
 
   return (
-    <>
-      <div className="hidden md:block absolute top-[65%] left-10 w-[20%] h-[20%] z-30 pointer-events-none">
-        <Image
-          src="/images/Jendela tanpa.svg"
-          alt="Jendela Kiri"
-          fill
-          className="object-contain"
-        />
-      </div>
+    <div className="hidden xl:block absolute top-[70%] 2xl:top-[65%] left-[5%] 2xl:left-[5%] w-[10%] aspect-square z-30 pointer-events-none">
+      {/* JENDELA (Background) */}
+      <Image
+        src="/images/Jendela tanpa.svg"
+        alt="Jendela Kiri"
+        fill
+        className="object-contain"
+      />
 
-      <div className="hidden md:flex absolute top-[65%] left-25 w-[12%] flex-col items-center justify-end z-40 pointer-events-none">
+      {/* TANAMAN  */}
+      <div className="absolute =bottom-[20%] left-1/2 -translate-x-1/2 w-[130%] flex flex-col items-center justify-end z-40">
         {/* Container Tanaman */}
         <div
           ref={tanamanJendelaRef}
-          className="relative w-full aspect-square z-40 pointer-events-none"
+          className="relative w-[75%] aspect-square z-40 pointer-events-none"
         >
           <div
             className="absolute inset-0 w-full h-full pointer-events-none"
@@ -63,7 +63,7 @@ export default function WindowPlant() {
         </div>
 
         {/* Container Wadah/Pot */}
-        <div className="relative w-full aspect-[2/1] -mt-[10%] z-50 pointer-events-none">
+        <div className="relative w-[85%] aspect-[2/1] -mt-[10%] z-50 pointer-events-none">
           <div
             className="absolute inset-0 w-full h-full pointer-events-none"
             style={{
@@ -88,6 +88,6 @@ export default function WindowPlant() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

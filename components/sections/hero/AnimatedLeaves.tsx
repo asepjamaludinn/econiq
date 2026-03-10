@@ -30,15 +30,26 @@ export default function AnimatedLeaves() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-[20]"
+      className="hidden md:block absolute top-[5%] xl:top-[5%] right-[-2%] w-[100%] xl:w-[30%] z-15 pointer-events-none"
     >
-      <div className="daun-angin absolute -top-[3%] -right-35 w-[40%] h-[40%] opacity-90">
+      <div className="relative w-full h-auto">
         <Image
-          src="/images/Daun.svg"
-          alt="Daun cluster"
-          fill
-          className="object-contain"
+          src="/images/Pohon.svg"
+          alt="Pohon Kanan"
+          width={500}
+          height={500}
+          className="w-full h-auto"
         />
+
+        <div className="daun-angin absolute -top-[15%] -right-[12%] w-[120%] opacity-90">
+          <Image
+            src="/images/Daun.svg"
+            alt="Daun cluster"
+            width={500}
+            height={500}
+            className="w-full h-auto object-contain"
+          />
+        </div>
       </div>
     </div>
   );

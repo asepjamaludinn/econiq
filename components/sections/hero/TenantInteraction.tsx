@@ -12,7 +12,7 @@ export default function TenantInteraction() {
   useGSAP(() => {
     let mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
+    mm.add("(min-width: 1280px)", () => {
       const penutupElement = penutupTenantRef.current;
       const shadowElement = penutupShadowRef.current;
 
@@ -54,9 +54,9 @@ export default function TenantInteraction() {
   });
 
   return (
-    <div className="absolute bottom-0 md:bottom-[0%] left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] aspect-[3/4] z-30 pointer-events-none">
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] md:w-[100%] xl:w-[50%] aspect-[3/4] z-30 pointer-events-none">
       {/* 1. Base Tenant */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-[60%] flex justify-center items-end">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[60%] flex justify-center items-end">
         <Image
           src="/images/Tenant.svg"
           alt="Tenant"
@@ -67,7 +67,7 @@ export default function TenantInteraction() {
 
       {/* 2. Bagian Atap Tenant */}
       <div
-        className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[100%] h-[30%]"
+        className="absolute top-[50%] left-1/2 -translate-x-1/2 w-[80%] h-[30%]"
         style={{ perspective: "800px" }}
       >
         <div
@@ -98,14 +98,14 @@ export default function TenantInteraction() {
 
       {/* 3. Bagian Depan Penutup Tenant */}
       <div
-        className="absolute top-[59%] left-1/2 -translate-x-1/2 w-[95%] h-[30%] pointer-events-auto"
+        className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[77%] h-[30%] pointer-events-auto"
         style={{ perspective: "800px" }}
       >
         {/* Shadow Penutup Depan */}
         <div
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{
-            transform: "translate(12%, 8.5%)",
+            transform: "translate(12%, 9.2%)",
             opacity: 0.2,
             zIndex: -1,
           }}

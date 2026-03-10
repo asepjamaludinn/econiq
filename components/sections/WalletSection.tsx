@@ -25,7 +25,7 @@ export default function WalletSection() {
     () => {
       let mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
+      mm.add("(min-width: 1280px)", () => {
         gsap.set(dompetRef.current, {
           xPercent: -50,
           yPercent: -50,
@@ -148,11 +148,14 @@ export default function WalletSection() {
         );
       });
 
-      mm.add("(max-width: 1023px)", () => {
+      mm.add("(max-width: 1279px)", () => {
         gsap.set(dompetRef.current, {
           xPercent: -50,
           yPercent: -50,
           rotation: 4,
+          y: 0,
+          left: "30%",
+          scale: 1,
         });
 
         gsap.set(textContainerRef.current, {
@@ -163,10 +166,12 @@ export default function WalletSection() {
           filter: "none",
         });
 
+        const contH = mobileWalletContainerRef.current?.offsetHeight || 220;
+
         mobileAssetRefs.current.forEach((el, i) => {
           gsap.set(el, {
-            x: i % 2 === 0 ? -250 : 250,
-            y: -250,
+            x: i % 2 === 0 ? -contH * 1.2 : contH * 1.2,
+            y: -contH * 1.2,
             opacity: 0,
             scale: 0.8,
             rotation: i % 2 === 0 ? -45 : 45,
@@ -183,14 +188,20 @@ export default function WalletSection() {
             { opacity: 1, duration: 0.01 },
             {
               x: 0,
-              y: 50,
+              y: contH * 0.23,
               opacity: 1,
               rotation: 0,
               scale: 1,
               duration: 1.4,
               ease: "power1.out",
             },
-            { y: 30, opacity: 0, scale: 0.3, duration: 1.2, ease: "power2.in" },
+            {
+              y: contH * 0.14,
+              opacity: 0,
+              scale: 0.3,
+              duration: 1.2,
+              ease: "power2.in",
+            },
           ],
           stagger: 0.6,
         });
@@ -201,6 +212,8 @@ export default function WalletSection() {
           onEnter: () => mobileAssetTL.play(),
         });
       });
+
+      return () => mm.revert();
     },
     { scope: wrapperRef },
   );
@@ -209,9 +222,9 @@ export default function WalletSection() {
     <div ref={wrapperRef}>
       <div
         ref={dompetRef}
-        className="absolute left-[30%] top-[83dvh] md:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
+        className="absolute left-[30%] top-[83dvh] md:top-[84vh] xl:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
       >
-        <div className="hidden lg:flex absolute inset-0 w-full h-full items-center justify-center">
+        <div className="hidden xl:flex absolute inset-0 w-full h-full items-center justify-center">
           {walletAssetsData.map((src, i) => (
             <Image
               key={`desktop-asset-${i}`}
@@ -265,7 +278,7 @@ export default function WalletSection() {
 
         <div
           ref={mobileWalletContainerRef}
-          className="lg:hidden relative z-20 mt-24 md:mt-auto mb-10 w-[250px] h-[220px] flex items-end justify-center pointer-events-none rotate-[4deg]"
+          className="xl:hidden relative z-20 mt-32 md:mt-40 lg:mt-100 mb-8 md:mb-10 w-[250px] h-[220px] md:w-[450px] md:h-[400px] lg:w-[500px] lg:h-[450px] flex items-end justify-center pointer-events-none rotate-[4deg]"
         >
           {walletAssetsData.map((src, i) => (
             <Image
@@ -275,9 +288,9 @@ export default function WalletSection() {
               }}
               src={src}
               alt={`Asset Web3 Mobile ${i}`}
-              width={100}
-              height={100}
-              className="absolute top-0 object-contain z-90"
+              width={200}
+              height={200}
+              className="absolute top-0 w-[100px] md:w-[160px] lg:w-[180px] h-auto object-contain z-90"
             />
           ))}
 
