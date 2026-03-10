@@ -5,7 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
 import HeroClouds from "./hero/HeroClouds";
 import AnimatedLeaves from "./hero/AnimatedLeaves";
 import WalkingMan from "./hero/WalkingMan";

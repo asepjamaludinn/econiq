@@ -32,57 +32,61 @@ export default function WindowPlant() {
         />
       </div>
 
-      <div
-        ref={tanamanJendelaRef}
-        className="hidden md:block absolute top-[73%] left-25 w-[12%] h-[12%] z-40 pointer-events-none"
-      >
+      <div className="hidden md:flex absolute top-[65%] left-25 w-[12%] flex-col items-center justify-end z-40 pointer-events-none">
+        {/* Container Tanaman */}
         <div
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{
-            transform: "translate(25px, 10px) skewX(25deg)",
-            transformOrigin: "bottom center",
-            opacity: 0.2,
-            zIndex: -1,
-          }}
+          ref={tanamanJendelaRef}
+          className="relative w-full aspect-square z-40 pointer-events-none"
         >
+          <div
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{
+              transform: "translate(5%,5%) skewX(25deg)",
+              transformOrigin: "bottom center",
+              opacity: 0.2,
+              zIndex: -1,
+            }}
+          >
+            <Image
+              src="/images/tanaman jendela kiri.svg"
+              alt="Shadow"
+              fill
+              className="object-contain object-bottom brightness-0"
+            />
+          </div>
           <Image
             src="/images/tanaman jendela kiri.svg"
-            alt="Shadow"
+            alt="Tanaman"
             fill
-            className="object-contain object-bottom brightness-0"
+            className="object-contain object-bottom"
           />
         </div>
-        <Image
-          src="/images/tanaman jendela kiri.svg"
-          alt="Tanaman"
-          fill
-          className="object-contain object-bottom"
-        />
-      </div>
 
-      <div className="hidden md:block absolute top-[80%] left-25 w-[12%] h-[12%] z-50 pointer-events-none">
-        <div
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{
-            transform: "translate(30px, 10px) skewX(20deg)",
-            transformOrigin: "bottom center",
-            opacity: 0.2,
-            zIndex: -1,
-          }}
-        >
+        {/* Container Wadah/Pot */}
+        <div className="relative w-full aspect-[2/1] -mt-[10%] z-50 pointer-events-none">
+          <div
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{
+              transform: "translate(15%, -25%) skewX(20deg)",
+              transformOrigin: "bottom center",
+              opacity: 0.2,
+              zIndex: -1,
+            }}
+          >
+            <Image
+              src="/images/wadah tanaman jendela kiri.svg"
+              alt="Shadow Wadah"
+              fill
+              className="object-contain brightness-0"
+            />
+          </div>
           <Image
             src="/images/wadah tanaman jendela kiri.svg"
-            alt="Shadow Wadah"
+            alt="Wadah"
             fill
-            className="object-contain brightness-0"
+            className="object-contain object-top"
           />
         </div>
-        <Image
-          src="/images/wadah tanaman jendela kiri.svg"
-          alt="Wadah"
-          fill
-          className="object-contain"
-        />
       </div>
     </>
   );

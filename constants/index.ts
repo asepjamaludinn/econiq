@@ -1,15 +1,19 @@
 export const featuresData = [
   {
-    title: "Transparan",
-    desc: "Setiap aliran dana tercatat dengan jelas menggunakan teknologi blockchain.",
+    title: "Low Entry Barrier",
+    desc: "Start your digital finance journey with minimal effort. Econiq provides simple tools to manage digital wallets and assets in one secure platform.",
   },
   {
-    title: "Edukasi Web3",
-    desc: "Pelajari cara kerja aset digital dan tingkatkan literasi finansialmu.",
+    title: "High Financial Potential",
+    desc: "Unlock new financial opportunities with Web3 technology. Track assets and monitor growth with real-time insights.",
   },
   {
-    title: "Investasi Cerdas",
-    desc: "Optimalkan portofoliomu dengan panduan data analitik yang akurat.",
+    title: "Smart & Efficient",
+    desc: "Manage your digital finances easily. Econiq automates processes and simplifies everyday financial interactions.",
+  },
+  {
+    title: "Accessible Everywhere",
+    desc: "Econiq services can be found in multiple locations, making digital finance accessible anytime and anywhere.",
   },
 ];
 

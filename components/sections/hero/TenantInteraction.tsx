@@ -65,6 +65,7 @@ export default function TenantInteraction() {
         />
       </div>
 
+      {/* Bagian Atap Tenant */}
       <div
         className="absolute top-[57%] md:top-[40%] left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] aspect-[16/9] z-40 pointer-events-none"
         style={{ perspective: "800px" }}
@@ -72,7 +73,7 @@ export default function TenantInteraction() {
         <div
           className="absolute inset-0 w-full h-full"
           style={{
-            transform: "translate(2px, 20px) skewX(25deg)",
+            transform: "translate(1%, 8%) skewX(25deg)",
             transformOrigin: "top left",
             opacity: 0.2,
             zIndex: -1,
@@ -95,6 +96,7 @@ export default function TenantInteraction() {
         </div>
       </div>
 
+      {/* Bagian Depan Penutup Tenant */}
       <div
         className="absolute top-[70%] md:top-[58.9%] left-1/2 -translate-x-1/2 w-[80%] md:w-[38%] aspect-[16/9] z-40"
         style={{ perspective: "800px" }}
@@ -102,7 +104,7 @@ export default function TenantInteraction() {
         <div
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{
-            transform: "translate(80px, 18px)",
+            transform: "translate(12%, 8.5%)",
             opacity: 0.2,
             zIndex: -1,
           }}
