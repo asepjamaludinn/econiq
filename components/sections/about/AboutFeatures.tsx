@@ -11,65 +11,51 @@ if (typeof window !== "undefined") {
 }
 
 const FEATURES_DATA = [
-  {
-    id: 1,
-    title: "Digital Assets",
-    description: "Manage multiple cryptocurrencies and tokens seamlessly in one unified, highly secure dashboard.",
-    imageSrc: "/images/BitCoin.svg", // Anda bisa ganti dengan gambar representatif nanti
-    timestamp: "00h21"
-  },
-  {
-    id: 2,
-    title: "Smart Vaults",
-    description: "Automated staking and yield generation working 24/7 without requiring active management.",
-    imageSrc: "/images/Dompet.svg",
-    timestamp: "09h26"
-  },
-  {
-    id: 3,
-    title: "Real-time Tracking",
-    description: "Monitor your financial growth globally. Accessible from any device, anywhere, anytime.",
-    imageSrc: "/images/Dolar.svg",
-    timestamp: "12h37"
-  }
+  { id: 1, title: "Smart Vaults", description: "Automated staking and yield generation.", imageSrc: "/images/Dompet.svg", timestamp: "00h21" },
+  { id: 2, title: "Digital Assets", description: "Manage multiple cryptocurrencies seamlessly.", imageSrc: "/images/BitCoin.svg", timestamp: "09h26" },
+  { id: 3, title: "Convenience", description: "Access your dashboard from any device.", imageSrc: "/images/Dolar.svg", timestamp: "12h37" },
 ];
 
 export default function AboutFeatures() {
   const sectionRef = useRef<HTMLElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".feature-card",
-      { y: 80, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        }
+    const scrollWidth = scrollContainerRef.current?.scrollWidth || 0;
+    const windowWidth = window.innerWidth;
+
+    gsap.to(scrollContainerRef.current, {
+      x: -(scrollWidth - windowWidth + 100), // Geser ke kiri sejauh sisa lebar kartu
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        pin: true, // KUNCI HALAMAN
+        scrub: 1,  // Ikat dengan scroll
+        start: "top top",
+        end: () => `+=${scrollWidth}`, // Panjang scroll = lebar container
       }
-    );
+    });
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="relative w-full max-w-7xl mx-auto px-4 py-24">
-      <div className="mb-16">
-        <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-4">Finance <br/>At Any Hour</h2>
-        <p className="text-white/60 max-w-2xl">
-          Econiq provides versatility and transparency, complimenting your financial journey 24/7 just like an automated system.
-        </p>
+    <section ref={sectionRef} className="relative w-full h-screen bg-[#DCA953] flex items-center overflow-hidden">
+      
+      {/* Judul Kiri (Fixed / Diam saat di-pin) */}
+      <div className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 w-full max-w-sm md:max-w-lg z-10 pointer-events-none">
+        <h2 className="text-5xl md:text-7xl font-black uppercase text-[#4A2010] leading-[0.9]">
+          FINANCE AT <br/> ANY HOUR
+        </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {FEATURES_DATA.map((feature) => (
-          <div key={feature.id} className="feature-card">
-            <FeatureCard {...feature} />
-          </div>
-        ))}
+      {/* Container Kartu yang bergerak ke kiri */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center pl-[50vw] md:pl-[40vw]">
+        <div ref={scrollContainerRef} className="flex gap-8 px-8">
+          {FEATURES_DATA.map((feature) => (
+            <div key={feature.id} className="w-[300px] md:w-[450px] shrink-0">
+              <FeatureCard {...feature} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

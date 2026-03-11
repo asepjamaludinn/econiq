@@ -1,7 +1,5 @@
 import AboutSplash from "@/components/sections/about/AboutSplash";
 import AboutHero from "@/components/sections/about/AboutHero";
-import AboutMarquee from "@/components/sections/about/AboutMarquee";
-import AboutStory from "@/components/sections/about/AboutStory";
 import AboutFeatures from "@/components/sections/about/AboutFeatures";
 import AboutCTA from "@/components/sections/about/AboutCTA";
 import AboutSecurity from "@/components/sections/about/AboutSecurity";
@@ -14,12 +12,9 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="relative w-full overflow-hidden bg-zinc-900 text-white">
+    <main className="relative w-full overflow-x-hidden bg-zinc-900 text-white">
       <AboutSplash />
-
       <AboutHero />
-      <AboutMarquee />
-      <AboutStory />
       <AboutFeatures />
       <AboutCTA />
       <AboutSecurity />

@@ -40,7 +40,7 @@ export default function SplashScreen() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#660DFF] w-screen h-screen"
+      className="fixed inset-0 z-999999 flex items-center justify-center bg-[#660DFF] w-screen h-screen"
     >
       <Image
         src="/images/Logo.svg"

@@ -46,7 +46,7 @@ export default function AboutSplash() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[99] pointer-events-none flex flex-col">
+    <div ref={containerRef} className="fixed inset-0 z-99 pointer-events-none flex flex-col">
       {/* Layer 2: Aksen Ungu (berada di bawah layer gelap) */}
       <div 
         ref={layerAccentRef} 
