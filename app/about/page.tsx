@@ -1,3 +1,4 @@
+import AboutSplash from "@/components/sections/about/AboutSplash";
 import AboutHero from "@/components/sections/about/AboutHero";
 import AboutMarquee from "@/components/sections/about/AboutMarquee";
 import AboutStory from "@/components/sections/about/AboutStory";
@@ -14,6 +15,8 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="relative w-full overflow-hidden bg-zinc-900 text-white">
+      <AboutSplash />
+
       <AboutHero />
       <AboutMarquee />
       <AboutStory />
