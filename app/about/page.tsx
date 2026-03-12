@@ -9,7 +9,7 @@ import AboutCTA from "@/components/sections/about/AboutCTA"
 
 export default function AboutPage() {
   return (
-    <main className="overflow-hidden">
+    <main className="overflow-hidden bg-zinc-900 text-white">
       <AboutHero />
       <AboutSplash />
       <AboutStory />

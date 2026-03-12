@@ -92,7 +92,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen h-[100dvh] flex flex-col items-center justify-start overflow-hidden bg-[#8644F7] md:bg-transparent"
+      className="relative w-full h-dvh flex flex-col items-center justify-start overflow-hidden bg-[#8644F7] md:bg-transparent"
     >
       {/* 1. Latar Belakang (Langit) */}
       <div className="hidden md:block absolute inset-0 w-full h-full z-0">
@@ -127,7 +127,7 @@ export default function HeroSection() {
             src="/images/Rumah kiri.svg"
             alt="Rumah Kiri"
             fill
-            className="object-contain object-left-bottom"
+            className="object-contain object-bottom-left"
           />
         </div>
         <div className="hidden xl:block absolute bottom-0 -right-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
@@ -135,7 +135,7 @@ export default function HeroSection() {
             src="/images/Rumah kanan.svg"
             alt="Rumah Kanan"
             fill
-            className="object-contain object-right-bottom"
+            className="object-contain object-bottom-right"
           />
         </div>
 
@@ -149,7 +149,7 @@ export default function HeroSection() {
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kiri"
               fill
-              className="object-cover xl:object-contain object-left-bottom"
+              className="object-cover xl:object-contain object-bottom-left"
             />
           </div>
 
@@ -158,7 +158,7 @@ export default function HeroSection() {
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kanan"
               fill
-              className="object-cover xl:object-contain object-right-bottom"
+              className="object-cover xl:object-contain object-bottom-right"
             />
           </div>
         </div>
@@ -183,7 +183,7 @@ export default function HeroSection() {
       </div>
 
       {/* 7. Karakter & Animasi */}
-      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-[80px] aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
+      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-20 aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
         <CatAnimation />
       </div>
 
