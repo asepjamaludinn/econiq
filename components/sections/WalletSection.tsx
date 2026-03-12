@@ -33,7 +33,6 @@ export default function WalletSection() {
           transformOrigin: "center center",
         });
 
-        // 2. Posisi Awal Aset Desktop
         walletAssetsData.forEach((_, i) => {
           gsap.set(assetRefs.current[i], {
             x: i % 2 === 0 ? -150 : 150,
@@ -44,7 +43,6 @@ export default function WalletSection() {
           });
         });
 
-        // 3. Setting Awal Teks
         gsap.set(textContainerRef.current, {
           y: "20vh",
           opacity: 0,
@@ -53,7 +51,6 @@ export default function WalletSection() {
           transformOrigin: "center center",
         });
 
-        // 4. Timeline Utama Scroll Desktop
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: nextSectionRef.current,
@@ -107,7 +104,6 @@ export default function WalletSection() {
         );
         tl.to(textContainerRef.current, { opacity: 1, duration: 1 }, 0.85);
 
-        // 5. Animasi Aset Masuk (Desktop)
         const assetTL = gsap.timeline({ paused: true });
         assetTL.to(assetRefs.current, {
           keyframes: [
@@ -262,16 +258,16 @@ export default function WalletSection() {
         >
           <div className="border-[2px] border-[#0A7B5E] text-[#0A7B5E] bg-transparent rounded-full px-4 md:px-5 py-1 mb-6 md:mb-10 flex items-center gap-2">
             <MdVerified className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-[10px] md:text-sm font-extrabold uppercase tracking-widest">
+            <span className="text-[10px] md:text-sm font-extrabold uppercase tracking-widest=">
               WEB3 FINANCIAL
             </span>
           </div>
 
-          <h2 className="text-[clamp(32px,7vw,120px)] font-black uppercase tracking-normal leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap">
+          <h2 className="text-[clamp(32px,7vw,120px)] font-black uppercase tracking-tight leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap ">
             Learn, Manage, Grow
           </h2>
 
-          <p className="text-white font-bold text-sm md:text-xl mt-2 relative z-20 max-w-2xl px-2">
+          <p className="text-white text-sm md:text-xl mt-2 relative z-20 max-w-2xl px-2 tracking-tight">
             Manage your Web3 finances with full transparency, anytime, anywhere.
           </p>
         </div>

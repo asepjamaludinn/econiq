@@ -396,16 +396,44 @@ export default function FeatureSection() {
                 </div>
 
                 <div className="flex flex-col flex-1 text-left pt-1">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-white/80 leading-relaxed text-sm lg:text-base">
+                  <p className="text-white/80 leading-relaxed text-sm lg:text-base tracking-tight">
                     {item.desc}
                   </p>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item will-change-transform">
+          <button className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-full font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight">
+            Learn More
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="overflow-visible"
+            >
+              <path
+                d="M5 12h14"
+                className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
+                style={{ transformOrigin: "19px 12px" }}
+              />
+
+              <path
+                d="m12 5 7 7-7 7"
+                className="transition-all duration-300 ease-out group-hover:translate-x-3"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

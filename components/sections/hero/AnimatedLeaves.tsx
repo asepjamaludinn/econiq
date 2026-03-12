@@ -30,7 +30,7 @@ export default function AnimatedLeaves() {
   return (
     <div
       ref={containerRef}
-      className="hidden md:block absolute top-[5%] xl:top-[5%] right-[-2%] w-[100%] xl:w-[30%] z-15 pointer-events-none"
+      className="hidden md:block absolute top-[5%] xl:top-[10%] right-[-2%] w-[100%] xl:w-[30%] z-15 pointer-events-none"
     >
       <div className="relative w-full h-auto">
         <Image
