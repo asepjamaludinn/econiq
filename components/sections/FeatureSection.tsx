@@ -1,20 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import {
-  Unlock,
-  TrendingUp,
-  Zap,
-  Globe,
-  Pause,
-  Play,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { Unlock, TrendingUp, Zap, Globe } from "lucide-react";
 import { featuresData } from "@/constants";
+import CustomVideoPlayer from "@/components/ui/CustomVideoPlayer";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -22,26 +14,12 @@ if (typeof window !== "undefined") {
 
 const featureIcons = [Unlock, TrendingUp, Zap, Globe];
 
-const formatTime = (timeInSeconds: number) => {
-  const minutes = Math.floor(timeInSeconds / 60);
-  const seconds = Math.floor(timeInSeconds % 60);
-  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-};
-
 export default function FeatureSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<SVGTSpanElement>(null);
   const badgeRef = useRef<SVGSVGElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [showControls, setShowControls] = useState(false);
 
   useGSAP(
     () => {
@@ -169,56 +147,6 @@ export default function FeatureSection() {
     { scope: sectionRef },
   );
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      const current = videoRef.current.currentTime;
-      const duration = videoRef.current.duration;
-      setCurrentTime(current);
-      if (duration > 0) {
-        setProgress((current / duration) * 100);
-      }
-    }
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (videoRef.current && progressBarRef.current) {
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      videoRef.current.currentTime = pos * videoRef.current.duration;
-    }
-  };
-
-  const handleVideoClick = () => {
-    if (!showControls) {
-      setShowControls(true);
-    } else {
-      togglePlay();
-    }
-  };
-
-  const handleVolumeClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-
-    if (videoRef.current) {
-      const newMutedState = !isMuted;
-      videoRef.current.muted = newMutedState;
-      setIsMuted(newMutedState);
-
-      setShowControls(!newMutedState);
-    }
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -306,81 +234,9 @@ export default function FeatureSection() {
               </svg>
             </div>
           </div>
-          <div
-            className="reveal-item will-change-transform w-full max-w-4xl aspect-video bg-black/10 rounded-3xl border-2 border-white/20 flex flex-col items-center justify-center mb-8 backdrop-blur-md shadow-2xl relative overflow-hidden group"
-            onClick={handleVideoClick}
-          >
-            <video
-              ref={videoRef}
-              src="/animations/econiq.mp4"
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              controls={false}
-              disablePictureInPicture
-              disableRemotePlayback
-              onTimeUpdate={handleTimeUpdate}
-              className="w-full h-full object-cover pointer-events-none"
-            />
 
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-              <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden flex items-center ${
-                  showControls
-                    ? "max-w-[500px] opacity-100"
-                    : "max-w-0 opacity-0 pointer-events-none"
-                }`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="bg-white rounded-[20px] flex items-center h-12 px-5 shadow-lg gap-4 w-max">
-                  <button
-                    onClick={togglePlay}
-                    className="cursor-pointer text-[#660DFF] hover:opacity-80 transition-opacity flex-shrink-0"
-                  >
-                    {isPlaying ? (
-                      <Pause size={20} fill="currentColor" strokeWidth={0} />
-                    ) : (
-                      <Play size={20} fill="currentColor" strokeWidth={0} />
-                    )}
-                  </button>
-
-                  <div
-                    ref={progressBarRef}
-                    onClick={handleSeek}
-                    className="w-32 sm:w-48 h-1.5 bg-[#660DFF]/20 rounded-full cursor-pointer relative"
-                  >
-                    <div
-                      className="absolute top-0 left-0 h-full bg-[#660DFF] rounded-full"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-
-                  <span className="text-[#660DFF] font-bold text-sm tabular-nums flex-shrink-0">
-                    {formatTime(currentTime)}
-                  </span>
-                </div>
-              </div>
-
-              <div
-                onClick={handleVolumeClick}
-                className="bg-white rounded-[20px] flex items-center justify-center h-12 w-12 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0"
-              >
-                {isMuted ? (
-                  <VolumeX
-                    className="text-[#660DFF]"
-                    size={20}
-                    strokeWidth={2.5}
-                  />
-                ) : (
-                  <Volume2
-                    className="text-[#660DFF]"
-                    size={20}
-                    strokeWidth={2.5}
-                  />
-                )}
-              </div>
-            </div>
+          <div className="reveal-item will-change-transform w-full max-w-4xl aspect-video bg-black/10 rounded-3xl border-2 border-white/20 flex flex-col items-center justify-center mb-8 backdrop-blur-md shadow-2xl relative overflow-hidden group">
+            <CustomVideoPlayer src="/animations/econiq.mp4" />
           </div>
         </div>
 

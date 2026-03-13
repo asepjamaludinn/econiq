@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { X, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { X } from "lucide-react";
 import { useLenis } from "lenis/react";
+import { companyInfo } from "@/constants";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -175,16 +176,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       <div
         ref={modalRef}
         className="fixed top-0 right-0 h-full bg-white z-[1000] flex flex-col translate-x-full overflow-y-auto w-full 
-                   md:w-[600px] lg:w-[700px] xl:w-[750px] 
+                   md:w-[600px] lg:w-[650px] xl:w-[750px] 
                    rounded-tl-[20px] rounded-bl-[20px] md:rounded-tl-[30px] md:rounded-bl-[30px]
                    shadow-[-20px_0_60px_rgba(0,0,0,0.15)]"
         style={{ willChange: "transform" }}
       >
-        <div className="flex items-center justify-between p-4 md:p-6 border-b border-zinc-100 modal-content-item sticky top-0 bg-white z-20">
+        <div className="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-zinc-100 modal-content-item sticky top-0 bg-white z-20">
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="group w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl bg-[#dcc3f4] text-[#8644F7] flex items-center justify-center hover:bg-[#8644F7] hover:text-white hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
+              className="group w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#dcc3f4] text-[#8644F7] flex items-center justify-center hover:bg-[#8644F7] hover:text-white hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
               aria-label="Close Contact"
             >
               <X
@@ -194,119 +195,100 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               />
             </button>
             <span className="text-base md:text-lg font-bold text-[#171717]">
-              Informasi Eqonic
+              Contact ECONIQ
             </span>
           </div>
         </div>
 
-        <div className="p-6 md:p-10 lg:p-12 flex-grow flex flex-col gap-5 md:gap-7">
-          {/* Headline */}
+        <div className="p-6 md:p-8 lg:px-10 lg:py-8 flex-grow flex flex-col gap-4 md:gap-5 lg:gap-4 xl:gap-7">
           <div className="modal-content-item">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-[#171717] leading-[0.95] mb-1.5">
-              Ada Ide? <br />
-              <span className="text-[#8644F7]">Mari Bicara.</span>
+            <h2 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter text-[#171717] leading-[0.95] mb-1 md:mb-1.5">
+              Let's Build <br />
+              <span className="text-[#8644F7]">Something Great.</span>
             </h2>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 md:gap-5 lg:gap-4 xl:gap-6">
             {/* Jam Operasional */}
             <div className="modal-content-item">
               <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1 flex items-center gap-1.5 leading-none">
-                Jam Operasional
+                Operating Hours
               </h4>
-              <p className="text-xl md:text-2xl font-black text-[#171717] leading-tight mb-0.5">
-                09:00 - 17:00
+              <p className="text-lg md:text-xl xl:text-2xl font-black text-[#171717] leading-tight mb-0.5">
+                {companyInfo.hours}
               </p>
               <p className="text-sm md:text-base font-semibold text-zinc-600">
-                Senin - Jumat (WIB)
+                {companyInfo.workDays}
               </p>
             </div>
 
             {/* WhatsApp / Telepon */}
             <div className="modal-content-item">
               <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1 leading-none">
-                WhatsApp / Telepon
+                Phone / WhatsApp
               </h4>
               <a
-                href="tel:+6281234567890"
-                className="text-xl md:text-2xl font-black text-[#171717] hover:text-[#8644F7] transition-colors inline-block leading-tight cursor-pointer"
+                href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
+                className="text-lg md:text-xl xl:text-2xl font-black text-[#171717] hover:text-[#8644F7] transition-colors inline-block leading-tight cursor-pointer"
               >
-                +62 812 3456 7890
+                {companyInfo.phone}
               </a>
             </div>
 
             {/* Email */}
             <div className="modal-content-item">
-              <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1.5 flex items-center gap-1.5 leading-none">
+              <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1 md:mb-1.5 flex items-center gap-1.5 leading-none">
                 Email
               </h4>
               <a
-                href="mailto:hello@eqonic.id"
-                className="text-3xl md:text-4xl font-black text-[#171717] hover:text-[#8644F7] transition-colors leading-tight cursor-pointer"
+                href={`mailto:${companyInfo.email}`}
+                className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-black text-[#171717] hover:text-[#8644F7] transition-colors leading-tight cursor-pointer"
               >
-                hello@eqonic.id
+                {companyInfo.email}
               </a>
             </div>
 
             {/* Lokasi */}
             <div className="modal-content-item">
-              <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1.5 flex items-center gap-1.5 leading-none">
-                Alamat Kantor
+              <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1 md:mb-1.5 flex items-center gap-1.5 leading-none">
+                Office Address
               </h4>
-              <p className="text-xl md:text-2xl font-black text-[#8644F7] leading-snug max-w-sm hover:text-[#660DFF] transition-colors cursor-pointer">
-                Gedung Direktorat Lt. 2, Politeknik Negeri Indramayu, Jawa Barat
-              </p>
+              <a
+                href={companyInfo.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-lg md:text-xl xl:text-2xl font-black text-[#8644F7] leading-snug max-w-sm lg:max-w-md hover:text-[#660DFF] transition-colors cursor-pointer"
+              >
+                {companyInfo.address}
+              </a>
             </div>
           </div>
 
-          {/* Sosial Media */}
-          <div className="modal-content-item mt-auto pt-6 md:pt-8 border-t border-zinc-100 flex items-center justify-between gap-4">
+          <div className="modal-content-item mt-auto pt-4 md:pt-5 xl:pt-6 border-t border-zinc-100 flex items-center justify-between gap-4">
             <div>
               <h4 className="text-[11px] font-bold text-zinc-400 tracking-widest mb-0.5 leading-none">
-                Ikuti Perjalanan Kami
+                Follow Our Journey
               </h4>
               <p className="text-xs md:text-sm font-medium text-zinc-500 leading-tight">
-                Update inovasi Web3 Eqonic.
-                <span className="hidden sm:inline"> (Social Media)</span>
+                Latest ECONIQ updates.
               </p>
             </div>
-            <div className="flex gap-2 md:gap-3">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#171717] text-white flex items-center justify-center hover:bg-[#8644F7] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                aria-label="Instagram"
-              >
-                <Instagram size={17} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#171717] text-white flex items-center justify-center hover:bg-[#8644F7] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                aria-label="Twitter"
-              >
-                <Twitter size={17} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#171717] text-white flex items-center justify-center hover:bg-[#8644F7] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={17} />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#171717] text-white flex items-center justify-center hover:bg-[#8644F7] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                aria-label="YouTube"
-              >
-                <Youtube size={17} />
-              </a>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {companyInfo.socials.map((social) => {
+                const Icon = social.Icon;
+                return (
+                  <a
+                    key={social.id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-[#171717] text-white flex items-center justify-center hover:bg-[#8644F7] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    aria-label={social.name}
+                  >
+                    <Icon size={17} />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

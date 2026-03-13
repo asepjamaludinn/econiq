@@ -3,6 +3,49 @@ import { SvgLearn } from "@/components/icons/SvgLearn";
 import { SvgTrack } from "@/components/icons/SvgTrack";
 import { SvgGrow } from "@/components/icons/SvgGrow";
 import { FeatureData, StepData, ImageData, FAQItemData } from "@/types";
+import { Instagram, Twitter, Facebook, Linkedin, Youtube } from "lucide-react";
+
+export const companyInfo = {
+  phone: "+62 812 3456 7890",
+  email: "hello@eqonic.id",
+  address: "Gedung Direktorat Lt. 2, Politeknik Negeri Indramayu, Jawa Barat",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Politeknik+Negeri+Indramayu",
+  hours: "09:00 - 17:00",
+  workDays: "Monday – Friday (UTC+7)",
+  socials: [
+    {
+      id: "instagram",
+      name: "Instagram",
+      url: "https://instagram.com",
+      Icon: Instagram,
+    },
+    {
+      id: "twitter",
+      name: "Twitter",
+      url: "https://twitter.com",
+      Icon: Twitter,
+    },
+    {
+      id: "facebook",
+      name: "Facebook",
+      url: "https://facebook.com",
+      Icon: Facebook,
+    },
+    {
+      id: "linkedin",
+      name: "LinkedIn",
+      url: "https://linkedin.com",
+      Icon: Linkedin,
+    },
+    {
+      id: "youtube",
+      name: "YouTube",
+      url: "https://youtube.com",
+      Icon: Youtube,
+    },
+  ],
+};
 
 export const featuresData: FeatureData[] = [
   {
