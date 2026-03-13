@@ -5,18 +5,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { faqData } from "@/constants";
-
+import { FAQItemData } from "@/types";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const FAQItem = ({
-  question,
-  answer,
-}: {
-  question: string;
-  answer: string;
-}) => {
+const FAQItem = ({ question, answer }: FAQItemData) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

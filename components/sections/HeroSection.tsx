@@ -99,6 +99,7 @@ export default function HeroSection() {
         <Image
           src="/images/Biru langit.svg"
           alt="Langit Biru"
+          aria-hidden="true"
           fill
           className="object-cover object-top"
           priority
@@ -126,6 +127,7 @@ export default function HeroSection() {
           <Image
             src="/images/Rumah kiri.svg"
             alt="Rumah Kiri"
+            aria-hidden="true"
             fill
             className="object-contain object-left-bottom"
           />
@@ -134,6 +136,7 @@ export default function HeroSection() {
           <Image
             src="/images/Rumah kanan.svg"
             alt="Rumah Kanan"
+            aria-hidden="true"
             fill
             className="object-contain object-right-bottom"
           />
@@ -148,6 +151,7 @@ export default function HeroSection() {
             <Image
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kiri"
+              aria-hidden="true"
               fill
               className="object-cover xl:object-contain object-left-bottom"
             />
@@ -157,6 +161,7 @@ export default function HeroSection() {
             <Image
               src="/images/Hiasan Tembok.svg"
               alt="Hiasan Tembok Kanan"
+              aria-hidden="true"
               fill
               className="object-cover xl:object-contain object-right-bottom"
             />
@@ -175,6 +180,7 @@ export default function HeroSection() {
           <Image
             src="/images/Jalan.svg"
             alt="Jalan"
+            aria-hidden="true"
             fill
             className="object-cover object-bottom"
             priority
@@ -199,6 +205,7 @@ export default function HeroSection() {
         <Image
           src="/images/Pager.svg"
           alt="Pagar Depan"
+          aria-hidden="true"
           fill
           className="object-cover xl:object-contain object-bottom"
           priority

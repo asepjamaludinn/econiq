@@ -21,7 +21,6 @@ export const SvgTrack = () => (
         values="0,5; 0,-5; 0,5"
         dur="4s"
         repeatCount="indefinite"
-        ease="ease-in-out"
       />
 
       {/* Dashboard Card */}

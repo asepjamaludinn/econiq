@@ -2,6 +2,8 @@ export const SvgWallet = () => (
   <svg
     viewBox="0 0 200 200"
     className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 drop-shadow-2xl"
+    aria-hidden="true"
+    focusable="false"
   >
     <defs>
       <linearGradient id="walletGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -34,7 +36,6 @@ export const SvgWallet = () => (
         values="0,0; 0,-8; 0,0"
         dur="4s"
         repeatCount="indefinite"
-        ease="ease-in-out"
       />
       <rect
         x="30"
@@ -55,7 +56,6 @@ export const SvgWallet = () => (
           values="0,0; 0,-15; 0,0"
           dur="3s"
           repeatCount="indefinite"
-          ease="ease-in-out"
         />
         <circle cx="100" cy="70" r="28" fill="url(#walletGrad2)" />
         <path

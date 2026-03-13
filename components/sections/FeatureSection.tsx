@@ -265,6 +265,8 @@ export default function FeatureSection() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-full h-full"
                 style={{ opacity: 0.95 }}
+                aria-hidden="true"
+                focusable="false"
               >
                 <g>
                   <path
