@@ -2,6 +2,8 @@ export const SvgGrow = () => (
   <svg
     viewBox="0 0 200 200"
     className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 drop-shadow-2xl"
+    aria-hidden="true"
+    focusable="false"
   >
     <defs>
       <linearGradient id="growGrad" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -65,7 +67,6 @@ export const SvgGrow = () => (
         values="0,0; 0,-15; 0,0"
         dur="3s"
         repeatCount="indefinite"
-        ease="ease-in-out"
       />
       <path
         d="M100 30 L150 80 L120 80 L120 120 L80 120 L80 80 L50 80 Z"
@@ -74,7 +75,6 @@ export const SvgGrow = () => (
         strokeWidth="2"
         strokeLinejoin="round"
       />
-
       {/* Inner Arrow Highlight */}
       <path
         d="M100 40 L130 70 L110 70 L110 110 L90 110 L90 70 L70 70 Z"
