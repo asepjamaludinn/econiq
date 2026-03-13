@@ -136,23 +136,25 @@ export const teamImages: ImageData[] = [
 
 export const faqData: FAQItemData[] = [
   {
-    question: "Apa itu Eqonic dan bagaimana cara kerjanya?",
+    question: "Apa visi Eqonic dalam mendukung tema INNOVATE?",
     answer:
-      "Eqonic adalah platform Web3 Financial yang memungkinkan Anda untuk menghubungkan dompet digital, melacak aset secara real-time, dan mempelajari ekosistem keuangan terdesentralisasi melalui modul edukasi interaktif kami.",
+      "Sejalan dengan semangat INNOVATE (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic hadir sebagai inovasi edukasi digital. Kami menavigasi masyarakat melintasi kerumitan finansial Web3 melalui platform yang aman, tervalidasi, dan dioptimalkan untuk kemudahan belajar, guna memajukan literasi teknologi di Indonesia.",
   },
   {
-    question: "Apakah aman menghubungkan dompet saya?",
+    question:
+      "Mengapa Eqonic menggunakan sistem 'Sandbox' tanpa risiko finansial nyata?",
     answer:
-      "Sangat aman. Kami menggunakan protokol keamanan standar Web3. Eqonic hanya memiliki akses baca (read-only) untuk melacak portofolio Anda dan tidak dapat melakukan transaksi tanpa persetujuan Anda.",
+      "Kami berfokus pada subtema Pendidikan dan Sosial. Ketakutan akan kerugian finansial sering menjadi penghalang utama dalam mempelajari Web3. Dengan Sandbox interaktif, kami memberdayakan masyarakat dari berbagai kalangan untuk belajar dan mensimulasikan strategi ekonomi digital tanpa risiko kehilangan uang sepeser pun.",
   },
   {
-    question: "Aset kripto apa saja yang didukung?",
+    question:
+      "Apakah platform ini hanya membahas Ekonomi, atau menyentuh isu keberlanjutan?",
     answer:
-      "Saat ini kami mendukung berbagai aset utama di jaringan Ethereum, Binance Smart Chain, Polygon, dan Solana. Kami terus menambahkan dukungan untuk jaringan dan token baru secara berkala.",
+      "Eqonic mencakup keduanya! Selain modul finansial, Eqonic Academy juga menyoroti subtema Lingkungan dengan memberikan edukasi terkait 'Green Blockchain' (jaringan kripto rendah emisi karbon) dan bagaimana teknologi desentralisasi dapat digunakan untuk mendanai inisiatif iklim serta kesehatan global.",
   },
   {
-    question: "Apakah platform ini sepenuhnya gratis?",
+    question: "Bagaimana platform ini berdampak pada masyarakat luas?",
     answer:
-      "Ya, fitur pelacakan aset dasar dan modul edukasi 'Learn & Explore' sepenuhnya gratis untuk digunakan oleh semua pengguna. Kami percaya pada literasi keuangan yang dapat diakses oleh siapa saja.",
+      "Website bukan sekadar media informasi, tetapi sarana pemberdayaan. Dengan mendemokratisasi akses pengetahuan Web3 secara gratis, Eqonic bertujuan meningkatkan kesadaran publik, menumbuhkan pemikiran kritis generasi muda, dan mempersiapkan masyarakat menghadapi transisi menuju ekonomi digital yang inklusif.",
   },
 ];

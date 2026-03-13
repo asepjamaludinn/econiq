@@ -26,10 +26,10 @@ export default function WalletSection() {
   );
 
   return (
-    <div ref={wrapperRef}>
+    <div ref={wrapperRef} className="relative xl:static w-full">
       <div
         ref={dompetRef}
-        className="absolute left-[30%] top-[83dvh] md:top-[84vh] xl:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
+        className="absolute left-[30%] -top-[120px] md:-top-[170px] xl:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
       >
         <div className="hidden xl:flex absolute inset-0 w-full h-full items-center justify-center">
           {walletAssetsData.map((src, i) => (
