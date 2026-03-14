@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
                 <ul className="list-disc pl-6 text-zinc-600 space-y-2 text-base md:text-lg">
                   {section.list.map((item, idx) => (
                     <li key={idx}>
-                      {item.label && (
+                      {"label" in item && (
                         <strong className="text-[#171717]">
                           {item.label}{" "}
                         </strong>
