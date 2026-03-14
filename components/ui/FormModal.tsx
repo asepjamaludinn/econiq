@@ -1,0 +1,183 @@
+"use client";
+
+import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
+import AnimatedSideModal from "./AnimatedSideModal";
+
+interface FormModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function FormModal({ isOpen, onClose }: FormModalProps) {
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  useEffect(() => {
+    if (!isOpen) {
+      setTimeout(() => {
+        setSubmitStatus("idle");
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+          setCaptchaValue(null);
+        }
+      }, 500);
+    }
+  }, [isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!captchaValue) {
+      alert("Please complete the reCAPTCHA.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        form.reset();
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+          setCaptchaValue(null);
+        }
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <AnimatedSideModal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Join ECONIQ"
+      contentClassName="px-6 md:px-10 lg:px-12 pb-10 pt-6 flex-grow flex flex-col gap-6"
+    >
+      <div className="modal-animate-item">
+        <h2 className="text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-[#171717] leading-[0.9] mb-4">
+          JOIN THE
+          <br />
+          <span className="text-[#8644F7]">NEXT GENERATION</span>
+          <br />
+          OF DIGITAL FINANCE
+        </h2>
+        <p className="text-base md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
+          Learn the fundamentals of Web3, blockchain, and digital finance. Leave
+          your details and our team will share more information with you.
+        </p>
+      </div>
+
+      <form className="flex flex-col gap-4 mt-2" onSubmit={handleSubmit}>
+        <div className="modal-animate-item">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            className="w-full bg-[#f4effc] text-[#171717] placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-[#8644F7]/40 transition-colors"
+          />
+        </div>
+
+        <div className="modal-animate-item">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            className="w-full bg-[#f4effc] text-[#171717] placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-[#8644F7]/40 transition-colors"
+          />
+        </div>
+
+        <div className="modal-animate-item flex items-center gap-3 mt-2">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms_agreed"
+            required
+            className="w-5 h-5 accent-[#8644F7] cursor-pointer rounded border-[#8644F7]/30"
+          />
+          <label
+            htmlFor="terms"
+            className="text-sm md:text-base text-zinc-600 cursor-default"
+          >
+            I accept the processing of my{" "}
+            <Link
+              href="/privacy"
+              onClick={(e) => e.stopPropagation()}
+              className="text-[#8644F7] font-medium hover:text-[#660DFF] hover:underline transition-all duration-300"
+            >
+              personal data.
+            </Link>
+          </label>
+        </div>
+
+        <div className="modal-animate-item mt-2">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            onChange={(val) => setCaptchaValue(val)}
+          />
+        </div>
+
+        {submitStatus === "success" && (
+          <div className="modal-animate-item flex items-start gap-3 text-green-700 bg-green-50 p-4 rounded-xl border border-green-200">
+            <CheckCircle2
+              size={24}
+              className="mt-0.5 flex-shrink-0 text-green-600"
+            />
+            <div className="flex flex-col gap-1">
+              <span className="font-bold text-sm md:text-base">Thank you!</span>
+              <span className="font-medium text-xs md:text-sm text-green-600/90 leading-relaxed">
+                Your information has been sent. Please check your email inbox
+                (or spam folder) for the confirmation message.
+              </span>
+            </div>
+          </div>
+        )}
+
+        {submitStatus === "error" && (
+          <div className="modal-animate-item text-red-500 bg-red-50 p-4 rounded-xl border border-red-200 font-medium text-sm">
+            Oops! Something went wrong. Please try again later.
+          </div>
+        )}
+
+        <div className="modal-animate-item mt-4">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={`w-full font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 cursor-pointer active:scale-[0.98] ${isSubmitting ? "bg-[#dcc3f4] text-white cursor-not-allowed" : "bg-[#8644F7] hover:bg-[#660DFF] text-white"}`}
+          >
+            {isSubmitting ? "Sending..." : "Start Learning"}{" "}
+            {!isSubmitting && <ArrowRight size={20} />}
+          </button>
+        </div>
+      </form>
+    </AnimatedSideModal>
+  );
+}

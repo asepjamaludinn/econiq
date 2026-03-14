@@ -7,11 +7,14 @@ import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import gsap from "gsap";
 import ContactModal from "@/components/ui/ContactModal";
+import FormModal from "@/components/ui/FormModal";
+import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { companyInfo } from "@/constants";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -24,7 +27,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/", action: null },
     { name: "About Us", href: "/about", action: null },
-    { name: "Academy", href: "/content", action: null },
+    { name: "content", href: "/content", action: null },
     { name: "Contact", href: "#", action: "contact-modal" },
   ];
 
@@ -45,9 +48,7 @@ export default function Navbar() {
 
   const handleMouseLeave = () => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) return;
-    closeTimeoutRef.current = setTimeout(() => {
-      setIsOpen(false);
-    }, 300);
+    closeTimeoutRef.current = setTimeout(() => setIsOpen(false), 300);
   };
 
   useEffect(() => {
@@ -123,18 +124,11 @@ export default function Navbar() {
         });
       }
     }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    };
   }, [isOpen]);
 
   const handleMenuClick = (action: string | null) => {
     setIsOpen(false);
-    if (action === "contact-modal") {
-      setIsContactOpen(true);
-    }
+    if (action === "contact-modal") setIsContactOpen(true);
   };
 
   return (
@@ -150,7 +144,7 @@ export default function Navbar() {
           ref={menuRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="relative bg-[#660DFF] rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-[360px] md:w-[320px] lg:max-w-none lg:w-fit pointer-events-auto"
+          className="relative bg-[#660DFF] rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto"
         >
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -159,19 +153,10 @@ export default function Navbar() {
             <div className="flex items-center gap-3.5 z-30">
               <div className="w-8 lg:w-6 h-4 relative flex justify-center items-center z-30 pointer-events-none">
                 <span
-                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${
-                    isOpen
-                      ? "w-full h-[3px] lg:w-2 lg:h-2 translate-y-0 rotate-45 lg:rotate-0"
-                      : "w-full h-[3px] -translate-y-[4px] lg:-translate-y-[3px] rotate-0"
-                  }`}
+                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${isOpen ? "w-full h-[3px] lg:w-2 lg:h-2 translate-y-0 rotate-45 lg:rotate-0" : "w-full h-[3px] -translate-y-[4px] lg:-translate-y-[3px] rotate-0"}`}
                 />
-
                 <span
-                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${
-                    isOpen
-                      ? "w-full h-[3px] lg:w-0 lg:opacity-0 translate-y-0 -rotate-45 lg:rotate-0"
-                      : "w-full h-[3px] translate-y-[4px] lg:translate-y-[3px] rotate-0 opacity-100"
-                  }`}
+                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${isOpen ? "w-full h-[3px] lg:w-0 lg:opacity-0 translate-y-0 -rotate-45 lg:rotate-0" : "w-full h-[3px] translate-y-[4px] lg:translate-y-[3px] rotate-0 opacity-100"}`}
                 />
               </div>
               <span className="hidden lg:block text-white font-normal text-base tracking-tight z-20 pointer-events-none">
@@ -202,9 +187,7 @@ export default function Navbar() {
                 style={{ top: `calc(${currentDotY}px + 14px)`, bottom: "8px" }}
               />
               <div
-                className={`hidden lg:block absolute left-[28px] w-2 h-2 bg-white rounded-full transition-all duration-300 ease-out z-20 pointer-events-none ${
-                  targetIndex === -1 ? "opacity-0" : "opacity-100"
-                }`}
+                className={`hidden lg:block absolute left-[28px] w-2 h-2 bg-white rounded-full transition-all duration-300 ease-out z-20 pointer-events-none ${targetIndex === -1 ? "opacity-0" : "opacity-100"}`}
                 style={{ transform: `translateY(${currentDotY}px)` }}
               />
 
@@ -216,7 +199,6 @@ export default function Navbar() {
 
               {navLinks.map((link, idx) => {
                 const isTargeted = targetIndex === idx;
-
                 return link.action ? (
                   <button
                     key={idx}
@@ -230,11 +212,7 @@ export default function Navbar() {
                   >
                     <div className="hidden lg:block w-6" />
                     <span
-                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${
-                        isTargeted
-                          ? "text-white"
-                          : "text-white/60 group-hover:text-white"
-                      }`}
+                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${isTargeted ? "text-white" : "text-white/60 group-hover:text-white"}`}
                     >
                       {link.name}
                     </span>
@@ -250,11 +228,7 @@ export default function Navbar() {
                   >
                     <div className="hidden lg:block w-6" />
                     <span
-                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${
-                        isTargeted
-                          ? "text-white"
-                          : "text-white/60 group-hover:text-white"
-                      }`}
+                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${isTargeted ? "text-white" : "text-white/60 group-hover:text-white"}`}
                     >
                       {link.name}
                     </span>
@@ -285,11 +259,7 @@ export default function Navbar() {
 
         {pathname !== "/" && (
           <div
-            className={`pointer-events-auto absolute lg:relative right-0 lg:right-auto top-0 transition-all duration-300 ${
-              isOpen
-                ? "opacity-0 scale-90 pointer-events-none lg:-translate-x-4"
-                : "opacity-100 scale-100 lg:translate-x-0"
-            }`}
+            className={`pointer-events-auto absolute lg:relative right-0 lg:right-auto top-0 transition-all duration-300 hidden lg:block ${isOpen ? "opacity-0 scale-90 pointer-events-none lg:-translate-x-4" : "opacity-100 scale-100 lg:translate-x-0"}`}
           >
             <button
               onClick={() => router.back()}
@@ -301,10 +271,25 @@ export default function Navbar() {
         )}
       </div>
 
+      <div className="fixed top-4 lg:top-5 right-4 lg:right-6 z-[160] pointer-events-auto hidden lg:block">
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="group flex items-center justify-center gap-2 lg:gap-3 bg-[#660DFF] hover:bg-[#5200CC] px-3 py-2.5 lg:px-5 lg:py-2.5 rounded-[12px] lg:rounded-xl shadow-[0_8px_25px_rgba(102,13,255,0.3)] transition-all duration-300 active:scale-95 border-none outline-none cursor-pointer"
+        >
+          <span className="text-white font-medium text-sm lg:text-base tracking-tight pointer-events-none">
+            Email
+          </span>
+          <div className="relative flex items-center justify-center w-[22px] h-[18px] pointer-events-none">
+            <EnvelopeIcon />
+          </div>
+        </button>
+      </div>
+
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
       />
+      <FormModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </>
   );
 }

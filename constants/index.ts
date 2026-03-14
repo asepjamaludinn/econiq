@@ -4,11 +4,13 @@ import { SvgTrack } from "@/components/icons/SvgTrack";
 import { SvgGrow } from "@/components/icons/SvgGrow";
 import { FeatureData, StepData, ImageData, FAQItemData } from "@/types";
 import { Instagram, Twitter, Facebook, Linkedin, Youtube } from "lucide-react";
+import { ArticleData } from "@/types";
 
 export const companyInfo = {
   phone: "+62 812 3456 7890",
   email: "hello@eqonic.id",
-  address: "Gedung Direktorat Lt. 2, Politeknik Negeri Indramayu, Jawa Barat",
+  address:
+    "Directorate Building 2nd Floor, State Polytechnic of Indramayu, West Java",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Politeknik+Negeri+Indramayu",
   hours: "09:00 - 17:00",
@@ -50,19 +52,19 @@ export const companyInfo = {
 export const featuresData: FeatureData[] = [
   {
     title: "Beginner Friendly",
-    desc: "Start learning digital finance safely. Eqonic provides intuitive simulations to manage virtual wallets without technical barriers.",
+    desc: "Start learning digital finance safely. Eqonic provides intuitive content and articles to help you understand Web3 without technical barriers.",
   },
   {
     title: "Financial Literacy",
-    desc: "Understand Web3 economics. Track virtual assets, study market behavior, and monitor growth with our real-time educational insights.",
+    desc: "Understand Web3 economics. Study market behavior and monitor global trends with our real-time educational insights.",
   },
   {
-    title: "Safe Sandbox Environment",
-    desc: "Practice managing digital assets securely. Our platform simulates real-world interactions without exposing you to actual financial risks.",
+    title: "Trusted Knowledge Base",
+    desc: "Access verified and accurate information about digital assets securely. Our platform provides real-world insights without exposing you to financial risks.",
   },
   {
-    title: "Interactive Learning",
-    desc: "Engage with dynamic modules that make complex blockchain and finance concepts easy to understand for everyone.",
+    title: "Insightful Reading",
+    desc: "Engage with dynamic articles that make complex blockchain and finance concepts easy to understand for everyone.",
   },
 ];
 
@@ -84,20 +86,20 @@ export const sumberUangData: string[] = [
 export const stepsData: StepData[] = [
   {
     num: "01",
-    title: "Virtual Wallet",
-    desc: "Begin your journey by connecting a virtual wallet. Experience secure Web3 transactions in a safe environment without real financial risk.",
+    title: "Discover Trends",
+    desc: "Begin your journey by discovering the latest news and trends in Web3, blockchain, and digital finance.",
     Icon: SvgWallet,
   },
   {
     num: "02",
     title: "Learn & Explore",
-    desc: "Access interactive modules to understand Web3 fundamentals, blockchain security, and digital financial literacy from the basics.",
+    desc: "Access comprehensive articles to understand Web3 fundamentals, blockchain security, and digital financial literacy from the basics.",
     Icon: SvgLearn,
   },
   {
     num: "03",
-    title: "Interactive Sandbox",
-    desc: "Use our simulation dashboard to learn how to track asset movements and analyze crypto market trends in real time.",
+    title: "Market Insights",
+    desc: "Read our daily insights to learn how to analyze crypto market movements and technological shifts in real-time.",
     Icon: SvgTrack,
   },
   {
@@ -179,25 +181,156 @@ export const teamImages: ImageData[] = [
 
 export const faqData: FAQItemData[] = [
   {
-    question: "Apa visi Eqonic dalam mendukung tema INNOVATE?",
+    question: "What is Eqonic's vision in supporting the INNOVATE theme?",
     answer:
-      "Sejalan dengan semangat INNOVATE (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic hadir sebagai inovasi edukasi digital. Kami menavigasi masyarakat melintasi kerumitan finansial Web3 melalui platform yang aman, tervalidasi, dan dioptimalkan untuk kemudahan belajar, guna memajukan literasi teknologi di Indonesia.",
+      "In line with the INNOVATE spirit (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic serves as a digital education innovation. We navigate society through the complexities of Web3 finance via a secure, validated, and optimized platform to advance technological literacy.",
+  },
+  {
+    question: "Why does Eqonic focus on educational articles and news?",
+    answer:
+      "We focus on the Education and Social sub-themes. The fear of financial loss is often the main barrier to learning Web3. By providing comprehensive articles and news, we empower people from all backgrounds to learn and understand digital economy strategies without the risk of losing any money.",
   },
   {
     question:
-      "Mengapa Eqonic menggunakan sistem 'Sandbox' tanpa risiko finansial nyata?",
+      "Does this platform only discuss Economics, or does it touch on sustainability issues?",
     answer:
-      "Kami berfokus pada subtema Pendidikan dan Sosial. Ketakutan akan kerugian finansial sering menjadi penghalang utama dalam mempelajari Web3. Dengan Sandbox interaktif, kami memberdayakan masyarakat dari berbagai kalangan untuk belajar dan mensimulasikan strategi ekonomi digital tanpa risiko kehilangan uang sepeser pun.",
+      "Eqonic covers both! Besides financial articles, Eqonic Academy also highlights the Environment sub-theme by providing education on 'Green Blockchain' (low-carbon emission crypto networks) and how decentralized technology can be used to fund global climate and health initiatives.",
   },
   {
-    question:
-      "Apakah platform ini hanya membahas Ekonomi, atau menyentuh isu keberlanjutan?",
+    question: "How does this platform impact the wider community?",
     answer:
-      "Eqonic mencakup keduanya! Selain modul finansial, Eqonic Academy juga menyoroti subtema Lingkungan dengan memberikan edukasi terkait 'Green Blockchain' (jaringan kripto rendah emisi karbon) dan bagaimana teknologi desentralisasi dapat digunakan untuk mendanai inisiatif iklim serta kesehatan global.",
+      "The website is not just an information medium, but a tool for empowerment. By democratizing access to Web3 knowledge for free, Eqonic aims to increase public awareness, foster critical thinking among the younger generation, and prepare society for the transition to an inclusive digital economy.",
+  },
+];
+
+export const heroData = {
+  titleLine1: "Know Your Money.",
+  titleLine2: "Grow Your Money.",
+};
+
+export const privacyPolicyData = {
+  title: "Privacy Policy",
+  lastUpdated: "March 2026",
+  sections: [
+    {
+      id: "introduction",
+      title: "1. Introduction",
+      content:
+        "Welcome to ECONIQ. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.",
+    },
+    {
+      id: "data-we-collect",
+      title: "2. Data We Collect",
+      content:
+        "When you use our platform, specifically when you fill out forms to subscribe to our newsletter or access our educational content, we may collect the following data:",
+      list: [
+        { label: "Identity Data:", desc: "includes your full name." },
+        { label: "Contact Data:", desc: "includes your email address." },
+        {
+          label: "Technical Data:",
+          desc: "internet protocol (IP) address, browser type, and interaction metrics with our platform.",
+        },
+      ],
+    },
+    {
+      id: "how-we-use-data",
+      title: "3. How We Use Your Data",
+      content:
+        "We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:",
+      list: [
+        {
+          desc: "To provide you with the latest news and information regarding Web3 and financial literacy.",
+        },
+        {
+          desc: "To manage our relationship with you, including sending confirmation emails and platform updates.",
+        },
+        {
+          desc: "To improve our website, products/services, marketing, and user experiences.",
+        },
+      ],
+    },
+    {
+      id: "data-security",
+      title: "4. Data Security",
+      content:
+        "ECONIQ operates as an educational platform. This means our platform provides financial insights and tech news **without requiring real financial investments or connecting actual crypto wallets**. We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way.",
+    },
+    {
+      id: "contact-us",
+      title: "5. Contact Us",
+      content:
+        "If you have any questions about this privacy policy or our privacy practices, please contact us via email.",
+    },
+  ],
+};
+
+export const articleCategories = [
+  "All",
+  "Web3 Basics",
+  "Security",
+  "Market Trends",
+  "Green Blockchain",
+];
+
+export const articlesData: ArticleData[] = [
+  {
+    id: "1",
+    title: "Understanding Internet Evolution: From Web1 to Web3",
+    excerpt:
+      "Understand how the internet evolved from the era of simply reading information, to interacting, and now to the era of decentralized digital asset ownership.",
+    category: "Web3 Basics",
+    readTime: "5 min read",
+    date: "Sep 18, 2025",
+    thumbnail: "/images/content/evolusi.jpg",
+    slug: "/content/evolusi-internet",
+    featured: true,
   },
   {
-    question: "Bagaimana platform ini berdampak pada masyarakat luas?",
-    answer:
-      "Website bukan sekadar media informasi, tetapi sarana pemberdayaan. Dengan mendemokratisasi akses pengetahuan Web3 secara gratis, Eqonic bertujuan meningkatkan kesadaran publik, menumbuhkan pemikiran kritis generasi muda, dan mempersiapkan masyarakat menghadapi transisi menuju ekonomi digital yang inklusif.",
+    id: "2",
+    title: "Myths & Facts About Crypto Wallet Security",
+    excerpt:
+      "Are digital wallets truly secure? Let's debunk the various myths that often make beginners hesitate to get started.",
+    category: "Security",
+    readTime: "4 min read",
+    date: "Sep 15, 2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1614064641936-3b5e06551b2e?q=80&w=1000&auto=format&fit=crop",
+    slug: "/content/mitos-fakta-wallet",
+  },
+  {
+    id: "3",
+    title: "Reading the Direction of Web3 Market Trends This Year",
+    excerpt:
+      "An in-depth analysis of global Web3 adoption trends and their impact on the local digital economy.",
+    category: "Market Trends",
+    readTime: "7 min read",
+    date: "Sep 12, 2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1641332214695-1f89c62c3e1e?q=80&w=1000&auto=format&fit=crop",
+    slug: "/content/tren-pasar-web3",
+  },
+  {
+    id: "4",
+    title: "Green Blockchain: An Eco-Friendly Solution",
+    excerpt:
+      "Answering concerns about carbon footprints. Get to know the new generation of energy-efficient blockchain technology.",
+    category: "Green Blockchain",
+    readTime: "6 min read",
+    date: "Sep 08, 2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?q=80&w=1000&auto=format&fit=crop",
+    slug: "/content/green-blockchain",
+  },
+  {
+    id: "5",
+    title: "A Guide to Creating Your First Smart Contract",
+    excerpt:
+      "Practical and safe steps to understand the logic behind smart contracts without the need for complex coding.",
+    category: "Web3 Basics",
+    readTime: "8 min read",
+    date: "Sep 04, 2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop",
+    slug: "/content/panduan-smart-contract",
   },
 ];
