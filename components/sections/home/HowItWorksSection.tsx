@@ -23,7 +23,7 @@ export default function HowItWorksSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[120vh] md:min-h-[130vh] flex flex-col items-center pt-[30vw] md:pt-[20vw] pb-[20vh] px-4 bg-[#B36EE6] text-white z-[130] -mt-[5vw] overflow-hidden"
+      className="relative w-full min-h-[120vh] md:min-h-[130vh] flex flex-col items-center pt-[30vw] md:pt-[20vw] pb-[20vh] px-4 bg-brand-tertiary text-white z-[130] -mt-[5vw] overflow-hidden"
     >
       <Image
         ref={imageRef}
@@ -72,7 +72,7 @@ export default function HowItWorksSection() {
                   key={index}
                   className="desktop-step-card relative flex items-start gap-10 z-10"
                 >
-                  <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#B36EE6] flex items-center justify-center relative z-20 mt-1.5">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-full bg-brand-tertiary flex items-center justify-center relative z-20 mt-1.5">
                     <div className="desktop-step-circle absolute inset-0 rounded-full border border-white"></div>
                     <span className="desktop-step-text font-semibold text-lg text-white relative z-10">
                       {step.num}

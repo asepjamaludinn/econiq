@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ContentPage() {
   return (
-    <main className="w-full min-h-screen bg-white overflow-hidden selection:bg-[#8644F7] selection:text-white">
+    <main className="w-full min-h-screen bg-white overflow-hidden selection:bg-brand-secondary selection:text-white">
       <FeaturedArticle />
       <ArticleList />
       <ContentCTA />

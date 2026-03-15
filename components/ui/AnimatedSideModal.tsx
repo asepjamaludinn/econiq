@@ -186,7 +186,7 @@ export default function AnimatedSideModal({
         >
           <div
             ref={cursorIconRef}
-            className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shadow-[0_8px_20px_rgba(134,68,247,0.4)] transition-colors duration-200 ${isMouseDown ? "bg-[#660DFF]" : "bg-[#8644F7]"}`}
+            className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shadow-[0_8px_20px_rgba(134,68,247,0.4)] transition-colors duration-200 ${isMouseDown ? "bg-brand-primary" : "bg-brand-secondary"}`}
           >
             <X size={20} strokeWidth={2.5} />
           </div>
@@ -205,7 +205,7 @@ export default function AnimatedSideModal({
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="group w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#dcc3f4] text-[#8644F7] flex items-center justify-center hover:bg-[#8644F7] hover:text-white hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer border-none outline-none"
+              className="group w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-brand-muted text-brand-secondary flex items-center justify-center hover:bg-brand-secondary hover:text-white hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer border-none outline-none"
               aria-label="Close modal"
             >
               <X
@@ -217,7 +217,7 @@ export default function AnimatedSideModal({
             </button>
             <h2
               id="modal-title"
-              className="text-base md:text-lg font-bold text-[#171717] m-0"
+              className="text-base md:text-lg font-bold text-foreground m-0"
             >
               {title}
             </h2>

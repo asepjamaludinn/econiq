@@ -61,7 +61,7 @@ export default function WalletSection() {
 
       <section
         ref={nextSectionRef}
-        className="relative w-full min-h-fit md:min-h-[100vh] flex flex-col items-center pt-28 md:pt-32 pb-32 md:pb-16 bg-[#B36EE6] text-white z-80"
+        className="relative w-full min-h-fit md:min-h-[100vh] flex flex-col items-center pt-28 md:pt-32 pb-32 md:pb-16 bg-brand-tertiary text-white z-80"
         style={{ perspective: "1500px" }}
       >
         <div
@@ -69,14 +69,14 @@ export default function WalletSection() {
           className="relative z-10 flex flex-col items-center text-center px-4"
           style={{ willChange: "transform, opacity, filter" }}
         >
-          <div className="border-[2px] border-[#0A7B5E] text-[#0A7B5E] bg-transparent rounded-full px-4 md:px-5 py-1 mb-6 md:mb-10 flex items-center gap-2">
+          <div className="border-[2px] border-brand-accent text-brand-accent bg-transparent rounded-full px-4 md:px-5 py-1 mb-6 md:mb-10 flex items-center gap-2">
             <MdVerified className="w-4 h-4 md:w-5 md:h-5" />
             <span className="text-[10px] md:text-sm font-extrabold uppercase tracking-widest">
               WEB3 FINANCIAL
             </span>
           </div>
 
-          <h2 className="text-[clamp(32px,7vw,120px)] font-black uppercase tracking-tight leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap ">
+          <h2 className="text-fluid-wallet font-black uppercase tracking-tight leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap ">
             Learn, Manage, Grow
           </h2>
 

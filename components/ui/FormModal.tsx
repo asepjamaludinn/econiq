@@ -80,7 +80,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       contentClassName="px-6 md:px-10 lg:px-12 pb-10 pt-6 flex-grow flex flex-col gap-6"
     >
       <div className="modal-animate-item">
-        <h2 className="text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-[#171717] leading-[0.9] mb-4">
+        <h2 className="text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-4">
           JOIN THE
           <br />
           <span className="text-[#8644F7]">NEXT GENERATION</span>
@@ -100,7 +100,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             name="name"
             placeholder="Full Name"
             required
-            className="w-full bg-[#f4effc] text-[#171717] placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-[#8644F7]/40 transition-colors"
+            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
           />
         </div>
 
@@ -110,7 +110,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             name="email"
             placeholder="Email Address"
             required
-            className="w-full bg-[#f4effc] text-[#171717] placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-[#8644F7]/40 transition-colors"
+            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
           />
         </div>
 
@@ -120,7 +120,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             id="terms"
             name="terms_agreed"
             required
-            className="w-5 h-5 accent-[#8644F7] cursor-pointer rounded border-[#8644F7]/30"
+            className="w-5 h-5 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30"
           />
           <label
             htmlFor="terms"
@@ -130,7 +130,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             <Link
               href="/privacy"
               onClick={(e) => e.stopPropagation()}
-              className="text-[#8644F7] font-medium hover:text-[#660DFF] hover:underline transition-all duration-300"
+              className="text-brand-secondary font-medium hover:text-brand-primary hover:underline transition-all duration-300"
             >
               personal data.
             </Link>
@@ -173,8 +173,8 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             disabled={isSubmitting}
             className={`group w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
               isSubmitting
-                ? "bg-[#dcc3f4] text-white cursor-not-allowed"
-                : "bg-[#8644F7] hover:bg-[#660DFF] hover:shadow-lg text-white"
+                ? "bg-brand-muted text-white cursor-not-allowed"
+                : "bg-brand-secondary hover:bg-brand-primary hover:shadow-lg text-white"
             }`}
           >
             {isSubmitting ? "Sending..." : "Start Learning"}

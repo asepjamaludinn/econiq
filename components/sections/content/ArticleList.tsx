@@ -46,9 +46,9 @@ export default function ArticleList() {
   );
 
   return (
-    <section className="w-full py-16 md:py-24 px-4 md:px-8 lg:px-12 max-w-[1500px] mx-auto bg-white">
+    <section className="w-full py-6 md:py-24 px-8 md:px-8 lg:px-12 max-w-[1500px] mx-auto bg-white">
       <div className="flex flex-col items-center mb-12 lg:mb-16">
-        <span className="px-6 py-2 text-md font-normal tracking-tight uppercase bg-[#8644F7] text-white rounded-full">
+        <span className="px-6 py-2 text-md font-normal tracking-tight uppercase bg-brand-primary text-white rounded-full">
           More From Our Articles
         </span>
       </div>
@@ -61,10 +61,10 @@ export default function ArticleList() {
           <Link
             key={article.id}
             href={article.slug}
-            className="article-card group flex flex-col h-full cursor-pointer w-[500px] max-w-full"
+            className="article-card opacity-0 group flex flex-col h-full cursor-pointer w-[500px] max-w-full"
           >
             <div className="relative w-[500px] max-w-full h-[350px] md:h-[300px] lg:h-[340px] rounded-md overflow-hidden mb-6 bg-zinc-100">
-              <div className="absolute inset-0 bg-[#660DFF]/0 group-hover:bg-[#660DFF]/5 z-10 transition-colors duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/5 z-10 transition-colors duration-300 pointer-events-none"></div>
 
               <Image
                 src={article.thumbnail}
@@ -75,13 +75,14 @@ export default function ArticleList() {
               />
             </div>
 
-            <div className="flex items-center text-[13px] text-zinc-500 font-light mb-3">
-              <span className="text-black">{article.topic}</span>
-              <span className="mx-3 text-black"></span>
-              <span className="text-black">{article.date}</span>
+            <div className="flex items-center gap-6 text-[13px] text-zinc-500 font-normal mb-3">
+              <span className="text-zinc-800">{article.topic}</span>
+              <span className="text-zinc-800 tracking-tight">
+                {article.date}
+              </span>
             </div>
 
-            <h3 className="text-[22px] md:text-[26px] font-normal text-[#171717] leading-[1.2] group-hover:text-[#8644F7] transition-colors line-clamp-3">
+            <h3 className="text-[22px] md:text-[26px] font-medium tracking-tight text-foreground leading-[1.2] group-hover:text-brand-primary transition-colors line-clamp-3">
               {article.title}
             </h3>
           </Link>

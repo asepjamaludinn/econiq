@@ -42,7 +42,7 @@ export default function MarketingSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[100vh] bg-gradient-to-t from-[#7020f9] to-[#B36EE6] text-white overflow-hidden z-[140] -mt-[5vw]"
+      className="relative w-full h-[100vh] bg-gradient-to-t from-grad-start to-brand-tertiary text-white overflow-hidden z-[140] -mt-[5vw]"
       style={{ willChange: "transform" }}
     >
       {/* 1. MARKETING SLIDE */}
@@ -78,7 +78,7 @@ export default function MarketingSection() {
               Global Awareness
             </span>
           </div>
-          <h1 className="w-full px-2 md:px-4 text-center text-[clamp(28px,8vw,58px)] font-black uppercase tracking-tight text-white leading-[1.05] mb-4 md:mb-6">
+          <h1 className="w-full px-2 md:px-4 text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] mb-4 md:mb-6">
             <div className="block w-full" style={{ perspective: "1000px" }}>
               <div
                 className="market-text-line market-text-line-1 block transform-gpu lg:whitespace-nowrap opacity-0"
@@ -145,7 +145,7 @@ export default function MarketingSection() {
             style={{ perspective: "1000px" }}
           >
             <h2
-              className="location-title block w-full text-center text-[clamp(28px,8vw,58px)] font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
+              className="location-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
               Available Everywhere
@@ -202,7 +202,7 @@ export default function MarketingSection() {
             style={{ perspective: "1000px" }}
           >
             <h2
-              className="team-title block w-full text-center text-[clamp(28px,8vw,58px)] font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
+              className="team-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
               Built by Experts

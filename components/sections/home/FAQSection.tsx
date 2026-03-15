@@ -101,7 +101,7 @@ export default function FAQSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-fit py-32 md:py-48 flex flex-col items-center bg-gradient-to-t from-[#efaa8c] to-[#7020f9] text-white z-10 px-4 overflow-hidden"
+      className="relative w-full min-h-fit py-32 md:py-48 flex flex-col items-center bg-gradient-to-t from-grad-end to-grad-start text-white z-10 px-4 overflow-hidden"
     >
       <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col items-center">
         <div

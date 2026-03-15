@@ -38,16 +38,16 @@ export default function PrivacyPolicy() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-white text-[#171717] pt-32 pb-24 px-6 md:px-12 lg:px-24"
+      className="min-h-screen bg-white text-foreground pt-32 pb-24 px-6 md:px-12 lg:px-24"
     >
       <div className="max-w-4xl mx-auto w-full">
         {/* Header Section */}
         <div className="privacy-header mb-12 md:mb-16 border-b border-zinc-200 pb-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-[#f4effc] flex items-center justify-center text-[#8644F7]">
+            <div className="w-12 h-12 rounded-xl bg-brand-light flex items-center justify-center text-brand-secondary">
               <ShieldCheck size={28} strokeWidth={2} />
             </div>
-            <span className="text-[#8644F7] font-bold tracking-widest uppercase text-sm md:text-base">
+            <span className="text-brand-secondary font-bold tracking-widest uppercase text-sm md:text-base">
               Legal & Trust
             </span>
           </div>
@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
         <div className="flex flex-col gap-10 md:gap-12">
           {privacyPolicyData.sections.map((section) => (
             <section key={section.id} className="privacy-content">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-[#171717]">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-foreground">
                 {section.title}
               </h2>
 
@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
                 dangerouslySetInnerHTML={{
                   __html: section.content.replace(
                     /\*\*(.*?)\*\*/g,
-                    '<strong class="text-[#8644F7]">$1</strong>',
+                    '<strong class="text-brand-secondary">$1</strong>',
                   ),
                 }}
               />
@@ -82,7 +82,7 @@ export default function PrivacyPolicy() {
                   {section.list.map((item, idx) => (
                     <li key={idx}>
                       {"label" in item && (
-                        <strong className="text-[#171717]">
+                        <strong className="text-foreground">
                           {item.label}{" "}
                         </strong>
                       )}
@@ -94,11 +94,13 @@ export default function PrivacyPolicy() {
 
               {/* Render Email Section khusus untuk id 'contact-us' */}
               {section.id === "contact-us" && (
-                <div className="bg-[#f4effc] p-6 rounded-2xl border border-[#dcc3f4]">
-                  <p className="text-[#171717] font-bold text-lg mb-1">Email</p>
+                <div className="bg-brand-light p-6 rounded-2xl border border-brand-muted">
+                  <p className="text-foreground font-bold text-lg mb-1">
+                    Email
+                  </p>
                   <a
                     href={`mailto:${companyInfo.email}`}
-                    className="text-[#8644F7] hover:text-[#660DFF] font-medium text-lg md:text-xl transition-colors"
+                    className="text-brand-secondary hover:text-brand-primary font-medium text-lg md:text-xl transition-colors"
                   >
                     {companyInfo.email}
                   </a>

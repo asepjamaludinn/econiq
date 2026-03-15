@@ -150,12 +150,12 @@ export default function FeatureSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center z-[120] pt-20 pb-32 sm:py-32 px-4"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center z-120 pt-20 pb-32 sm:py-32 px-4"
       style={{ perspective: "1500px" }}
     >
       <div
         ref={bgRef}
-        className="absolute -top-10 -left-[5%] w-[110%] h-[130%] bg-[#660DFF] -z-10"
+        className="absolute -top-10 -left-[5%] w-[110%] h-[130%] bg-brand-primary -z-10"
       ></div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center">

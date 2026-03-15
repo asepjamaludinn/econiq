@@ -36,7 +36,7 @@ export default function ContentCTA() {
     <section className="w-full px-4 md:px-6 lg:px-10 py-16 max-w-full mx-auto">
       <div
         ref={containerRef}
-        className="relative w-full rounded-[30px] md:rounded-[40px] overflow-hidden bg-gradient-to-br from-[#7020f9] to-[#efaa8c] text-white p-10 md:p-16 lg:p-20 flex flex-col items-center text-center shadow-2xl"
+        className="relative w-full rounded-[30px] md:rounded-[40px] overflow-hidden bg-gradient-to-br from-grad-start to-grad-end text-white p-10 md:p-16 lg:p-20 flex flex-col items-center text-center shadow-2xl"
       >
         <div
           className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -66,7 +66,7 @@ export default function ContentCTA() {
             ) as HTMLButtonElement;
             emailButton?.click();
           }}
-          className="relative z-10 group bg-white text-[#660DFF] px-10 py-5 rounded-2xl font-bold text-lg md:text-xl shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+          className="relative z-10 group bg-white text-brand-primary px-10 py-5 rounded-2xl font-bold text-lg md:text-xl shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
         >
           Subscribe to Newsletter
         </button>

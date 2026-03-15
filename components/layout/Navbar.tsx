@@ -27,7 +27,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/", action: null },
     { name: "About Us", href: "/about", action: null },
-    { name: "content", href: "/content", action: null },
+    { name: "Content", href: "/content", action: null },
     { name: "Contact", href: "#", action: "contact-modal" },
   ];
 
@@ -139,12 +139,12 @@ export default function Navbar() {
         onClick={() => setIsOpen(false)}
       />
 
-      <div className="fixed top-4 lg:top-5 left-4 right-4 lg:right-auto lg:left-6 z-[150] flex justify-center lg:justify-start items-start gap-2.5 font-sans pointer-events-none">
+      <div className="fixed top-4 lg:top-5 left-4 right-4 lg:right-auto lg:left-6 z-150 flex justify-center lg:justify-start items-start gap-2.5 font-sans pointer-events-none">
         <div
           ref={menuRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="relative bg-[#660DFF] rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto"
+          className="relative bg-brand-primary rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto"
         >
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -245,7 +245,7 @@ export default function Navbar() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white text-[#660DFF] w-7 h-7 flex justify-center items-center rounded-full hover:scale-110 transition-transform duration-300 shadow-sm"
+                      className="bg-white text-brand-primary w-7 h-7 flex justify-center items-center rounded-full hover:scale-110 transition-transform duration-300 shadow-sm"
                       aria-label={social.name}
                     >
                       <Icon size={18} />
@@ -263,7 +263,7 @@ export default function Navbar() {
           >
             <button
               onClick={() => router.back()}
-              className="flex items-center justify-center w-[40px] h-[40px] lg:w-[40px] lg:h-[40px] bg-[#E2D1F9] text-[#660DFF] rounded-[12px] shadow-[0_6px_20px_rgba(226,209,249,0.4)] hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
+              className="flex items-center justify-center w-[40px] h-[40px] lg:w-[40px] lg:h-[40px] bg-brand-light text-brand-primary rounded-[12px] shadow-[0_6px_20px_rgba(226,209,249,0.4)] hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
             >
               <ArrowLeft size={18} strokeWidth={2.5} />
             </button>
@@ -274,7 +274,7 @@ export default function Navbar() {
       <div className="fixed top-4 lg:top-5 right-4 lg:right-6 z-[160] pointer-events-auto hidden lg:block">
         <button
           onClick={() => setIsFormOpen(true)}
-          className="group flex items-center justify-center gap-2 lg:gap-3 bg-[#660DFF] hover:bg-[#5200CC] px-3 py-2.5 lg:px-5 lg:py-2.5 rounded-[12px] lg:rounded-xl shadow-[0_8px_25px_rgba(102,13,255,0.3)] transition-all duration-300 active:scale-95 border-none outline-none cursor-pointer"
+          className="group flex items-center justify-center gap-2 lg:gap-3 bg-brand-primary hover:bg-brand-dark px-3 py-2.5 lg:px-5 lg:py-2.5 rounded-[12px] lg:rounded-xl shadow-[0_8px_25px_rgba(102,13,255,0.3)] transition-all duration-300 active:scale-95 border-none outline-none cursor-pointer"
         >
           <span className="text-white font-medium text-sm lg:text-base tracking-tight pointer-events-none">
             Email

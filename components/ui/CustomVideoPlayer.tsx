@@ -111,7 +111,7 @@ export default function CustomVideoPlayer({
           <div className="bg-white rounded-[20px] flex items-center h-12 px-5 shadow-lg gap-4 w-max">
             <button
               onClick={togglePlay}
-              className="cursor-pointer text-[#660DFF] hover:opacity-80 transition-opacity flex-shrink-0"
+              className="cursor-pointer text-brand-primary hover:opacity-80 transition-opacity flex-shrink-0"
             >
               {isPlaying ? (
                 <Pause size={20} fill="currentColor" strokeWidth={0} />
@@ -123,15 +123,15 @@ export default function CustomVideoPlayer({
             <div
               ref={progressBarRef}
               onClick={handleSeek}
-              className="w-32 sm:w-48 h-1.5 bg-[#660DFF]/20 rounded-full cursor-pointer relative"
+              className="w-32 sm:w-48 h-1.5 bg-brand-primary/20 rounded-full cursor-pointer relative"
             >
               <div
-                className="absolute top-0 left-0 h-full bg-[#660DFF] rounded-full"
+                className="absolute top-0 left-0 h-full bg-brand-primary rounded-full"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
-            <span className="text-[#660DFF] font-bold text-sm tabular-nums flex-shrink-0">
+            <span className="text-brand-primary font-bold text-sm tabular-nums flex-shrink-0">
               {formatTime(currentTime)}
             </span>
           </div>
@@ -142,9 +142,17 @@ export default function CustomVideoPlayer({
           className="bg-white rounded-[20px] flex items-center justify-center h-12 w-12 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0"
         >
           {isMuted ? (
-            <VolumeX className="text-[#660DFF]" size={20} strokeWidth={2.5} />
+            <VolumeX
+              className="text-brand-primary"
+              size={20}
+              strokeWidth={2.5}
+            />
           ) : (
-            <Volume2 className="text-[#660DFF]" size={20} strokeWidth={2.5} />
+            <Volume2
+              className="text-brand-primary"
+              size={20}
+              strokeWidth={2.5}
+            />
           )}
         </div>
       </div>

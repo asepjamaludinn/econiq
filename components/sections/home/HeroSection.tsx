@@ -108,7 +108,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen h-[100dvh] flex flex-col items-center justify-start overflow-hidden bg-[#8644F7] md:bg-transparent"
+      className="relative w-full h-screen h-[100dvh] flex flex-col items-center justify-start overflow-hidden bg-brand-secondary md:bg-transparent"
     >
       {/* 1. Latar Belakang (Langit) */}
       <div className="hidden md:block absolute inset-0 w-full h-full z-0">
@@ -163,7 +163,7 @@ export default function HeroSection() {
         <WindowPlant />
 
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full xl:w-[50%] h-full z-25 pointer-events-none">
-          <div className="absolute inset-0 bg-[#8644F7] xl:shadow-[0_0_40px_rgba(102,13,255,0.4)]" />
+          <div className="absolute inset-0 bg-brand-secondary xl:shadow-[0_0_40px_rgba(102,13,255,0.4)]" />
 
           <div className="absolute bottom-0 left-0 w-[15%] md:w-[10%] xl:w-[15%] h-full z-30 transform -translate-x-[45%] md:-translate-x-[50%] xl:-translate-x-[5%]">
             <Image
@@ -237,7 +237,7 @@ export default function HeroSection() {
         ref={ekstensiRef}
         className="absolute bottom-0 left-0 w-full h-[15%] md:h-[25%] z-70 pointer-events-none origin-bottom will-change-transform"
       >
-        <div className="absolute top-full left-0 w-full h-[50vh] bg-[#B36EE6]"></div>
+        <div className="absolute top-full left-0 w-full h-[50vh] bg-brand-tertiary"></div>
       </div>
 
       {/* 9. Arrow Down (Jumping & Fade on Scroll) */}
@@ -245,7 +245,7 @@ export default function HeroSection() {
         ref={arrowRef}
         className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-[80] animate-bounce pointer-events-none"
       >
-        <div className="w-12 h-12 md:w-14 md:h-14 bg-[#660DFF] rounded-[14px] md:rounded-[18px] flex items-center justify-center">
+        <div className="w-12 h-12 md:w-14 md:h-14 bg-brand-primary rounded-[14px] md:rounded-[18px] flex items-center justify-center">
           <ArrowDown size={28} strokeWidth={2.5} className="text-white" />
         </div>
       </div>

@@ -17,9 +17,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       contentClassName="p-6 md:p-8 lg:px-10 lg:py-8 flex-grow flex flex-col gap-4 md:gap-5 lg:gap-4 xl:gap-7"
     >
       <div className="modal-animate-item">
-        <h2 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter text-[#171717] leading-[0.95] mb-1 md:mb-1.5">
+        <h2 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter text-foreground leading-[0.95] mb-1 md:mb-1.5">
           Let's Build <br />
-          <span className="text-[#8644F7]">Something Great.</span>
+          <span className="text-brand-secondary">Something Great.</span>
         </h2>
       </div>
 
@@ -28,7 +28,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <h4 className="text-[13px] md:text-sm font-bold text-zinc-400 tracking-widest mb-1 flex items-center gap-1.5 leading-none">
             Operating Hours
           </h4>
-          <p className="text-lg md:text-xl xl:text-2xl font-black text-[#171717] leading-tight mb-0.5">
+          <p className="text-lg md:text-xl xl:text-2xl font-black text-foreground leading-tight mb-0.5">
             {companyInfo.hours}
           </p>
           <p className="text-sm md:text-base font-semibold text-zinc-600">
@@ -42,7 +42,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </h4>
           <a
             href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
-            className="text-lg md:text-xl xl:text-2xl font-black text-[#171717] hover:text-[#8644F7] transition-colors inline-block leading-tight cursor-pointer"
+            className="text-lg md:text-xl xl:text-2xl font-black text-foreground hover:text-brand-secondary transition-colors inline-block leading-tight cursor-pointer"
           >
             {companyInfo.phone}
           </a>
@@ -54,7 +54,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </h4>
           <a
             href={`mailto:${companyInfo.email}`}
-            className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-black text-[#171717] hover:text-[#8644F7] transition-colors leading-tight cursor-pointer"
+            className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-black text-foreground hover:text-brand-secondary transition-colors leading-tight cursor-pointer"
           >
             {companyInfo.email}
           </a>
@@ -68,7 +68,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             href={companyInfo.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-lg md:text-xl xl:text-2xl font-black text-[#8644F7] leading-snug max-w-sm lg:max-w-md hover:text-[#660DFF] transition-colors cursor-pointer"
+            className="block text-lg md:text-xl xl:text-2xl font-black text-brand-secondary leading-snug max-w-sm lg:max-w-md hover:text-brand-primary transition-colors cursor-pointer"
           >
             {companyInfo.address}
           </a>
@@ -93,7 +93,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#8644F7] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-brand-secondary text-white flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-300 cursor-pointer"
                 aria-label={social.name}
               >
                 <Icon size={18} />
