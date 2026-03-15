@@ -32,7 +32,6 @@ export default function SliderControls({
             : "opacity-100 hover:bg-white/30 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
         }`}
       >
-        {/* 2. Panggil Ikon Kiri */}
         <IconArrowLeftSlider className="text-white w-7 h-7 md:w-8 md:h-8" />
       </button>
 
@@ -46,7 +45,6 @@ export default function SliderControls({
             : "opacity-100 hover:bg-white/30 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
         }`}
       >
-        {/* 3. Panggil Ikon Kanan */}
         <IconArrowRightSlider className="text-white w-7 h-7 md:w-8 md:h-8" />
       </button>
     </div>
