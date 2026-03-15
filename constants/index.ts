@@ -264,8 +264,6 @@ export const privacyPolicyData = {
   ],
 };
 
-
-
 export const articlesData: ArticleData[] = [
   {
     id: "1",
@@ -275,7 +273,7 @@ export const articlesData: ArticleData[] = [
     topic: "Web3 Basics",
     readTime: "4 min read",
     date: "Sep 01, 2025",
-    thumbnail: "/images/content/web3-basics.jpg",
+    thumbnail: "/images/content/web3-basics.JPG",
     slug: "/content/what-is-web3",
     featured: true,
   },
