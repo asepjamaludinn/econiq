@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 interface CloudData {
   id: number;
@@ -45,20 +48,24 @@ export default function HeroClouds() {
       if (clouds.length === 0) return;
       const awanElements = gsap.utils.toArray<HTMLDivElement>(".awan-terbang");
 
+      const activeTweens = new Set<gsap.core.Tween>();
+
       awanElements.forEach((awan) => {
         const driftRight = () => {
-          gsap.to(awan, {
+          const tween = gsap.to(awan, {
             x: "150vw",
             duration: gsap.utils.random(50, 90),
             ease: "none",
             onComplete: () => {
+              activeTweens.delete(tween);
               gsap.set(awan, { x: "-50vw" });
               driftRight();
             },
           });
+          activeTweens.add(tween);
         };
 
-        gsap.to(awan, {
+        const floatTween = gsap.to(awan, {
           y: `+=${gsap.utils.random(-15, 15)}`,
           duration: gsap.utils.random(5, 10),
           repeat: -1,
@@ -66,7 +73,21 @@ export default function HeroClouds() {
           ease: "sine.inOut",
         });
 
+        activeTweens.add(floatTween);
         driftRight();
+      });
+
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => {
+          if (self.isActive) {
+            activeTweens.forEach((t) => t.play());
+          } else {
+            activeTweens.forEach((t) => t.pause());
+          }
+        },
       });
     },
     { scope: containerRef, dependencies: [clouds] },

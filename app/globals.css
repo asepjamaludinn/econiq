@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* --- Colors --- */
+  /* Colors */
   --color-background: #ffffff;
   --color-foreground: #171717;
 
@@ -18,7 +18,7 @@
   --color-grad-start: #7020f9;
   --color-grad-end: #efaa8c;
 
-  /* --- Typography --- */
+  /* Typography */
   --font-sans: var(--font-plus-jakarta), sans-serif;
 
   /* Fluid Typography */
@@ -29,7 +29,7 @@
   --text-fluid-step-lg: clamp(70px, 7.5vw, 120px);
   --text-fluid-step-xl: clamp(90px, 8vw, 140px);
 
-  /* --- Z-Index --- */
+  /* Z-Index */
   --z-15: 15;
   --z-25: 25;
   --z-60: 60;
@@ -48,9 +48,9 @@
   --z-900: 900;
   --z-950: 950;
   --z-1000: 1000;
-  --z-max: 999999;
+  --z-999: 999999;
 
-  /* --- Animations --- */
+  /* Animations */
   --animate-vibrate: vibrate-envelope 0.4s ease-in-out 1;
 }
 

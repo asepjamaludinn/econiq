@@ -9,12 +9,21 @@ import gsap from "gsap";
 import ContactModal from "@/components/ui/ContactModal";
 import FormModal from "@/components/ui/FormModal";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
+import { IconMenuOpen } from "@/components/icons/IconMenuOpen";
 import { companyInfo } from "@/constants";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  const {
+    isFormOpen,
+    isContactOpen,
+    openFormModal,
+    closeFormModal,
+    openContactModal,
+    closeContactModal,
+  } = useModalStore();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -128,7 +137,8 @@ export default function Navbar() {
 
   const handleMenuClick = (action: string | null) => {
     setIsOpen(false);
-    if (action === "contact-modal") setIsContactOpen(true);
+
+    if (action === "contact-modal") openContactModal();
   };
 
   return (
@@ -151,14 +161,11 @@ export default function Navbar() {
             className="flex items-center justify-between lg:justify-start px-5 py-5 lg:py-2.5 cursor-pointer relative z-20 w-full bg-transparent border-none outline-none"
           >
             <div className="flex items-center gap-3.5 z-30">
-              <div className="w-8 lg:w-6 h-4 relative flex justify-center items-center z-30 pointer-events-none">
-                <span
-                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${isOpen ? "w-full h-[3px] lg:w-2 lg:h-2 translate-y-0 rotate-45 lg:rotate-0" : "w-full h-[3px] -translate-y-[4px] lg:-translate-y-[3px] rotate-0"}`}
-                />
-                <span
-                  className={`absolute bg-white rounded-full transition-all duration-300 ease-out origin-center ${isOpen ? "w-full h-[3px] lg:w-0 lg:opacity-0 translate-y-0 -rotate-45 lg:rotate-0" : "w-full h-[3px] translate-y-[4px] lg:translate-y-[3px] rotate-0 opacity-100"}`}
-                />
-              </div>
+              <IconMenuOpen
+                isOpen={isOpen}
+                className="w-8 lg:w-6 h-4 pointer-events-none z-30"
+              />
+
               <span className="hidden lg:block text-white font-normal text-base tracking-tight z-20 pointer-events-none">
                 Menu
               </span>
@@ -273,7 +280,7 @@ export default function Navbar() {
 
       <div className="fixed top-4 lg:top-5 right-4 lg:right-6 z-[160] pointer-events-auto hidden lg:block">
         <button
-          onClick={() => setIsFormOpen(true)}
+          onClick={openFormModal}
           className="group flex items-center justify-center gap-2 lg:gap-3 bg-brand-primary hover:bg-brand-dark px-3 py-2.5 lg:px-5 lg:py-2.5 rounded-[12px] lg:rounded-xl shadow-[0_8px_25px_rgba(102,13,255,0.3)] transition-all duration-300 active:scale-95 border-none outline-none cursor-pointer"
         >
           <span className="text-white font-medium text-sm lg:text-base tracking-tight pointer-events-none">
@@ -285,11 +292,8 @@ export default function Navbar() {
         </button>
       </div>
 
-      <ContactModal
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
-      <FormModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      <ContactModal isOpen={isContactOpen} onClose={closeContactModal} />
+      <FormModal isOpen={isFormOpen} onClose={closeFormModal} />
     </>
   );
 }

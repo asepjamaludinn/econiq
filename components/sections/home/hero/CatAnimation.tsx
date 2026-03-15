@@ -4,6 +4,9 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function CatAnimation() {
   const kepalaKucingRef = useRef<HTMLDivElement>(null);
@@ -21,6 +24,12 @@ export default function CatAnimation() {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        scrollTrigger: {
+          trigger: kepalaKucingRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          toggleActions: "play pause resume pause",
+        },
       });
     }
   });

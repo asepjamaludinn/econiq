@@ -18,11 +18,14 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  // 1. Tambahkan state khusus untuk menyimpan pesan error
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
         setSubmitStatus("idle");
+        setErrorMsg(null);
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
@@ -34,13 +37,17 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Validasi Captcha di Frontend
     if (!captchaValue) {
-      alert("Please complete the reCAPTCHA.");
+      setErrorMsg("Please complete the reCAPTCHA.");
+      setSubmitStatus("error");
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMsg(null); // Bersihkan error sebelumnya
+
     const form = e.currentTarget;
     const formData = new FormData(form);
 
@@ -62,10 +69,22 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           setCaptchaValue(null);
         }
       } else {
+        // 2. Parsing respons JSON untuk mendapatkan pesan error dari Zod
+        const errorData = await response.json();
+
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          setErrorMsg(errorData.errors.join(", "));
+        } else {
+          setErrorMsg(errorData.message || "An unexpected error occurred.");
+        }
+
         setSubmitStatus("error");
       }
     } catch (error) {
       console.error(error);
+      setErrorMsg(
+        "Failed to connect to the server. Please check your network.",
+      );
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -83,7 +102,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
         <h2 className="text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-4">
           JOIN THE
           <br />
-          <span className="text-[#8644F7]">NEXT GENERATION</span>
+          <span className="text-brand-secondary">NEXT GENERATION</span>
           <br />
           OF DIGITAL FINANCE
         </h2>
@@ -161,9 +180,10 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </div>
         )}
 
+        {/* 3. Tampilkan pesan error secara dinamis */}
         {submitStatus === "error" && (
           <div className="modal-animate-item text-red-500 bg-red-50 p-4 rounded-xl border border-red-200 font-medium text-sm">
-            Oops! Something went wrong. Please try again later.
+            {errorMsg || "Oops! Something went wrong. Please try again later."}
           </div>
         )}
 

@@ -1,5 +1,8 @@
 "use client";
 
+import { IconArrowLeftSlider } from "@/components/icons/IconArrowLeftSlider";
+import { IconArrowRightSlider } from "@/components/icons/IconArrowRightSlider";
+
 interface SliderControlsProps {
   onPrev: () => void;
   onNext: () => void;
@@ -29,18 +32,8 @@ export default function SliderControls({
             : "opacity-100 hover:bg-white/30 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
         }`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-white w-7 h-7 md:w-8 md:h-8"
-          viewBox="0 0 24 24"
-        >
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
+        {/* 2. Panggil Ikon Kiri */}
+        <IconArrowLeftSlider className="text-white w-7 h-7 md:w-8 md:h-8" />
       </button>
 
       <button
@@ -53,18 +46,8 @@ export default function SliderControls({
             : "opacity-100 hover:bg-white/30 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
         }`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-white w-7 h-7 md:w-8 md:h-8"
-          viewBox="0 0 24 24"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
+        {/* 3. Panggil Ikon Kanan */}
+        <IconArrowRightSlider className="text-white w-7 h-7 md:w-8 md:h-8" />
       </button>
     </div>
   );

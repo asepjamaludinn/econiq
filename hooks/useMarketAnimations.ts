@@ -54,7 +54,6 @@ export const useMarketAnimations = (
         ".team-subtext-p",
       ]);
 
-      // 1. ANIMASI DESKTOP
       mm.add("(min-width: 1024px)", () => {
         gsap.set(
           [
@@ -239,7 +238,6 @@ export const useMarketAnimations = (
           .to({}, { duration: 0.5 });
       });
 
-      // 2. ANIMASI MOBILE & TABLET
       mm.add("(max-width: 1023px)", () => {
         gsap.set(
           [

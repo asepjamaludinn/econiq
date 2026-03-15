@@ -4,7 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sumberUangData } from "@/constants";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const uangHujan = Array.from({ length: 5 }).map((_, i) => ({
   id: i + 1,
@@ -21,10 +24,11 @@ export default function MoneyRain() {
 
       mm.add("(min-width: 1024px)", () => {
         const uangElements = gsap.utils.toArray<HTMLDivElement>(".uang-jatuh");
+        const activeTweens = new Set<gsap.core.Tween>();
 
         uangElements.forEach((uang) => {
           const dropUang = () => {
-            gsap.fromTo(
+            const tween = gsap.fromTo(
               uang,
               {
                 y: -150,
@@ -37,13 +41,36 @@ export default function MoneyRain() {
                 duration: gsap.utils.random(7, 12),
                 ease: "none",
                 onComplete: () => {
+                  activeTweens.delete(tween); // Hapus tween lama dari memori
                   const nextDelay = gsap.utils.random(2, 12);
-                  gsap.delayedCall(nextDelay, dropUang);
+                  const delayTween = gsap.delayedCall(nextDelay, dropUang);
+                  activeTweens.add(delayTween); // Lacak delay agar bisa dipause
                 },
               },
             );
+            activeTweens.add(tween);
           };
-          gsap.delayedCall(gsap.utils.random(2, 8), dropUang);
+
+          // Delay awal jatuhnya hujan
+          const initialDelay = gsap.delayedCall(
+            gsap.utils.random(2, 8),
+            dropUang,
+          );
+          activeTweens.add(initialDelay);
+        });
+
+        // Toggle pause/play
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: (self) => {
+            if (self.isActive) {
+              activeTweens.forEach((t) => t.play());
+            } else {
+              activeTweens.forEach((t) => t.pause());
+            }
+          },
         });
       });
     },
