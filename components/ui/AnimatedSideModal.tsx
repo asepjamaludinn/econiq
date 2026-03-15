@@ -29,7 +29,6 @@ export default function AnimatedSideModal({
   const [isHoveringOverlay, setIsHoveringOverlay] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
 
-  // Animasi Open/Close Modal
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -47,17 +46,18 @@ export default function AnimatedSideModal({
         { x: 0, duration: 0.7, ease: "power4.out" },
         "-=0.2",
       );
-      gsap.fromTo(
+
+      tl.fromTo(
         ".modal-animate-item",
         { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.5,
-          stagger: 0.1,
+          stagger: 0.05,
           ease: "power3.out",
-          delay: 0.4,
         },
+        "-=0.5",
       );
     } else {
       document.body.style.overflow = "";

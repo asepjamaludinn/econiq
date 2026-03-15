@@ -19,9 +19,7 @@ export const SvgLearn = () => (
         <stop offset="100%" stopColor="#8644F7" stopOpacity="0" />
       </radialGradient>
     </defs>
-
     <circle cx="100" cy="100" r="55" fill="url(#crystalGlow)" />
-
     <g stroke="#FFFFFF" strokeOpacity="0.2" strokeWidth="1.5">
       <line x1="100" y1="100" x2="35" y2="70" />
       <line x1="100" y1="100" x2="165" y2="60" />
@@ -30,7 +28,6 @@ export const SvgLearn = () => (
       <line x1="35" y1="70" x2="45" y2="145" strokeDasharray="4 4" />
       <line x1="165" y1="60" x2="145" y2="155" strokeDasharray="4 4" />
     </g>
-
     <g fill="#B36EE6" stroke="#FFFFFF" strokeWidth="1.5">
       <circle cx="35" cy="70" r="4">
         <animate
@@ -65,7 +62,6 @@ export const SvgLearn = () => (
         />
       </circle>
     </g>
-
     <g filter="url(#learnGlow)">
       <animateTransform
         attributeName="transform"
@@ -79,7 +75,6 @@ export const SvgLearn = () => (
       <polygon points="75,95 100,140 100,95" fill="#8644F7" />
       <polygon points="125,95 100,140 100,95" fill="#5A22B5" />
     </g>
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -128,7 +123,6 @@ export const SvgLearn = () => (
       />
       <circle cx="180" cy="34" r="3" fill="#0A7B5E" />
     </g>
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -179,20 +173,16 @@ export const SvgLearn = () => (
       </circle>
       <circle cx="35" cy="150" r="5" fill="#8644F7" />
     </g>
-
     {[
-      { x: 70, y: 30, scale: "0.8", dur: "2s" },
-      { x: 120, y: 160, scale: "1", dur: "3s" },
-      { x: 170, y: 110, scale: "0.6", dur: "2.5s" },
+      { x: 70, y: 30, s: "0.8", d: "2s" },
+      { x: 120, y: 160, s: "1", d: "3s" },
+      { x: 170, y: 110, s: "0.6", d: "2.5s" },
     ].map((star, i) => (
-      <g
-        key={i}
-        transform={`translate(${star.x}, ${star.y}) scale(${star.scale})`}
-      >
+      <g key={i} transform={`translate(${star.x}, ${star.y}) scale(${star.s})`}>
         <animate
           attributeName="opacity"
           values="0;1;0"
-          dur={star.dur}
+          dur={star.d}
           repeatCount="indefinite"
         />
         <path

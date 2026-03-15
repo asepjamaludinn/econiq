@@ -267,7 +267,7 @@ export default function FeatureSection() {
         </div>
 
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item will-change-transform">
-          <button className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-full font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight">
+          <button className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-3xl font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight cursor-pointer">
             Learn More
             <svg
               width="24"

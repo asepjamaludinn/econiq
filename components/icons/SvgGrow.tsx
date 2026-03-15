@@ -15,11 +15,7 @@ export const SvgGrow = () => (
         <stop offset="100%" stopColor="#000000" stopOpacity="0" />
       </radialGradient>
     </defs>
-
-    {/* Ground Shadow */}
     <ellipse cx="100" cy="170" rx="60" ry="15" fill="url(#shadowGrad)" />
-
-    {/* Platform Discs */}
     <g>
       <animateTransform
         attributeName="transform"
@@ -58,8 +54,6 @@ export const SvgGrow = () => (
         strokeOpacity="0.5"
       />
     </g>
-
-    {/* Big Arrow Up */}
     <g>
       <animateTransform
         attributeName="transform"
@@ -75,24 +69,18 @@ export const SvgGrow = () => (
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      {/* Inner Arrow Highlight */}
       <path
         d="M100 40 L130 70 L110 70 L110 110 L90 110 L90 70 L70 70 Z"
         fill="#FFFFFF"
         opacity="0.3"
       />
     </g>
-
-    {/* Sparkles / Stars */}
     {[
-      { x: 40, y: 50, scale: "1" },
-      { x: 160, y: 70, scale: "0.7" },
-      { x: 70, y: 20, scale: "0.5" },
+      { x: 40, y: 50, s: "1" },
+      { x: 160, y: 70, s: "0.7" },
+      { x: 70, y: 20, s: "0.5" },
     ].map((star, i) => (
-      <g
-        key={i}
-        transform={`translate(${star.x}, ${star.y}) scale(${star.scale})`}
-      >
+      <g key={i} transform={`translate(${star.x}, ${star.y}) scale(${star.s})`}>
         <animate
           attributeName="opacity"
           values="0;1;0"

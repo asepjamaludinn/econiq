@@ -52,19 +52,19 @@ export const companyInfo = {
 export const featuresData: FeatureData[] = [
   {
     title: "Beginner Friendly",
-    desc: "Start learning digital finance safely. Eqonic provides intuitive content and articles to help you understand Web3 without technical barriers.",
+    desc: "Start learning digital finance safely. Eqonic provides intuitive content and step-by-step guides to help you understand Web3 without technical barriers.",
   },
   {
     title: "Financial Literacy",
-    desc: "Understand Web3 economics. Study market behavior and monitor global trends with our real-time educational insights.",
+    desc: "Understand the core of Web3 economics. Learn how decentralized finance works and its impact on the real-world digital economy.",
   },
   {
     title: "Trusted Knowledge Base",
-    desc: "Access verified and accurate information about digital assets securely. Our platform provides real-world insights without exposing you to financial risks.",
+    desc: "Build a strong foundation with verified and accurate information. We help you navigate the Web3 space safely and avoid digital scams or misinformation.",
   },
   {
     title: "Insightful Reading",
-    desc: "Engage with dynamic articles that make complex blockchain and finance concepts easy to understand for everyone.",
+    desc: "Engage with dynamic articles that make complex blockchain concepts, smart contracts, and digital finance easy to understand for everyone.",
   },
 ];
 
@@ -98,7 +98,7 @@ export const stepsData: StepData[] = [
   },
   {
     num: "03",
-    title: "Market Insights",
+    title: "Analytical Thinking",
     desc: "Read our daily insights to learn how to analyze crypto market movements and technological shifts in real-time.",
     Icon: SvgTrack,
   },
@@ -186,9 +186,9 @@ export const faqData: FAQItemData[] = [
       "In line with the INNOVATE spirit (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic serves as a digital education innovation. We navigate society through the complexities of Web3 finance via a secure, validated, and optimized platform to advance technological literacy.",
   },
   {
-    question: "Why does Eqonic focus on educational articles and news?",
+    question: "Why does Eqonic focus purely on educational articles and news?",
     answer:
-      "We focus on the Education and Social sub-themes. The fear of financial loss is often the main barrier to learning Web3. By providing comprehensive articles and news, we empower people from all backgrounds to learn and understand digital economy strategies without the risk of losing any money.",
+      "We believe that education is the first line of defense. The Web3 space is full of complex technologies and potential misinformation. By providing a comprehensive and verified knowledge base, we empower beginners to build a strong foundation and critical thinking skills before they enter the real digital economy.",
   },
   {
     question:
@@ -264,73 +264,86 @@ export const privacyPolicyData = {
   ],
 };
 
-export const articleCategories = [
-  "All",
-  "Web3 Basics",
-  "Security",
-  "Market Trends",
-  "Green Blockchain",
-];
+
 
 export const articlesData: ArticleData[] = [
   {
     id: "1",
-    title: "Understanding Internet Evolution: From Web1 to Web3",
+    title: "What is Web3: A Beginner's Guide",
     excerpt:
-      "Understand how the internet evolved from the era of simply reading information, to interacting, and now to the era of decentralized digital asset ownership.",
-    category: "Web3 Basics",
-    readTime: "5 min read",
-    date: "Sep 18, 2025",
-    thumbnail: "/images/content/evolusi.jpg",
-    slug: "/content/evolusi-internet",
+      "Kenali konsep dasar Web3 dan bagaimana ia akan mengubah cara kita berinteraksi di internet.",
+    topic: "Web3 Basics",
+    readTime: "4 min read",
+    date: "Sep 01, 2025",
+    thumbnail: "/images/content/web3-basics.jpg",
+    slug: "/content/what-is-web3",
     featured: true,
   },
   {
     id: "2",
-    title: "Myths & Facts About Crypto Wallet Security",
+    title: "What is Blockchain & How Does It Work?",
     excerpt:
-      "Are digital wallets truly secure? Let's debunk the various myths that often make beginners hesitate to get started.",
-    category: "Security",
-    readTime: "4 min read",
-    date: "Sep 15, 2025",
-    thumbnail:
-      "https://images.unsplash.com/photo-1614064641936-3b5e06551b2e?q=80&w=1000&auto=format&fit=crop",
-    slug: "/content/mitos-fakta-wallet",
-  },
-  {
-    id: "3",
-    title: "Reading the Direction of Web3 Market Trends This Year",
-    excerpt:
-      "An in-depth analysis of global Web3 adoption trends and their impact on the local digital economy.",
-    category: "Market Trends",
-    readTime: "7 min read",
-    date: "Sep 12, 2025",
-    thumbnail:
-      "https://images.unsplash.com/photo-1641332214695-1f89c62c3e1e?q=80&w=1000&auto=format&fit=crop",
-    slug: "/content/tren-pasar-web3",
+      "Penjelasan sederhana tentang teknologi di balik Web3 tanpa istilah teknis yang memusingkan.",
+    topic: "Technology",
+    readTime: "5 min read",
+    date: "Sep 03, 2025",
+    thumbnail: "/images/content/blockchain.JPG",
+    slug: "/content/what-is-blockchain",
   },
   {
     id: "4",
-    title: "Green Blockchain: An Eco-Friendly Solution",
+    title: "What is a Crypto Wallet?",
+    excerpt: "Pahami fungsi dompet digital untuk mengamankan aset Web3 kamu.",
+    topic: "Wallet",
+    readTime: "3 min read",
+    date: "Sep 07, 2025",
+    thumbnail: "/images/content/wallet.JPG",
+    slug: "/content/crypto-wallet",
+  },
+
+  {
+    id: "7",
+    title: "Internet Evolution: Web1 → Web3",
     excerpt:
-      "Answering concerns about carbon footprints. Get to know the new generation of energy-efficient blockchain technology.",
-    category: "Green Blockchain",
-    readTime: "6 min read",
-    date: "Sep 08, 2025",
-    thumbnail:
-      "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?q=80&w=1000&auto=format&fit=crop",
-    slug: "/content/green-blockchain",
+      "Pahami bagaimana internet berevolusi dari sekadar membaca informasi hingga era kepemilikan aset digital.",
+    topic: "History",
+    readTime: "5 min read",
+    date: "Sep 18, 2025",
+    thumbnail: "/images/content/evolusi.JPG",
+    slug: "/content/evolusi-internet",
   },
   {
-    id: "5",
+    id: "8",
+    title: "Myths & Facts About Crypto Wallet Security",
+    excerpt:
+      "Apakah dompet digital benar-benar aman? Mari kita kupas mitos dan fakta keamanannya.",
+    topic: "Security",
+    readTime: "6 min read",
+    date: "Sep 15, 2025",
+    thumbnail: "/images/content/security.JPG",
+    slug: "/content/mitos-fakta-wallet",
+  },
+  {
+    id: "9",
+    title: "Green Blockchain: An Eco-Friendly Solution",
+    excerpt:
+      "Menjawab kekhawatiran jejak karbon. Kenali teknologi blockchain generasi baru yang hemat energi.",
+    topic: "Environment",
+    readTime: "6 min read",
+    date: "Sep 08, 2025",
+    thumbnail: "/images/content/green.JPG",
+    slug: "/content/green-blockchain",
+  },
+
+  {
+    id: "11",
     title: "A Guide to Creating Your First Smart Contract",
     excerpt:
-      "Practical and safe steps to understand the logic behind smart contracts without the need for complex coding.",
-    category: "Web3 Basics",
+      "Langkah praktis memahami logika di balik smart contract dan bagaimana cara kerjanya di ekosistem blockchain.",
+    topic: "Development",
     readTime: "8 min read",
-    date: "Sep 04, 2025",
-    thumbnail:
-      "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop",
+    date: "Sep 20, 2025",
+    thumbnail: "/images/content/smart-contract.JPG",
     slug: "/content/panduan-smart-contract",
   },
 ];

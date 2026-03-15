@@ -110,7 +110,7 @@ export default function TenantInteraction() {
             zIndex: -1,
           }}
         >
-          <div ref={penutupShadowRef} className="w-full h-full">
+          <div ref={penutupShadowRef} className="relative w-full h-full">
             <Image
               src="/images/Penutup depan tenant.svg"
               alt="Shadow"

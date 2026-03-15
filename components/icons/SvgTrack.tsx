@@ -2,6 +2,8 @@ export const SvgTrack = () => (
   <svg
     viewBox="0 0 200 200"
     className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 drop-shadow-2xl"
+    aria-hidden="true"
+    focusable="false"
   >
     <defs>
       <linearGradient id="trackBg" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -13,7 +15,6 @@ export const SvgTrack = () => (
         <stop offset="100%" stopColor="#8644F7" stopOpacity="0.6" />
       </linearGradient>
     </defs>
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -22,8 +23,6 @@ export const SvgTrack = () => (
         dur="4s"
         repeatCount="indefinite"
       />
-
-      {/* Dashboard Card */}
       <rect
         x="20"
         y="30"
@@ -35,8 +34,6 @@ export const SvgTrack = () => (
         strokeOpacity="0.3"
         strokeWidth="2"
       />
-
-      {/* Header UI */}
       <rect
         x="35"
         y="45"
@@ -47,8 +44,6 @@ export const SvgTrack = () => (
         opacity="0.5"
       />
       <circle cx="165" cy="49" r="4" fill="#B36EE6" />
-
-      {/* Grid Lines */}
       <line
         x1="35"
         y1="80"
@@ -78,8 +73,6 @@ export const SvgTrack = () => (
         strokeOpacity="0.2"
         strokeWidth="1"
       />
-
-      {/* Animated Bars */}
       {[
         { x: 45, h1: 30, h2: 50 },
         { x: 75, h1: 60, h2: 40 },
@@ -109,8 +102,6 @@ export const SvgTrack = () => (
           />
         </rect>
       ))}
-
-      {/* Floating Line Chart */}
       <path
         d="M35 120 Q 60 70 90 90 T 165 50"
         fill="none"
@@ -126,8 +117,6 @@ export const SvgTrack = () => (
           repeatCount="indefinite"
         />
       </path>
-
-      {/* Glowing Dot on Line */}
       <circle cx="165" cy="50" r="6" fill="#FFFFFF">
         <animate
           attributeName="cy"

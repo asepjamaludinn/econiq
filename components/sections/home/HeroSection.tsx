@@ -146,6 +146,7 @@ export default function HeroSection() {
             aria-hidden="true"
             fill
             className="object-contain object-left-bottom"
+            priority
           />
         </div>
         <div className="hidden xl:block absolute bottom-0 -right-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
@@ -155,6 +156,7 @@ export default function HeroSection() {
             aria-hidden="true"
             fill
             className="object-contain object-right-bottom"
+            priority
           />
         </div>
 
@@ -170,6 +172,7 @@ export default function HeroSection() {
               aria-hidden="true"
               fill
               className="object-cover xl:object-contain object-left-bottom"
+              priority
             />
           </div>
 
@@ -180,6 +183,7 @@ export default function HeroSection() {
               aria-hidden="true"
               fill
               className="object-cover xl:object-contain object-right-bottom"
+              priority
             />
           </div>
         </div>

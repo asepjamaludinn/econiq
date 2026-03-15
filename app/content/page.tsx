@@ -4,7 +4,7 @@ import ArticleList from "@/components/sections/content/ArticleList";
 import ContentCTA from "@/components/sections/content/ContentCTA";
 
 export const metadata: Metadata = {
-  title: "Academy | Eqonic",
+  title: "Content | Eqonic",
   description: "Belajar Web3, Blockchain, dan Literasi Finansial Digital.",
 };
 

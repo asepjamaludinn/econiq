@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { articlesData } from "@/constants";
@@ -54,16 +55,19 @@ export default function FeaturedArticle() {
           >
             <div className="absolute inset-0 bg-[#660DFF]/5 z-10 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-0 pointer-events-none"></div>
 
-            <img
+            <Image
               src={featured.thumbnail}
               alt={featured.title}
-              className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           </Link>
         </div>
 
         <div className="w-full md:w-1/2 flex flex-col justify-between py-2 md:py-4">
-          <div className="feat-text text-zinc-500 font-light text-sm md:text-base tracking-tight">
+          <div className="feat-text text-black font-light text-sm md:text-md tracking-tight">
             Published on {featured.date}
           </div>
 
@@ -74,11 +78,11 @@ export default function FeaturedArticle() {
               </h2>
             </Link>
 
-            <p className="feat-text text-zinc-500 font-light text-base md:text-lg leading-relaxed mb-6 tracking-tight">
+            <p className="feat-text text-zinc-900 font-light text-base md:text-lg leading-relaxed mb-6 tracking-tight">
               {featured.excerpt}
             </p>
 
-            <div className="feat-text text-zinc-400 font-light text-sm tracking-tight">
+            <div className="feat-text text-zinc-900 font-light text-sm tracking-tight">
               {featured.readTime}
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import AnimatedSideModal from "./AnimatedSideModal";
 
@@ -171,10 +171,37 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 cursor-pointer active:scale-[0.98] ${isSubmitting ? "bg-[#dcc3f4] text-white cursor-not-allowed" : "bg-[#8644F7] hover:bg-[#660DFF] text-white"}`}
+            className={`group w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
+              isSubmitting
+                ? "bg-[#dcc3f4] text-white cursor-not-allowed"
+                : "bg-[#8644F7] hover:bg-[#660DFF] hover:shadow-lg text-white"
+            }`}
           >
-            {isSubmitting ? "Sending..." : "Start Learning"}{" "}
-            {!isSubmitting && <ArrowRight size={20} />}
+            {isSubmitting ? "Sending..." : "Start Learning"}
+
+            {!isSubmitting && (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="overflow-visible"
+              >
+                <path
+                  d="M5 12h14"
+                  className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
+                  style={{ transformOrigin: "19px 12px" }}
+                />
+                <path
+                  d="m12 5 7 7-7 7"
+                  className="transition-all duration-300 ease-out group-hover:translate-x-3"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </form>

@@ -99,7 +99,8 @@ export default function WalletSection() {
               alt={`Asset Web3 Mobile ${i}`}
               width={200}
               height={200}
-              className="absolute top-0 w-[100px] md:w-[160px] lg:w-[180px] h-auto object-contain z-90"
+              className="absolute top-0 w-[100px] md:w-[160px] lg:w-[180px] object-contain z-90"
+              style={{ height: "auto" }}
             />
           ))}
 

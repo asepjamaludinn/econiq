@@ -27,7 +27,7 @@ export interface ArticleData {
   id: string;
   title: string;
   excerpt: string;
-  category: string;
+  topic: string;
   readTime: string;
   date: string;
   thumbnail: string;

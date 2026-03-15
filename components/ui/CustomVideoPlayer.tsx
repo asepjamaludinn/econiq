@@ -5,6 +5,7 @@ import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 interface CustomVideoPlayerProps {
   src: string;
+  poster?: string;
 }
 
 const formatTime = (timeInSeconds: number) => {
@@ -13,7 +14,10 @@ const formatTime = (timeInSeconds: number) => {
   return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 };
 
-export default function CustomVideoPlayer({ src }: CustomVideoPlayerProps) {
+export default function CustomVideoPlayer({
+  src,
+  poster,
+}: CustomVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
@@ -78,7 +82,7 @@ export default function CustomVideoPlayer({ src }: CustomVideoPlayerProps) {
     >
       <video
         ref={videoRef}
-        src={src}
+        poster={poster || "/images/video.PNG"}
         autoPlay
         loop
         muted={isMuted}
@@ -88,7 +92,11 @@ export default function CustomVideoPlayer({ src }: CustomVideoPlayerProps) {
         disableRemotePlayback
         onTimeUpdate={handleTimeUpdate}
         className="w-full h-full object-cover pointer-events-none"
-      />
+      >
+        <source src={src.replace(".mp4", ".webm")} type="video/webm" />
+
+        <source src={src} type="video/mp4" />
+      </video>
 
       {/* Video Controls Wrapper */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">

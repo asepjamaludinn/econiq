@@ -19,7 +19,6 @@ export const SvgWallet = () => (
         <feComposite in="SourceGraphic" in2="blur" operator="over" />
       </filter>
     </defs>
-
     <circle
       cx="100"
       cy="100"
@@ -28,7 +27,6 @@ export const SvgWallet = () => (
       opacity="0.4"
       filter="blur(20px)"
     />
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -48,7 +46,6 @@ export const SvgWallet = () => (
         strokeOpacity="0.2"
         strokeWidth="2"
       />
-
       <g filter="url(#glowWallet)">
         <animateTransform
           attributeName="transform"
@@ -69,7 +66,6 @@ export const SvgWallet = () => (
           opacity="0.5"
         />
       </g>
-
       <path
         d="M20 90 Q 100 120 180 90 L180 140 Q 180 156 164 156 L36 156 Q 20 156 20 140 Z"
         fill="url(#walletGrad2)"
@@ -88,18 +84,17 @@ export const SvgWallet = () => (
       />
       <circle cx="100" cy="101" r="2" fill="#8644F7" />
     </g>
-
     {[
-      { cx: 30, cy: 50, dur: "2s", delay: "0s" },
-      { cx: 160, cy: 40, dur: "3s", delay: "1s" },
-      { cx: 170, cy: 150, dur: "2.5s", delay: "0.5s" },
+      { cX: 30, cY: 50, dur: "2s", dly: "0s" },
+      { cX: 160, cY: 40, dur: "3s", dly: "1s" },
+      { cX: 170, cY: 150, dur: "2.5s", dly: "0.5s" },
     ].map((p, i) => (
-      <circle key={i} cx={p.cx} cy={p.cy} r="3" fill="#FFFFFF" opacity="0.8">
+      <circle key={i} cx={p.cX} cy={p.cY} r="3" fill="#FFFFFF" opacity="0.8">
         <animate
           attributeName="opacity"
           values="0.2;1;0.2"
           dur={p.dur}
-          begin={p.delay}
+          begin={p.dly}
           repeatCount="indefinite"
         />
         <animateTransform
@@ -107,7 +102,7 @@ export const SvgWallet = () => (
           type="translate"
           values="0,0; 0,-10; 0,0"
           dur={p.dur}
-          begin={p.delay}
+          begin={p.dly}
           repeatCount="indefinite"
         />
       </circle>
