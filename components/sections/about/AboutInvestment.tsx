@@ -54,10 +54,10 @@ export default function AboutInvestment() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full py-32 md:py-48 flex items-center overflow-hidden bg-[linear-gradient(to_bottom,var(--color-zinc-900)_50%,#000000_50%)] lg:bg-[linear-gradient(to_right,var(--color-zinc-900)_50%,#000000_50%)]"
+      className="relative w-full py-32 md:py-48 flex items-center overflow-hidden bg-[linear-gradient(to_bottom,var(--color-zinc-900),#000000)] lg:bg-[linear-gradient(to_right,var(--color-zinc-900)_40%,#000000_100%)]"
     >
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-0 relative z-10">
-        <div ref={textRef} className="flex flex-col justify-center pr-0 lg:pr-12">
+        <div ref={textRef} className="relative z-30 flex flex-col justify-center pr-0 lg:pr-12">
           <h2 className="text-5xl md:text-7xl lg:text-[80px] font-black uppercase tracking-tighter leading-[0.9] mb-6">
             LOW BARRIER. <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#B36EE6] to-[#660DFF]">

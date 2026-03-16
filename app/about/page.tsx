@@ -9,6 +9,7 @@ import AboutBigTypography from "@/components/sections/about/AboutBigTypography"
 import AboutProductShowcase from "@/components/sections/about/AboutProductShowcase"
 import AboutInvestment from "@/components/sections/about/AboutInvestment"
 import AboutMonitoring from "@/components/sections/about/AboutMonitoring"
+import FooterNightScene from '@/components/sections/about/FooterNightScene';
 
 export default function AboutPage() {
   return (
@@ -24,6 +25,7 @@ export default function AboutPage() {
       <AboutMarquee />
       <AboutTimeline />
       <AboutCTA />
+      <FooterNightScene />
     </main>
   )
 }
