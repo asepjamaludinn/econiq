@@ -1,37 +1,10 @@
-"use client";
-
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
 interface HangingSignProps {
   text: string;
 }
 
 export default function HangingSign({ text }: HangingSignProps) {
-  const signRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (signRef.current) {
-        gsap.set(signRef.current, { transformOrigin: "top center" });
-        gsap.to(signRef.current, {
-          rotation: 4,
-          duration: 2.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
-    },
-    { scope: signRef },
-  );
-
   return (
-    <div
-      ref={signRef}
-      className="relative flex flex-col items-center mb-10 z-10"
-    >
+    <div className="relative flex flex-col items-center mb-10 z-10 animate-swing origin-top">
       <div className="w-5 h-5 rounded-full border-[3px] border-brand-primary bg-white z-20 shadow-sm"></div>
 
       <svg

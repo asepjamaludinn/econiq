@@ -1,39 +1,6 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function CatAnimation() {
-  const kepalaKucingRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (kepalaKucingRef.current) {
-      gsap.set(kepalaKucingRef.current, {
-        transformOrigin: "bottom center",
-        rotation: -10,
-      });
-
-      gsap.to(kepalaKucingRef.current, {
-        rotation: 10,
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        scrollTrigger: {
-          trigger: kepalaKucingRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "play pause resume pause",
-        },
-      });
-    }
-  });
-
   return (
     <div className="relative w-full h-full">
       <div
@@ -52,7 +19,7 @@ export default function CatAnimation() {
       ></div>
 
       <div className="relative w-full h-[50%] z-10 translate-y-[15%] md:translate-y-[25%] -translate-x-[6%] md:-translate-x-[30%]">
-        <div ref={kepalaKucingRef} className="relative w-full h-full">
+        <div className="relative w-full h-full animate-sway-cat origin-bottom">
           <Image
             src="/images/kepala meng1.svg"
             alt="Kepala Kucing"

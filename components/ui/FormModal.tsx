@@ -1,10 +1,28 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import dynamic from "next/dynamic";
 import AnimatedSideModal from "./AnimatedSideModal";
+import type ReCAPTCHA_Type from "react-google-recaptcha";
+
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[78px] bg-zinc-50 animate-pulse rounded-xl border border-zinc-200 flex items-center justify-center shadow-sm">
+      <div className="flex items-center gap-2 text-zinc-400">
+        <Loader2 className="w-4 h-4 animate-spin" />
+        <span className="text-xs font-bold tracking-wider uppercase">
+          Verifying Security...
+        </span>
+      </div>
+    </div>
+  ),
+}) as React.ComponentType<
+  React.ComponentProps<typeof ReCAPTCHA_Type> &
+    React.RefAttributes<ReCAPTCHA_Type>
+>;
 
 interface FormModalProps {
   isOpen: boolean;
@@ -12,13 +30,12 @@ interface FormModalProps {
 }
 
 export default function FormModal({ isOpen, onClose }: FormModalProps) {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<ReCAPTCHA_Type>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  // 1. Tambahkan state khusus untuk menyimpan pesan error
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -37,16 +54,15 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validasi Captcha di Frontend
     if (!captchaValue) {
-      setErrorMsg("Please complete the reCAPTCHA.");
+      setErrorMsg("Please complete the security verification.");
       setSubmitStatus("error");
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus("idle");
-    setErrorMsg(null); // Bersihkan error sebelumnya
+    setErrorMsg(null);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -69,7 +85,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           setCaptchaValue(null);
         }
       } else {
-        // 2. Parsing respons JSON untuk mendapatkan pesan error dari Zod
         const errorData = await response.json();
 
         if (errorData.errors && Array.isArray(errorData.errors)) {
@@ -83,7 +98,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     } catch (error) {
       console.error(error);
       setErrorMsg(
-        "Failed to connect to the server. Please check your network.",
+        "Failed to connect to the server. Please check your network connection.",
       );
       setSubmitStatus("error");
     } finally {
@@ -96,30 +111,33 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       isOpen={isOpen}
       onClose={onClose}
       title="Join ECONIQ"
-      contentClassName="px-6 md:px-10 lg:px-12 pb-10 pt-6 flex-grow flex flex-col gap-6"
+      contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
     >
-      <div className="modal-animate-item">
-        <h2 className="text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-4">
+      <div className="modal-animate-item shrink-0">
+        <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
           JOIN THE
           <br />
           <span className="text-brand-secondary">NEXT GENERATION</span>
           <br />
           OF DIGITAL FINANCE
         </h2>
-        <p className="text-base md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
           Learn the fundamentals of Web3, blockchain, and digital finance. Leave
           your details and our team will share more information with you.
         </p>
       </div>
 
-      <form className="flex flex-col gap-4 mt-2" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-3 md:gap-4 mt-1 md:mt-2 shrink-0 pb-4"
+        onSubmit={handleSubmit}
+      >
         <div className="modal-animate-item">
           <input
             type="text"
             name="name"
             placeholder="Full Name"
             required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
+            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
           />
         </div>
 
@@ -129,21 +147,21 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             name="email"
             placeholder="Email Address"
             required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
+            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
           />
         </div>
 
-        <div className="modal-animate-item flex items-center gap-3 mt-2">
+        <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
           <input
             type="checkbox"
             id="terms"
             name="terms_agreed"
             required
-            className="w-5 h-5 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30"
+            className="w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0"
           />
           <label
             htmlFor="terms"
-            className="text-sm md:text-base text-zinc-600 cursor-default"
+            className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-default"
           >
             I accept the processing of my{" "}
             <Link
@@ -156,16 +174,18 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </label>
         </div>
 
-        <div className="modal-animate-item mt-2">
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-            onChange={(val) => setCaptchaValue(val)}
-          />
+        <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100 min-h-[78px]">
+          {isOpen && (
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(val: string | null) => setCaptchaValue(val)}
+            />
+          )}
         </div>
 
         {submitStatus === "success" && (
-          <div className="modal-animate-item flex items-start gap-3 text-green-700 bg-green-50 p-4 rounded-xl border border-green-200">
+          <div className="modal-animate-item flex items-start gap-3 text-green-700 bg-green-50 p-3.5 md:p-4 rounded-xl border border-green-200">
             <CheckCircle2
               size={24}
               className="mt-0.5 flex-shrink-0 text-green-600"
@@ -180,24 +200,30 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </div>
         )}
 
-        {/* 3. Tampilkan pesan error secara dinamis */}
         {submitStatus === "error" && (
-          <div className="modal-animate-item text-red-500 bg-red-50 p-4 rounded-xl border border-red-200 font-medium text-sm">
+          <div className="modal-animate-item text-red-500 bg-red-50 p-3.5 md:p-4 rounded-xl border border-red-200 font-medium text-sm">
             {errorMsg || "Oops! Something went wrong. Please try again later."}
           </div>
         )}
 
-        <div className="modal-animate-item mt-4">
+        <div className="modal-animate-item mt-2 md:mt-4">
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`group w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
+            className={`group w-full font-bold py-3.5 md:py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
               isSubmitting
                 ? "bg-brand-muted text-white cursor-not-allowed"
                 : "bg-brand-secondary hover:bg-brand-primary hover:shadow-lg text-white"
             }`}
           >
-            {isSubmitting ? "Sending..." : "Start Learning"}
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              "Start Learning"
+            )}
 
             {!isSubmitting && (
               <svg

@@ -82,7 +82,7 @@ export default function CustomVideoPlayer({
     >
       <video
         ref={videoRef}
-        poster={poster || "/images/video.PNG"}
+        poster={poster || "/images/video.png"}
         autoPlay
         loop
         muted={isMuted}

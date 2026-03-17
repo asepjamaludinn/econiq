@@ -29,8 +29,8 @@ export async function POST(request: Request) {
     const mailToAdmin = createAdminEmailPayload(name, email);
 
     await Promise.all([
-      sendMailWithRetry(mailToVisitor),
-      sendMailWithRetry(mailToAdmin),
+      sendMailWithRetry(mailToVisitor, 2, 300),
+      sendMailWithRetry(mailToAdmin, 2, 300),
     ]);
 
     return NextResponse.json({ message: "Success" }, { status: 200 });

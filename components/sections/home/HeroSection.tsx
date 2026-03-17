@@ -6,14 +6,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowDown } from "lucide-react";
-import HeroClouds from "./hero/HeroClouds";
-import AnimatedLeaves from "./hero/AnimatedLeaves";
-import WalkingMan from "./hero/WalkingMan";
-import CatAnimation from "./hero/CatAnimation";
-import MoneyRain from "./hero/MoneyRain";
+import dynamic from "next/dynamic";
+import { heroData } from "@/constants";
 import TenantInteraction from "./hero/TenantInteraction";
 import WindowPlant from "./hero/WindowPlant";
-import { heroData } from "@/constants";
+import AnimatedLeaves from "./hero/AnimatedLeaves";
+const HeroClouds = dynamic(() => import("./hero/HeroClouds"), { ssr: false });
+const WalkingMan = dynamic(() => import("./hero/WalkingMan"), { ssr: false });
+const CatAnimation = dynamic(() => import("./hero/CatAnimation"), {
+  ssr: false,
+});
+const MoneyRain = dynamic(() => import("./hero/MoneyRain"), { ssr: false });
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -122,7 +125,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* 2. Partikel & Dekorasi (Awan/Daun) */}
+      {/* 2. Partikel & Dekorasi (Awan/Daun)  */}
       <div className="hidden md:block">
         <HeroClouds />
       </div>
@@ -223,7 +226,7 @@ export default function HeroSection() {
         className="absolute bottom-0 left-0 w-full h-[15%] xl:h-[20%] z-60 pointer-events-none origin-bottom will-change-transform"
       >
         <Image
-          src="/images/Pager.svg"
+          src="/images/Pager.webp"
           alt="Pagar Depan"
           aria-hidden="true"
           fill
@@ -231,6 +234,7 @@ export default function HeroSection() {
           priority
         />
       </div>
+
       <MoneyRain />
 
       <div
@@ -240,7 +244,7 @@ export default function HeroSection() {
         <div className="absolute top-full left-0 w-full h-[50vh] bg-brand-tertiary"></div>
       </div>
 
-      {/* 9. Arrow Down (Jumping & Fade on Scroll) */}
+      {/* 9. Arrow Down */}
       <div
         ref={arrowRef}
         className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-[80] animate-bounce pointer-events-none"
