@@ -43,6 +43,7 @@ export default function MarketingSection() {
     <section
       ref={sectionRef}
       className="relative w-full h-[100vh] bg-gradient-to-t from-grad-start to-brand-tertiary text-white overflow-hidden z-[140] -mt-[5vw]"
+      style={{ willChange: "transform" }}
     >
       <div className="marketing-wrapper absolute inset-0 w-full h-full flex items-center justify-center max-w-[1600px] mx-auto pointer-events-none pb-12 lg:pb-0">
         <div className="marketing-images-container absolute inset-0 z-10">
@@ -51,7 +52,10 @@ export default function MarketingSection() {
               key={`marketing-img-${index}`}
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
-              <div className="zoom-image-wrapper opacity-0 relative w-full aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] rounded-2xl overflow-hidden">
+              <div
+                className="zoom-image-wrapper opacity-0 relative w-full aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-2xl overflow-hidden"
+                style={{ willChange: "transform, opacity" }}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -66,9 +70,9 @@ export default function MarketingSection() {
 
         <div
           ref={textContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto"
+          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
         >
-          <div className="marketing-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center backdrop-blur-sm opacity-0">
+          <div className="marketing-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
             <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
               Global Awareness
             </span>
@@ -76,13 +80,13 @@ export default function MarketingSection() {
           <h1 className="w-full px-2 md:px-4 text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] mb-4 md:mb-6">
             <div className="block w-full" style={{ perspective: "1000px" }}>
               <div
-                className="market-text-line market-text-line-1 block lg:whitespace-nowrap opacity-0"
+                className="market-text-line market-text-line-1 block transform-gpu lg:whitespace-nowrap opacity-0"
                 style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
               >
                 Empowering Through
               </div>
               <div
-                className="market-text-line market-text-line-2 block lg:whitespace-nowrap opacity-0"
+                className="market-text-line market-text-line-2 block transform-gpu lg:whitespace-nowrap opacity-0"
                 style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
               >
                 Knowledge
@@ -90,7 +94,7 @@ export default function MarketingSection() {
             </div>
           </h1>
 
-          <div className="marketing-subtext flex flex-col items-center w-full max-w-sm lg:max-w-lg">
+          <div className="marketing-subtext flex flex-col items-center w-full max-w-sm lg:max-w-lg transform-gpu">
             <p className="market-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
               Leading the movement for Web3 financial literacy worldwide.
             </p>
@@ -109,7 +113,10 @@ export default function MarketingSection() {
               key={`location-img-${index}`}
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
-              <div className="location-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] rounded-full overflow-hidden border-2 border-white/20">
+              <div
+                className="location-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-full overflow-hidden border-2 border-white/20"
+                style={{ willChange: "transform, opacity" }}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -124,9 +131,9 @@ export default function MarketingSection() {
 
         <div
           ref={locationTextContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto"
+          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
         >
-          <div className="location-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center backdrop-blur-sm opacity-0">
+          <div className="location-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
             <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
               Community Network
             </span>
@@ -137,14 +144,14 @@ export default function MarketingSection() {
             style={{ perspective: "1000px" }}
           >
             <h2
-              className="location-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] opacity-0 lg:whitespace-nowrap"
+              className="location-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
               Accessible Education
             </h2>
           </div>
 
-          <div className="location-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl">
+          <div className="location-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl transform-gpu">
             <p className="location-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
               Join our local community hubs to experience Web3 learning directly
               in your neighborhood
@@ -161,7 +168,10 @@ export default function MarketingSection() {
               key={`team-img-${index}`}
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
-              <div className="team-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] rounded-3xl overflow-hidden">
+              <div
+                className="team-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] transform-gpu rounded-3xl overflow-hidden"
+                style={{ willChange: "transform, opacity" }}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -176,9 +186,9 @@ export default function MarketingSection() {
 
         <div
           ref={teamTextContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto"
+          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
         >
-          <div className="team-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center backdrop-blur-sm opacity-0">
+          <div className="team-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
             <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
               Dedicated Mentors
             </span>
@@ -189,14 +199,14 @@ export default function MarketingSection() {
             style={{ perspective: "1000px" }}
           >
             <h2
-              className="team-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] opacity-0 lg:whitespace-nowrap"
+              className="team-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
               Guided by Innovators
             </h2>
           </div>
 
-          <div className="team-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl">
+          <div className="team-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl transform-gpu">
             <p className="team-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
               Mentors dedicated to simplifying complex blockchain ecosystems for
             </p>
