@@ -151,14 +151,16 @@ export default async function ArticleDetailPage(props: {
             </div>
           </aside>
 
-          <div className="col-span-1 lg:col-span-9">
+          <div className="col-span-1 lg:col-span-9 min-w-0 w-full">
             <div
               className="article-content text-base md:text-[17px] lg:text-lg text-zinc-600 leading-relaxed tracking-tight
                 [&>h3]:text-2xl [&>h3]:md:text-3xl [&>h3]:font-bold [&>h3]:text-foreground [&>h3]:tracking-tight [&>h3]:mt-12 [&>h3]:mb-5
                 [&>p]:mb-6 
                 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul>li]:mb-2 [&>ul>li::marker]:text-brand-primary
                 [&>img]:w-full [&>img]:rounded-[20px] [&>img]:my-10 [&>img]:object-cover [&>img]:border [&>img]:border-zinc-100 [&>img]:shadow-sm
-                [&>strong]:text-foreground [&>strong]:font-semibold [&>em]:text-zinc-800"
+                [&>strong]:text-foreground [&>strong]:font-semibold [&>em]:text-zinc-800
+                [&>div]:w-full [&>div]:overflow-x-auto
+                [&_table]:w-full [&_table]:min-w-[600px] lg:[&_table]:min-w-full"
               dangerouslySetInnerHTML={{
                 __html:
                   article.content || "<p>Konten artikel belum tersedia.</p>",
