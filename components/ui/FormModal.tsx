@@ -114,21 +114,21 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
     >
       <div className="modal-animate-item shrink-0">
-        <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
+        <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-4 md:mb-4">
           JOIN THE
           <br />
           <span className="text-brand-secondary">NEXT GENERATION</span>
           <br />
           OF DIGITAL FINANCE
         </h2>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
+        <p className="text-base sm:text-lg md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
           Learn the fundamentals of Web3, blockchain, and digital finance. Leave
           your details and our team will share more information with you.
         </p>
       </div>
 
       <form
-        className="flex flex-col gap-3 md:gap-4 mt-1 md:mt-2 shrink-0 pb-4"
+        className="flex flex-col gap-3 md:gap-4 mt-20 md:mt-20 lg:mt-2 shrink-0 pb-4"
         onSubmit={handleSubmit}
       >
         <div className="modal-animate-item">
