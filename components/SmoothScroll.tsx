@@ -3,6 +3,7 @@
 import { ReactLenis, type LenisRef } from "lenis/react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function SmoothScroll({
   children,
@@ -10,6 +11,7 @@ export default function SmoothScroll({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<LenisRef>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function update(time: number) {
@@ -22,6 +24,12 @@ export default function SmoothScroll({
       gsap.ticker.remove(update);
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisRef.current?.lenis) {
+      lenisRef.current.lenis.scrollTo(0, { immediate: true });
+    }
+  }, [pathname]);
 
   return (
     <ReactLenis

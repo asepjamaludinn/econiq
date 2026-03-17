@@ -7,22 +7,28 @@ export const SvgLearn = () => (
   >
     <defs>
       <linearGradient id="learnGlass" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.25" />
-        <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.05" />
+        <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.05" />
       </linearGradient>
       <filter id="learnGlow" x="-20%" y="-20%" width="140%" height="140%">
         <feGaussianBlur stdDeviation="8" result="blur" />
         <feComposite in="SourceGraphic" in2="blur" operator="over" />
       </filter>
       <radialGradient id="crystalGlow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="#B36EE6" stopOpacity="0.8" />
-        <stop offset="100%" stopColor="#8644F7" stopOpacity="0" />
+        <stop
+          offset="0%"
+          stopColor="var(--color-brand-tertiary)"
+          stopOpacity="0.8"
+        />
+        <stop
+          offset="100%"
+          stopColor="var(--color-brand-secondary)"
+          stopOpacity="0"
+        />
       </radialGradient>
     </defs>
-
     <circle cx="100" cy="100" r="55" fill="url(#crystalGlow)" />
-
-    <g stroke="#FFFFFF" strokeOpacity="0.2" strokeWidth="1.5">
+    <g stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.5">
       <line x1="100" y1="100" x2="35" y2="70" />
       <line x1="100" y1="100" x2="165" y2="60" />
       <line x1="100" y1="100" x2="145" y2="155" />
@@ -30,8 +36,11 @@ export const SvgLearn = () => (
       <line x1="35" y1="70" x2="45" y2="145" strokeDasharray="4 4" />
       <line x1="165" y1="60" x2="145" y2="155" strokeDasharray="4 4" />
     </g>
-
-    <g fill="#B36EE6" stroke="#FFFFFF" strokeWidth="1.5">
+    <g
+      fill="var(--color-brand-tertiary)"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
       <circle cx="35" cy="70" r="4">
         <animate
           attributeName="r"
@@ -65,7 +74,6 @@ export const SvgLearn = () => (
         />
       </circle>
     </g>
-
     <g filter="url(#learnGlow)">
       <animateTransform
         attributeName="transform"
@@ -74,12 +82,21 @@ export const SvgLearn = () => (
         dur="4s"
         repeatCount="indefinite"
       />
-      <polygon points="100,50 75,95 100,95" fill="#E2D1F9" opacity="0.9" />
-      <polygon points="100,50 125,95 100,95" fill="#B36EE6" />
-      <polygon points="75,95 100,140 100,95" fill="#8644F7" />
-      <polygon points="125,95 100,140 100,95" fill="#5A22B5" />
+      <polygon
+        points="100,50 75,95 100,95"
+        fill="var(--color-brand-muted)"
+        opacity="0.9"
+      />
+      <polygon
+        points="100,50 125,95 100,95"
+        fill="var(--color-brand-tertiary)"
+      />
+      <polygon
+        points="75,95 100,140 100,95"
+        fill="var(--color-brand-secondary)"
+      />
+      <polygon points="125,95 100,140 100,95" fill="var(--color-brand-dark)" />
     </g>
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -95,7 +112,7 @@ export const SvgLearn = () => (
         height="40"
         rx="6"
         fill="url(#learnGlass)"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.4"
         strokeWidth="1"
       />
@@ -105,7 +122,7 @@ export const SvgLearn = () => (
         width="20"
         height="4"
         rx="2"
-        fill="#B36EE6"
+        fill="var(--color-brand-tertiary)"
         opacity="0.9"
       />
       <rect
@@ -114,7 +131,7 @@ export const SvgLearn = () => (
         width="40"
         height="2.5"
         rx="1"
-        fill="#FFFFFF"
+        fill="currentColor"
         opacity="0.5"
       />
       <rect
@@ -123,12 +140,11 @@ export const SvgLearn = () => (
         width="30"
         height="2.5"
         rx="1"
-        fill="#FFFFFF"
+        fill="currentColor"
         opacity="0.3"
       />
-      <circle cx="180" cy="34" r="3" fill="#0A7B5E" />
+      <circle cx="180" cy="34" r="3" fill="var(--color-brand-accent)" />
     </g>
-
     <g>
       <animateTransform
         attributeName="transform"
@@ -144,7 +160,7 @@ export const SvgLearn = () => (
         height="50"
         rx="8"
         fill="url(#learnGlass)"
-        stroke="#B36EE6"
+        stroke="var(--color-brand-tertiary)"
         strokeOpacity="0.6"
         strokeWidth="1.5"
       />
@@ -153,7 +169,7 @@ export const SvgLearn = () => (
         cy="150"
         r="14"
         fill="none"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.2"
         strokeWidth="3"
       />
@@ -162,7 +178,7 @@ export const SvgLearn = () => (
         cy="150"
         r="14"
         fill="none"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.9"
         strokeWidth="3"
         strokeDasharray="60"
@@ -177,27 +193,23 @@ export const SvgLearn = () => (
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="35" cy="150" r="5" fill="#8644F7" />
+      <circle cx="35" cy="150" r="5" fill="var(--color-brand-secondary)" />
     </g>
-
     {[
-      { x: 70, y: 30, scale: "0.8", dur: "2s" },
-      { x: 120, y: 160, scale: "1", dur: "3s" },
-      { x: 170, y: 110, scale: "0.6", dur: "2.5s" },
+      { x: 70, y: 30, s: "0.8", d: "2s" },
+      { x: 120, y: 160, s: "1", d: "3s" },
+      { x: 170, y: 110, s: "0.6", d: "2.5s" },
     ].map((star, i) => (
-      <g
-        key={i}
-        transform={`translate(${star.x}, ${star.y}) scale(${star.scale})`}
-      >
+      <g key={i} transform={`translate(${star.x}, ${star.y}) scale(${star.s})`}>
         <animate
           attributeName="opacity"
           values="0;1;0"
-          dur={star.dur}
+          dur={star.d}
           repeatCount="indefinite"
         />
         <path
           d="M0 -8 L1.5 -1.5 L8 0 L1.5 1.5 L0 8 L-1.5 1.5 L-8 0 L-1.5 -1.5 Z"
-          fill="#FFFFFF"
+          fill="currentColor"
         />
       </g>
     ))}

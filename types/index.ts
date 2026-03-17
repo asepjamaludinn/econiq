@@ -22,3 +22,18 @@ export interface ImageData {
   alt: string;
   positionClasses: string;
 }
+
+export interface ArticleData {
+  id: string;
+  title: string;
+  excerpt: string;
+  topic: string;
+  readTime: string;
+  date: string;
+  thumbnail: string;
+  slug: string;
+  featured?: boolean;
+  authorName?: string;
+  authorAvatar?: string;
+  content?: string;
+}
