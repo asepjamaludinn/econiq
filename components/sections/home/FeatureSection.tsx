@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -166,20 +167,22 @@ export default function FeatureSection() {
         >
           <div className="relative inline-block w-full text-left sm:text-center mb-6 sm:mb-8 -mt-10 sm:mt-0">
             <h2 className="text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] leading-[1.05] md:leading-[1.1] font-black uppercase tracking-normal text-white drop-shadow-md relative z-10">
-              <div className="reveal-item will-change-transform">
+              <div className="reveal-item opacity-0 will-change-transform">
                 THE NEXT GENERATION
               </div>
-              <div className="reveal-item will-change-transform">
+              <div className="reveal-item opacity-0 will-change-transform">
                 OF DIGITAL FINANCE
               </div>
-              <div className="reveal-item will-change-transform">
+              <div className="reveal-item opacity-0 will-change-transform">
                 STARTS WITH
               </div>
-              <div className="reveal-item will-change-transform">ECONIQ</div>
+              <div className="reveal-item opacity-0 will-change-transform">
+                ECONIQ
+              </div>
             </h2>
 
             <div
-              className="reveal-item will-change-transform absolute pointer-events-none drop-shadow-2xl z-20 
+              className="reveal-item opacity-0 will-change-transform absolute pointer-events-none drop-shadow-2xl z-20 
               w-20 h-20 -top-4 right-0 
               sm:w-24 sm:h-24 sm:-top-6 sm:-right-12 
               md:w-32 md:h-32 md:-top-30 md:-right-5
@@ -235,12 +238,12 @@ export default function FeatureSection() {
             </div>
           </div>
 
-          <div className="reveal-item will-change-transform w-full max-w-4xl aspect-video bg-black/10 rounded-3xl border-2 border-white/20 flex flex-col items-center justify-center mb-8 backdrop-blur-md shadow-2xl relative overflow-hidden group">
+          <div className="reveal-item opacity-0 will-change-transform w-full max-w-4xl aspect-video bg-black/10 rounded-3xl border-2 border-white/20 flex flex-col items-center justify-center mb-8 backdrop-blur-md shadow-2xl relative overflow-hidden group">
             <CustomVideoPlayer src="/animations/econiq.mp4" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-10 w-full mt-8 reveal-item">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-10 w-full mt-8 reveal-item opacity-0">
           {featuresData.map((item, index) => {
             const Icon = featureIcons[index % featureIcons.length];
 
@@ -266,8 +269,11 @@ export default function FeatureSection() {
           })}
         </div>
 
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item will-change-transform">
-          <button className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-3xl font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight cursor-pointer">
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item opacity-0 will-change-transform">
+          <Link
+            href="/content"
+            className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-3xl font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight cursor-pointer"
+          >
             Learn More
             <svg
               width="24"
@@ -285,13 +291,12 @@ export default function FeatureSection() {
                 className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
                 style={{ transformOrigin: "19px 12px" }}
               />
-
               <path
                 d="m12 5 7 7-7 7"
                 className="transition-all duration-300 ease-out group-hover:translate-x-3"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

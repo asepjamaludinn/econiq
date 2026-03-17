@@ -63,7 +63,7 @@ export default function ArticleList() {
             href={article.slug}
             className="article-card opacity-0 group flex flex-col h-full cursor-pointer w-[500px] max-w-full"
           >
-            <div className="relative w-[500px] max-w-full h-[350px] md:h-[300px] lg:h-[340px] rounded-md overflow-hidden mb-6 bg-zinc-100">
+            <div className="relative w-[500px] max-w-full h-[350px] md:h-[300px] lg:h-[340px] rounded-xs overflow-hidden mb-6 bg-zinc-100">
               <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/5 z-10 transition-colors duration-300 pointer-events-none"></div>
 
               <Image

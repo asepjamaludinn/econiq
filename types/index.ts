@@ -33,4 +33,7 @@ export interface ArticleData {
   thumbnail: string;
   slug: string;
   featured?: boolean;
+  authorName?: string;
+  authorAvatar?: string;
+  content?: string;
 }

@@ -7,12 +7,24 @@ export const SvgGrow = () => (
   >
     <defs>
       <linearGradient id="growGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#B36EE6" stopOpacity="0.8" />
-        <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+        <stop
+          offset="0%"
+          stopColor="var(--color-brand-tertiary)"
+          stopOpacity="0.8"
+        />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
       </linearGradient>
       <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="#000000" stopOpacity="0.4" />
-        <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+        <stop
+          offset="0%"
+          stopColor="var(--color-foreground)"
+          stopOpacity="0.4"
+        />
+        <stop
+          offset="100%"
+          stopColor="var(--color-foreground)"
+          stopOpacity="0"
+        />
       </radialGradient>
     </defs>
     <ellipse cx="100" cy="170" rx="60" ry="15" fill="url(#shadowGrad)" />
@@ -29,9 +41,9 @@ export const SvgGrow = () => (
         cy="150"
         rx="50"
         ry="15"
-        fill="#8644F7"
+        fill="var(--color-brand-secondary)"
         opacity="0.3"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.2"
       />
       <ellipse
@@ -39,9 +51,9 @@ export const SvgGrow = () => (
         cy="140"
         rx="40"
         ry="12"
-        fill="#8644F7"
+        fill="var(--color-brand-secondary)"
         opacity="0.6"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.3"
       />
       <ellipse
@@ -49,8 +61,8 @@ export const SvgGrow = () => (
         cy="130"
         rx="30"
         ry="9"
-        fill="#B36EE6"
-        stroke="#FFFFFF"
+        fill="var(--color-brand-tertiary)"
+        stroke="currentColor"
         strokeOpacity="0.5"
       />
     </g>
@@ -65,13 +77,13 @@ export const SvgGrow = () => (
       <path
         d="M100 30 L150 80 L120 80 L120 120 L80 120 L80 80 L50 80 Z"
         fill="url(#growGrad)"
-        stroke="#8644F7"
+        stroke="var(--color-brand-secondary)"
         strokeWidth="2"
         strokeLinejoin="round"
       />
       <path
         d="M100 40 L130 70 L110 70 L110 110 L90 110 L90 70 L70 70 Z"
-        fill="#FFFFFF"
+        fill="currentColor"
         opacity="0.3"
       />
     </g>
@@ -89,7 +101,7 @@ export const SvgGrow = () => (
         />
         <path
           d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z"
-          fill="#FFFFFF"
+          fill="currentColor"
         />
       </g>
     ))}

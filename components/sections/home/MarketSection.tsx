@@ -45,7 +45,6 @@ export default function MarketingSection() {
       className="relative w-full h-[100vh] bg-gradient-to-t from-grad-start to-brand-tertiary text-white overflow-hidden z-[140] -mt-[5vw]"
       style={{ willChange: "transform" }}
     >
-      {/* 1. MARKETING SLIDE */}
       <div className="marketing-wrapper absolute inset-0 w-full h-full flex items-center justify-center max-w-[1600px] mx-auto pointer-events-none pb-12 lg:pb-0">
         <div className="marketing-images-container absolute inset-0 z-10">
           {marketingImages.map((image, index) => (
@@ -54,8 +53,8 @@ export default function MarketingSection() {
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
               <div
-                className="zoom-image-wrapper relative w-full aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-2xl overflow-hidden"
-                style={{ willChange: "transform, opacity", opacity: 0 }}
+                className="zoom-image-wrapper opacity-0 relative w-full aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-2xl overflow-hidden"
+                style={{ willChange: "transform, opacity" }}
               >
                 <Image
                   src={image.src}
@@ -115,8 +114,8 @@ export default function MarketingSection() {
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
               <div
-                className="location-image-wrapper relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-full overflow-hidden border-2 border-white/20"
-                style={{ willChange: "transform, opacity", opacity: 0 }}
+                className="location-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-full overflow-hidden border-2 border-white/20"
+                style={{ willChange: "transform, opacity" }}
               >
                 <Image
                   src={image.src}
@@ -136,7 +135,7 @@ export default function MarketingSection() {
         >
           <div className="location-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
             <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
-              Our Locations
+              Community Network
             </span>
           </div>
 
@@ -148,16 +147,14 @@ export default function MarketingSection() {
               className="location-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
-              Available Everywhere
+              Accessible Education
             </h2>
           </div>
 
           <div className="location-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl transform-gpu">
             <p className="location-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              Find our partner stores and experience Web3 directly
-            </p>
-            <p className="location-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              in your own neighborhood.
+              Join our local community hubs to experience Web3 learning directly
+              in your neighborhood
             </p>
           </div>
         </div>
@@ -172,7 +169,7 @@ export default function MarketingSection() {
               className={`absolute ${image.positionClasses} flex items-center justify-center`}
             >
               <div
-                className="team-image-wrapper relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] transform-gpu rounded-3xl overflow-hidden"
+                className="team-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] transform-gpu rounded-3xl overflow-hidden"
                 style={{ willChange: "transform, opacity" }}
               >
                 <Image
@@ -193,7 +190,7 @@ export default function MarketingSection() {
         >
           <div className="team-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
             <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
-              The Visionaries
+              Dedicated Mentors
             </span>
           </div>
 
@@ -205,7 +202,7 @@ export default function MarketingSection() {
               className="team-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
-              Built by Experts
+              Guided by Innovators
             </h2>
           </div>
 
@@ -220,7 +217,6 @@ export default function MarketingSection() {
         </div>
       </div>
 
-      {/* MOBILE CONTROLS */}
       <div className="lg:hidden absolute top-[65%] md:top-[70%] -translate-y-1/2 left-0 w-full flex items-center justify-center z-[200] pointer-events-none">
         <SliderControls
           onPrev={handlePrev}

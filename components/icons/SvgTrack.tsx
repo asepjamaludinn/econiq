@@ -7,12 +7,20 @@ export const SvgTrack = () => (
   >
     <defs>
       <linearGradient id="trackBg" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.15" />
-        <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.02" />
+        <stop offset="0%" stopColor="currentColor" stopOpacity="0.15" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.02" />
       </linearGradient>
       <linearGradient id="barGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#B36EE6" stopOpacity="1" />
-        <stop offset="100%" stopColor="#8644F7" stopOpacity="0.6" />
+        <stop
+          offset="0%"
+          stopColor="var(--color-brand-tertiary)"
+          stopOpacity="1"
+        />
+        <stop
+          offset="100%"
+          stopColor="var(--color-brand-secondary)"
+          stopOpacity="0.6"
+        />
       </linearGradient>
     </defs>
     <g>
@@ -30,7 +38,7 @@ export const SvgTrack = () => (
         height="140"
         rx="16"
         fill="url(#trackBg)"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.3"
         strokeWidth="2"
       />
@@ -40,16 +48,16 @@ export const SvgTrack = () => (
         width="40"
         height="8"
         rx="4"
-        fill="#FFFFFF"
+        fill="currentColor"
         opacity="0.5"
       />
-      <circle cx="165" cy="49" r="4" fill="#B36EE6" />
+      <circle cx="165" cy="49" r="4" fill="var(--color-brand-tertiary)" />
       <line
         x1="35"
         y1="80"
         x2="165"
         y2="80"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.1"
         strokeWidth="1"
         strokeDasharray="4 4"
@@ -59,7 +67,7 @@ export const SvgTrack = () => (
         y1="110"
         x2="165"
         y2="110"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.1"
         strokeWidth="1"
         strokeDasharray="4 4"
@@ -69,7 +77,7 @@ export const SvgTrack = () => (
         y1="140"
         x2="165"
         y2="140"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.2"
         strokeWidth="1"
       />
@@ -105,7 +113,7 @@ export const SvgTrack = () => (
       <path
         d="M35 120 Q 60 70 90 90 T 165 50"
         fill="none"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -117,7 +125,7 @@ export const SvgTrack = () => (
           repeatCount="indefinite"
         />
       </path>
-      <circle cx="165" cy="50" r="6" fill="#FFFFFF">
+      <circle cx="165" cy="50" r="6" fill="currentColor">
         <animate
           attributeName="cy"
           values="50;30;50"

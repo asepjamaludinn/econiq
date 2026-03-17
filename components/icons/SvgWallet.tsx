@@ -7,12 +7,20 @@ export const SvgWallet = () => (
   >
     <defs>
       <linearGradient id="walletGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.2" />
-        <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.05" />
+        <stop offset="0%" stopColor="currentColor" stopOpacity="0.2" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.05" />
       </linearGradient>
       <linearGradient id="walletGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#B36EE6" stopOpacity="0.8" />
-        <stop offset="100%" stopColor="#8644F7" stopOpacity="0.9" />
+        <stop
+          offset="0%"
+          stopColor="var(--color-brand-tertiary)"
+          stopOpacity="0.8"
+        />
+        <stop
+          offset="100%"
+          stopColor="var(--color-brand-secondary)"
+          stopOpacity="0.9"
+        />
       </linearGradient>
       <filter id="glowWallet" x="-20%" y="-20%" width="140%" height="140%">
         <feGaussianBlur stdDeviation="8" result="blur" />
@@ -23,7 +31,7 @@ export const SvgWallet = () => (
       cx="100"
       cy="100"
       r="60"
-      fill="#8644F7"
+      fill="var(--color-brand-secondary)"
       opacity="0.4"
       filter="blur(20px)"
     />
@@ -42,7 +50,7 @@ export const SvgWallet = () => (
         height="90"
         rx="16"
         fill="url(#walletGrad1)"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.2"
         strokeWidth="2"
       />
@@ -57,19 +65,19 @@ export const SvgWallet = () => (
         <circle cx="100" cy="70" r="28" fill="url(#walletGrad2)" />
         <path
           d="M100 52 L91 67 L100 72 L109 67 Z"
-          fill="#FFFFFF"
+          fill="currentColor"
           opacity="0.9"
         />
         <path
           d="M100 72 L91 67 L100 83 L109 67 Z"
-          fill="#FFFFFF"
+          fill="currentColor"
           opacity="0.5"
         />
       </g>
       <path
         d="M20 90 Q 100 120 180 90 L180 140 Q 180 156 164 156 L36 156 Q 20 156 20 140 Z"
         fill="url(#walletGrad2)"
-        stroke="#FFFFFF"
+        stroke="currentColor"
         strokeOpacity="0.3"
         strokeWidth="2"
       />
@@ -79,17 +87,24 @@ export const SvgWallet = () => (
         width="30"
         height="12"
         rx="6"
-        fill="#FFFFFF"
+        fill="currentColor"
         opacity="0.9"
       />
-      <circle cx="100" cy="101" r="2" fill="#8644F7" />
+      <circle cx="100" cy="101" r="2" fill="var(--color-brand-secondary)" />
     </g>
     {[
       { cX: 30, cY: 50, dur: "2s", dly: "0s" },
       { cX: 160, cY: 40, dur: "3s", dly: "1s" },
       { cX: 170, cY: 150, dur: "2.5s", dly: "0.5s" },
     ].map((p, i) => (
-      <circle key={i} cx={p.cX} cy={p.cY} r="3" fill="#FFFFFF" opacity="0.8">
+      <circle
+        key={i}
+        cx={p.cX}
+        cy={p.cY}
+        r="3"
+        fill="currentColor"
+        opacity="0.8"
+      >
         <animate
           attributeName="opacity"
           values="0.2;1;0.2"
