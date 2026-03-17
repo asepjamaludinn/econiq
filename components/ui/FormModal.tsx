@@ -93,7 +93,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       isOpen={isOpen}
       onClose={onClose}
       title="Join ECONIQ"
-      // Menambahkan overflow-y-auto agar bisa discroll jika konten melebihi layar
       contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
     >
       <div className="modal-animate-item shrink-0">
@@ -157,7 +156,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </label>
         </div>
 
-        {/* Menggunakan scale agar ReCAPTCHA tidak merusak lebar layar di HP kecil */}
         <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100">
           <ReCAPTCHA
             ref={recaptchaRef}

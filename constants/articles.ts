@@ -134,8 +134,8 @@ const contentWallet = `
     <li><strong>Paper Wallet:</strong> Kunci privat dicetak atau ditulis di atas kertas. Sangat aman dari peretas digital, tapi rentan terhadap kerusakan fisik (terbakar/basah).</li>
   </ul>
 
-  <div style="overflow-x: auto; margin-top: 2rem; margin-bottom: 2rem;">
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+  <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; margin-top: 2rem; margin-bottom: 2rem;" data-lenis-prevent="true">
+  <table style="width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
       <thead>
         <tr style="background-color: #f4effc; color: #5200cc;">
           <th style="padding: 12px 16px; border: 1px solid #e5e5e5; font-weight: bold;">Karakteristik</th>
@@ -223,8 +223,8 @@ const contentEvolusi = `
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Visualisasi pergeseran arsitektur internet</p>
 
   <h3>Perbandingan Utama Era Internet</h3>
-  <div style="overflow-x: auto; margin-top: 1.5rem; margin-bottom: 2rem;">
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+  <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; margin-top: 2rem; margin-bottom: 2rem;" data-lenis-prevent="true">
+  <table style="width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
       <thead>
         <tr style="background-color: #f4effc; color: #5200cc;">
           <th style="padding: 12px 16px; border: 1px solid #e5e5e5; font-weight: bold;">Aspek</th>
