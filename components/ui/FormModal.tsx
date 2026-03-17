@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import AnimatedSideModal from "./AnimatedSideModal";
 import type ReCAPTCHA_Type from "react-google-recaptcha";
@@ -10,13 +10,19 @@ import type ReCAPTCHA_Type from "react-google-recaptcha";
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[78px] bg-zinc-100 animate-pulse rounded-md border border-zinc-200 flex items-center justify-center">
-      <span className="text-sm font-medium text-zinc-400">
-        Loading anti-spam...
-      </span>
+    <div className="w-full h-[78px] bg-zinc-50 animate-pulse rounded-xl border border-zinc-200 flex items-center justify-center shadow-sm">
+      <div className="flex items-center gap-2 text-zinc-400">
+        <Loader2 className="w-4 h-4 animate-spin" />
+        <span className="text-xs font-bold tracking-wider uppercase">
+          Verifying Security...
+        </span>
+      </div>
     </div>
   ),
-});
+}) as React.ComponentType<
+  React.ComponentProps<typeof ReCAPTCHA_Type> &
+    React.RefAttributes<ReCAPTCHA_Type>
+>;
 
 interface FormModalProps {
   isOpen: boolean;
@@ -49,7 +55,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     e.preventDefault();
 
     if (!captchaValue) {
-      setErrorMsg("Please complete the reCAPTCHA.");
+      setErrorMsg("Please complete the security verification.");
       setSubmitStatus("error");
       return;
     }
@@ -92,7 +98,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     } catch (error) {
       console.error(error);
       setErrorMsg(
-        "Failed to connect to the server. Please check your network.",
+        "Failed to connect to the server. Please check your network connection.",
       );
       setSubmitStatus("error");
     } finally {
@@ -173,7 +179,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-              onChange={(val) => setCaptchaValue(val)}
+              onChange={(val: string | null) => setCaptchaValue(val)}
             />
           )}
         </div>
@@ -210,7 +216,14 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
                 : "bg-brand-secondary hover:bg-brand-primary hover:shadow-lg text-white"
             }`}
           >
-            {isSubmitting ? "Sending..." : "Start Learning"}
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              "Start Learning"
+            )}
 
             {!isSubmitting && (
               <svg

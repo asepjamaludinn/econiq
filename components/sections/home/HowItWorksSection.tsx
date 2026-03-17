@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { stepsData } from "@/constants";
 import { useHowItWorksAnimations } from "@/hooks/useHowItWorksAnimations";
@@ -19,6 +19,8 @@ export default function HowItWorksSection() {
     pinWrapperRef,
     imageRef,
   );
+
+  const ActiveMobileIcon = stepsData[activeMobileStep].Icon;
 
   return (
     <section
@@ -60,7 +62,6 @@ export default function HowItWorksSection() {
           className="w-full max-w-6xl relative z-20 text-left"
         >
           <div className="hidden lg:grid grid-cols-2 gap-20 items-center">
-            {/* KOLOM KIRI (Teks) */}
             <div className="relative flex flex-col gap-10 w-full pt-4">
               <div className="absolute left-[28px] top-[calc(2.5rem+1.25rem)] h-[calc(100%-120px)] w-[1px] -translate-x-1/2 bg-white/20 z-0" />
               <div className="line-progress absolute left-[28px] top-14 h-[calc(100%-120px)] w-[1px] -translate-x-1/2 bg-white z-[5] origin-top scale-y-0" />
@@ -90,22 +91,25 @@ export default function HowItWorksSection() {
 
             {/* KOLOM KANAN  */}
             <div className="relative w-full h-[400px] lg:h-[500px]">
-              {stepsData.map((step, index) => (
-                <div
-                  key={index}
-                  className="desktop-image-slide absolute inset-0 flex flex-col items-center justify-center px-6"
-                >
-                  {React.createElement(step.Icon)}
-                </div>
-              ))}
+              {stepsData.map((step, index) => {
+                const DesktopStepIcon = step.Icon;
+
+                return (
+                  <div
+                    key={index}
+                    className="desktop-image-slide absolute inset-0 flex flex-col items-center justify-center px-6"
+                  >
+                    <DesktopStepIcon />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Mobile dan Tab */}
           <div className="flex lg:hidden flex-col w-full relative z-20 px-2 md:px-8">
             <div className="w-full max-w-3xl mx-auto flex flex-col">
               <div className="w-full flex justify-center items-center min-h-[250px] sm:min-h-[350px] md:min-h-[450px] mb-6 sm:mb-8 md:mb-12 transition-all duration-500 ease-in-out">
-                {React.createElement(stepsData[activeMobileStep].Icon)}
+                <ActiveMobileIcon />
               </div>
 
               <div className="flex items-center justify-between w-full mb-4 sm:mb-6 md:mb-8 border-b border-white/20 pb-4 md:pb-6 gap-1.5 sm:gap-3">

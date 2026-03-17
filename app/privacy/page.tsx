@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ShieldCheck } from "lucide-react";
 import { privacyPolicyData, companyInfo } from "@/constants";
+import parse from "html-react-parser";
 
 export default function PrivacyPolicy() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,7 +60,6 @@ export default function PrivacyPolicy() {
           </p>
         </div>
 
-        {/* Content Section Dinamis */}
         <div className="flex flex-col gap-10 md:gap-12">
           {privacyPolicyData.sections.map((section) => (
             <section key={section.id} className="privacy-content">
@@ -67,15 +67,14 @@ export default function PrivacyPolicy() {
                 {section.title}
               </h2>
 
-              <p
-                className="text-zinc-600 leading-relaxed text-base md:text-lg mb-4"
-                dangerouslySetInnerHTML={{
-                  __html: section.content.replace(
+              <div className="text-zinc-600 leading-relaxed text-base md:text-lg mb-4">
+                {parse(
+                  section.content.replace(
                     /\*\*(.*?)\*\*/g,
                     '<strong class="text-brand-secondary">$1</strong>',
                   ),
-                }}
-              />
+                )}
+              </div>
 
               {section.list && (
                 <ul className="list-disc pl-6 text-zinc-600 space-y-2 text-base md:text-lg">
@@ -92,7 +91,6 @@ export default function PrivacyPolicy() {
                 </ul>
               )}
 
-              {/* Render Email Section khusus untuk id 'contact-us' */}
               {section.id === "contact-us" && (
                 <div className="bg-brand-light p-6 rounded-2xl border border-brand-muted">
                   <p className="text-foreground font-bold text-lg mb-1">

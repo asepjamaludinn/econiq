@@ -4,6 +4,7 @@ import { articlesData } from "@/constants";
 import { Facebook, Youtube, Instagram, Twitter } from "lucide-react";
 import ContentCTA from "@/components/sections/content/ContentCTA";
 import SimilarArticles from "@/components/sections/content/SimilarArticles";
+import parse from "html-react-parser";
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -32,7 +33,6 @@ export default async function ArticleDetailPage(props: {
 
   if (!article) return notFound();
 
-  // Logika pencarian artikel serupa
   const otherArticles = articlesData.filter((a) => a.id !== article.id);
   const relatedByTopic = otherArticles.filter((a) => a.topic === article.topic);
   const remainingArticles = otherArticles.filter(
@@ -161,11 +161,11 @@ export default async function ArticleDetailPage(props: {
                 [&>strong]:text-foreground [&>strong]:font-semibold [&>em]:text-zinc-800
                 [&>div]:w-full [&>div]:overflow-x-auto
                 [&_table]:w-full [&_table]:min-w-[600px] lg:[&_table]:min-w-full"
-              dangerouslySetInnerHTML={{
-                __html:
-                  article.content || "<p>Konten artikel belum tersedia.</p>",
-              }}
-            />
+            >
+              {parse(
+                article.content || "<p>Konten artikel belum tersedia.</p>",
+              )}
+            </div>
           </div>
         </div>
       </article>
