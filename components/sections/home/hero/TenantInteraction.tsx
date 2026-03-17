@@ -62,6 +62,7 @@ export default function TenantInteraction() {
           alt="Tenant"
           fill
           className="object-contain object-bottom"
+          priority
         />
       </div>
 
@@ -92,6 +93,7 @@ export default function TenantInteraction() {
             alt="Atap"
             fill
             className="object-contain object-top"
+            priority
           />
         </div>
       </div>
@@ -130,6 +132,7 @@ export default function TenantInteraction() {
             alt="Penutup"
             fill
             className="object-contain object-top"
+            priority
           />
         </div>
       </div>

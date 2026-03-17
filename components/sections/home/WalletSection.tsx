@@ -29,7 +29,7 @@ export default function WalletSection() {
     <div ref={wrapperRef} className="relative xl:static w-full">
       <div
         ref={dompetRef}
-        className="absolute left-[30%] -top-[120px] md:-top-[170px] xl:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
+        className="absolute left-[30%] -top-[135px] md:-top-[170px] xl:top-[79vh] z-100 w-[100px] h-[100px] flex items-center justify-center pointer-events-none"
       >
         <div className="hidden xl:flex absolute inset-0 w-full h-full items-center justify-center">
           {walletAssetsData.map((src, i) => (
@@ -100,7 +100,7 @@ export default function WalletSection() {
               alt={`Asset Web3 Mobile ${i}`}
               width={200}
               height={200}
-              className="absolute top-0 w-[100px] md:w-[160px] lg:w-[180px] object-contain z-90"
+              className="absolute top-0 w-[100px] md:w-[160px] lg:w-[180px] object-contain z-90 opacity-0"
               style={{ height: "auto" }}
             />
           ))}

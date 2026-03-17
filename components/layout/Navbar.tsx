@@ -181,6 +181,22 @@ export default function Navbar() {
                 priority
               />
             </div>
+
+            {/* Icon Envelope untuk Mobile & Tablet dikanan Logo */}
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation(); // Mencegah ter-trigger-nya onClick menu dropdown
+                openFormModal();
+              }}
+              className="lg:hidden z-30 group flex items-center justify-center p-1 -mr-1 cursor-pointer"
+            >
+              <div className="relative flex items-center justify-center w-[22px] h-[18px] pointer-events-none">
+                <EnvelopeIcon />
+              </div>
+            </div>
           </button>
 
           <div ref={menuListRef} className="h-0 opacity-0 hidden pb-12 lg:pb-3">

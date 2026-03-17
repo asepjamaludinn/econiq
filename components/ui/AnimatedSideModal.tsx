@@ -29,6 +29,12 @@ export default function AnimatedSideModal({
   const [isHoveringOverlay, setIsHoveringOverlay] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
 
+  const [isDesktopEnvironment, setIsDesktopEnvironment] = useState(false);
+
+  useEffect(() => {
+    setIsDesktopEnvironment(window.matchMedia("(pointer: fine)").matches);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -79,7 +85,7 @@ export default function AnimatedSideModal({
   }, [isOpen, lenis]);
 
   useEffect(() => {
-    if (isOpen && customCursorRef.current) {
+    if (isOpen && customCursorRef.current && isDesktopEnvironment) {
       gsap.set(customCursorRef.current, { xPercent: -50, yPercent: -50 });
 
       const xTo = gsap.quickTo(customCursorRef.current, "x", {
@@ -126,8 +132,7 @@ export default function AnimatedSideModal({
         window.removeEventListener("mouseup", handleMouseUp);
       };
     }
-  }, [isOpen]);
-
+  }, [isOpen, isDesktopEnvironment]);
   useEffect(() => {
     if (!isOpen || !modalRef.current) return;
 
@@ -167,32 +172,45 @@ export default function AnimatedSideModal({
 
   return (
     <>
+      {/* Overlay */}
       <div
         ref={overlayRef}
         onClick={onClose}
         onMouseEnter={() => setIsHoveringOverlay(true)}
         onMouseLeave={() => setIsHoveringOverlay(false)}
-        className="fixed inset-0 bg-black/50 z-[900] opacity-0 pointer-events-none cursor-none"
+        className={`fixed inset-0 bg-black/50 z-[900] opacity-0 pointer-events-none ${
+          isDesktopEnvironment ? "cursor-none" : ""
+        }`}
         aria-hidden="true"
       />
 
-      <div
-        ref={customCursorRef}
-        className="fixed top-0 left-0 z-[950] pointer-events-none flex items-center justify-center"
-        aria-hidden="true"
-      >
+      {/* Custom Cursor */}
+      {isDesktopEnvironment && (
         <div
-          className={`transition-all duration-300 ease-out ${isHoveringOverlay && isOpen ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
+          ref={customCursorRef}
+          className="fixed top-0 left-0 z-[950] pointer-events-none flex items-center justify-center"
+          aria-hidden="true"
         >
           <div
-            ref={cursorIconRef}
-            className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shadow-[0_8px_20px_rgba(134,68,247,0.4)] transition-colors duration-200 ${isMouseDown ? "bg-brand-primary" : "bg-brand-secondary"}`}
+            className={`transition-all duration-300 ease-out ${
+              isHoveringOverlay && isOpen
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-50"
+            }`}
           >
-            <X size={20} strokeWidth={2.5} />
+            <div
+              ref={cursorIconRef}
+              className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shadow-[0_8px_20px_rgba(134,68,247,0.4)] transition-colors duration-200 ${
+                isMouseDown ? "bg-brand-primary" : "bg-brand-secondary"
+              }`}
+            >
+              <X size={20} strokeWidth={2.5} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
+      {/* Modal Content */}
       <div
         ref={modalRef}
         role="dialog"

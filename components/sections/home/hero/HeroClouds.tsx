@@ -29,8 +29,14 @@ export default function HeroClouds() {
       "/images/awan4.svg",
     ];
 
+    const isMobile = window.innerWidth < 768;
+
+    const maxClouds = isMobile
+      ? Math.floor(Math.random() * 2) + 2
+      : Math.floor(Math.random() * 5) + 6;
+
     const generatedClouds = Array.from({
-      length: Math.floor(Math.random() * 5) + 6,
+      length: maxClouds,
     }).map((_, i) => ({
       id: i,
       src: awanImages[Math.floor(Math.random() * awanImages.length)],
