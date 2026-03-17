@@ -20,7 +20,7 @@ const contentWeb3Basics = `
   
   <p><strong>3. Web Semantik dan AI</strong><br/>Web 3.0 mengintegrasikan kecerdasan buatan dan web semantik agar mesin bisa memahami konteks dan makna dari informasi. Ini membuat pengalaman pengguna menjadi lebih personal dan efisien.</p>
 
-  <img src="/images/content/web3-gallery.WEBP" alt="Ilustrasi Desentralisasi Web3" />
+  <img src="/images/content/web3-gallery.webp" alt="Ilustrasi Desentralisasi Web3" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Visualisasi arsitektur jaringan desentralisasi</p>
 
   <h3>Karakteristik dan Manfaat Web 3.0</h3>
@@ -65,7 +65,7 @@ const contentBlockchain = `
     <li><strong>6. Transaksi Selesai:</strong> Transaksi selesai dan datanya tersimpan secara permanen. Siapa pun dapat melacak dan mengonfirmasi transaksi tersebut.</li>
   </ul>
 
-  <img src="/images/content/blockchain-gallery.JPG" alt="Cara Kerja Blok dan Rantai Kriptografi" />
+  <img src="/images/content/blockchain-gallery.jpg" alt="Cara Kerja Blok dan Rantai Kriptografi" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Visualisasi cara kerja blockchain dan kriptografi</p>
 
   <h3>Contoh Kasus: Jack dan Phil</h3>
@@ -114,7 +114,7 @@ const contentWallet = `
     <li><strong>Memantau Saldo:</strong> Menampilkan jumlah aset kripto yang dimiliki berdasarkan catatan data asli dari blockchain.</li>
   </ul>
   
-  <img src="/images/content/wallet-gallery.JPG" alt="Antarmuka Crypto Wallet" />
+  <img src="/images/content/wallet-gallery.jpg" alt="Antarmuka Crypto Wallet" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Visualisasi antarmuka dompet kripto</p>
 
   <h3>Jenis Dompet: Hot Wallet vs Cold Wallet</h3>
@@ -219,7 +219,7 @@ const contentEvolusi = `
     <li><strong>Aset Kripto & NFT:</strong> Representasi nilai dan bukti sah kepemilikan suatu aset di dunia digital.</li>
   </ul>
 
-  <img src="/images/content/evolution-gallery.JPG" alt="Perbandingan Evolusi Internet" />
+  <img src="/images/content/evolution-gallery.jpg" alt="Perbandingan Evolusi Internet" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Visualisasi pergeseran arsitektur internet</p>
 
   <h3>Perbandingan Utama Era Internet</h3>
@@ -282,7 +282,7 @@ const contentSecurity = `
     <li><strong>Phishing:</strong> Situs palsu yang menyerupai layanan resmi dapat menipu Anda untuk memberikan akses penuh ke aset Anda.</li>
   </ul>
 
-  <img src="/images/content/security-gallery.JPG" alt="Ilustrasi Keamanan Siber dan Enkripsi" />
+  <img src="/images/content/security-gallery.jpg" alt="Ilustrasi Keamanan Siber dan Enkripsi" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Kriptografi kuat harus dibarengi dengan kewaspadaan pengguna.</p>
 
   <h3>Mitos 2: "Semua Transaksi di Blockchain Bersifat Anonim"</h3>
@@ -329,7 +329,7 @@ const contentGreen = `
   
   <p>Karena para penambang (<em>miners</em>) selalu ingin menekan biaya operasional demi keuntungan maksimal, mereka kerap mencari sumber listrik termurah. Sayangnya, energi termurah ini sering kali berasal dari pembangkit listrik berbahan bakar fosil.</p>
 
-  <img src="/images/content/green-gallery.JPG" alt="Ilustrasi Teknologi Hijau dan Ramah Lingkungan" />
+  <img src="/images/content/green-gallery.jpg" alt="Ilustrasi Teknologi Hijau dan Ramah Lingkungan" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Inovasi Web3 menuju pelestarian lingkungan</p>
 
   <h3>Solusi Menuju Net-Zero Emissions</h3>
@@ -370,7 +370,7 @@ const contentSmartContract = `
   <h3>Logika Sederhana: "If-This-Then-That"</h3>
   <p>Smart Contract bekerja dengan logika pemrograman dasar: <em>"Jika kondisi X terpenuhi, maka lakukan tindakan Y."</em> Karena kode ini ditanam di blockchain, kontrak tersebut bersifat transparan, otomatis, dan yang paling penting adalah <strong>Immutable</strong>—tidak dapat diubah atau dibatalkan oleh siapa pun setelah diterbitkan.</p>
   
-  <img src="/images/content/smart-contract-gallery.PNG" alt="Visualisasi Logika Eksekusi Smart Contract" />
+  <img src="/images/content/smart-contract-gallery.png" alt="Visualisasi Logika Eksekusi Smart Contract" />
   <p style="text-align: center; font-size: 0.875rem; color: #71717a; margin-top: -1.5rem;">Automasi transaksi tanpa perantara melalui kode kriptografi.</p>
 
   <h3>Siklus Hidup Pembuatan Smart Contract</h3>
@@ -419,7 +419,7 @@ export const articlesData: ArticleData[] = [
     topic: "Web3 Basics",
     readTime: "5 min read",
     date: "Sep 01, 2025",
-    thumbnail: "/images/content/web3-basics.JPG",
+    thumbnail: "/images/content/web3-basics.jpg",
     slug: "/content/apa-itu-web3",
     featured: true,
     authorName: "Asep Jamaludin",
@@ -434,7 +434,7 @@ export const articlesData: ArticleData[] = [
     topic: "Technology",
     readTime: "5 min read",
     date: "Sep 03, 2025",
-    thumbnail: "/images/content/blockchain.JPG",
+    thumbnail: "/images/content/blockchain.jpg",
     slug: "/content/apa-itu-blockchain",
     authorName: "Muh. Lazuardi",
     authorAvatar: "/images/lazz.png",
@@ -448,7 +448,7 @@ export const articlesData: ArticleData[] = [
     topic: "Wallet",
     readTime: "7 min read",
     date: "Sep 07, 2025",
-    thumbnail: "/images/content/wallet.JPG",
+    thumbnail: "/images/content/wallet.jpg",
     slug: "/content/crypto-wallet",
     authorName: "Asep Jamaludin",
     authorAvatar: "/images/sepp.png",
@@ -462,7 +462,7 @@ export const articlesData: ArticleData[] = [
     topic: "History",
     readTime: "6 min read",
     date: "Sep 18, 2025",
-    thumbnail: "/images/content/evolusi.JPG",
+    thumbnail: "/images/content/evolusi.jpg",
     slug: "/content/evolusi-internet",
     authorName: "Muh. Lazuardi",
     authorAvatar: "/images/lazz.png",
@@ -476,7 +476,7 @@ export const articlesData: ArticleData[] = [
     topic: "Security",
     readTime: "6 min read",
     date: "Sep 15, 2025",
-    thumbnail: "/images/content/security.JPG",
+    thumbnail: "/images/content/security.jpg",
     slug: "/content/mitos-fakta-wallet",
     authorName: "Asep Jamaludin",
     authorAvatar: "/images/sepp.png",
@@ -490,7 +490,7 @@ export const articlesData: ArticleData[] = [
     topic: "Environment",
     readTime: "5 min read",
     date: "Sep 08, 2025",
-    thumbnail: "/images/content/green.JPG",
+    thumbnail: "/images/content/green.jpg",
     slug: "/content/green-blockchain",
     authorName: "Muh. Lazuardi",
     authorAvatar: "/images/lazz.png",
@@ -504,7 +504,7 @@ export const articlesData: ArticleData[] = [
     topic: "Development",
     readTime: "5 min read",
     date: "Sep 20, 2025",
-    thumbnail: "/images/content/smart-contract.JPG",
+    thumbnail: "/images/content/smart-contract.jpg",
     slug: "/content/panduan-smart-contract",
     authorName: "Asep Jamaludin",
     authorAvatar: "/images/sepp.png",

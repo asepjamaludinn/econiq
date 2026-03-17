@@ -58,7 +58,7 @@ export default function SimilarArticles({ articles }: SimilarArticlesProps) {
       <div className="mt-10 block md:hidden">
         <Link
           href="/content"
-          className="block w-full text-center py-4 rounded-xl border border-zinc-200 text-foreground font-medium tracking-tight hover:border-brand-primary hover:text-brand-primary transition-colors"
+          className="block w-full text-center py-4 rounded-xl bg-brand-primary text-white font-medium tracking-tight shadow-[0_8px_25px_rgba(102,13,255,0.25)] hover:bg-brand-dark hover:shadow-[0_12px_30px_rgba(102,13,255,0.35)] hover:-translate-y-1 transition-all duration-300 active:scale-[0.98]"
         >
           View all articles
         </Link>
