@@ -33,14 +33,12 @@ export default function HowItWorksSection() {
         width={400}
         height={400}
         className="absolute left-0 top-[10%] md:top-[30%] -translate-y-1/2 w-48 md:w-80 lg:w-96 h-auto z-30 pointer-events-none transform-gpu"
-        style={{ willChange: "transform, opacity" }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center mt-10 md:mt-20">
         <div
           ref={textContainerRef}
           className="relative z-10 flex flex-col items-center text-center px-4 mb-16 md:mb-24"
-          style={{ willChange: "transform" }}
         >
           <h2 className="w-full px-2 text-center text-[clamp(34px,10vw,70px)] md:text-[clamp(50px,7vw,100px)] lg:text-[clamp(70px,7.5vw,120px)] xl:text-[clamp(90px,8vw,140px)] font-black uppercase tracking-tighter leading-[1.05] relative z-20 text-white">
             <div

@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function WalkingMan() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const [isInView, setIsInView] = useState(false);
 
   useGSAP(
     () => {
@@ -29,6 +31,24 @@ export default function WalkingMan() {
     { scope: containerRef },
   );
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "100px",
+      },
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -37,7 +57,13 @@ export default function WalkingMan() {
       <div className="orang-jalan absolute bottom-[4%] md:bottom-[10%] left-0 pointer-events-none">
         <div className="w-[300px] md:w-[400px] flex flex-col justify-end items-center translate-y-[15%] relative">
           <div className="relative w-full aspect-square z-10">
-            <DotLottieReact src="/animations/man walking.json" loop autoplay />
+            {isInView && (
+              <DotLottieReact
+                src="/animations/man walking.json"
+                loop
+                autoplay
+              />
+            )}
           </div>
           <div
             className="absolute z-0"

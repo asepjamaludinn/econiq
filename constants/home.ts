@@ -32,7 +32,7 @@ export const walletAssetsData: string[] = [
   "/images/card.svg",
   "/images/BitCoin.svg",
   "/images/kalung.svg",
-  "/images/Dolar.svg",
+  "/images/Dolar.webp",
   "/images/75Rp.svg",
   "/images/gelang.svg",
 ];
@@ -72,19 +72,19 @@ export const stepsData: StepData[] = [
 
 export const marketingImages: ImageData[] = [
   {
-    src: "/images/feed1.svg",
+    src: "/images/feed1.webp",
     alt: "Feed 1",
     positionClasses:
       "top-[2%] md:top-[8%] lg:top-[12%] left-[-5%] md:left-[2%] lg:left-[5%] w-[180px] md:w-[280px] lg:w-[320px] -rotate-[12deg]",
   },
   {
-    src: "/images/feed2.svg",
+    src: "/images/feed2.webp",
     alt: "Feed 2",
     positionClasses:
       "bottom-[8%] md:bottom-[3%] lg:bottom-[8%] left-[10%] md:left-[0%] lg:left-[20%] w-[160px] md:w-[250px] lg:w-[200px] rotate-[6deg]",
   },
   {
-    src: "/images/feed3.svg",
+    src: "/images/feed3.webp",
     alt: "Feed 3",
     positionClasses:
       "top-[15%] md:top-[10%] lg:top-[18%] right-[-5%] md:-right-[5%] lg:right-[5%] w-[180px] md:w-[280px] lg:w-[280px] rotate-[15deg]",

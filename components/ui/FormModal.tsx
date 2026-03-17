@@ -3,8 +3,20 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
+import dynamic from "next/dynamic";
 import AnimatedSideModal from "./AnimatedSideModal";
+import type ReCAPTCHA_Type from "react-google-recaptcha";
+
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[78px] bg-zinc-100 animate-pulse rounded-md border border-zinc-200 flex items-center justify-center">
+      <span className="text-sm font-medium text-zinc-400">
+        Loading anti-spam...
+      </span>
+    </div>
+  ),
+});
 
 interface FormModalProps {
   isOpen: boolean;
@@ -12,7 +24,7 @@ interface FormModalProps {
 }
 
 export default function FormModal({ isOpen, onClose }: FormModalProps) {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<ReCAPTCHA_Type>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -156,12 +168,14 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </label>
         </div>
 
-        <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100">
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-            onChange={(val) => setCaptchaValue(val)}
-          />
+        <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100 min-h-[78px]">
+          {isOpen && (
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(val) => setCaptchaValue(val)}
+            />
+          )}
         </div>
 
         {submitStatus === "success" && (
