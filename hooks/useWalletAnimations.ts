@@ -195,7 +195,7 @@ export const useWalletAnimations = (
               ease: "power2.in",
             },
           ],
-          stagger: 0.15,
+          stagger: 0.6,
         });
 
         ScrollTrigger.create({
