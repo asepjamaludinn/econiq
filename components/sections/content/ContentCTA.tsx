@@ -54,19 +54,19 @@ export default function ContentCTA() {
         </div>
 
         <h2 className="relative z-10 text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] mb-6 max-w-3xl drop-shadow-md">
-          Never Miss a Digital Shift
+          Jangan Lewatkan Perkembangan Digital
         </h2>
 
-        <p className="relative z-10 text-lg md:text-xl text-white/90 font-light mb-10 max-w-2xl leading-relaxed">
-          Stay ahead of the curve. Get our latest Web3 insights, market
-          deep-dives, and tech news delivered straight to your inbox every week.
+        <p className="relative z-10 text-lg md:text-xl text-white/90 font-light mb-10 max-w-3xl leading-relaxed">
+          Dapatkan insight Web3 dan tren keuangan digital langsung ke email
+          Anda.
         </p>
 
         <button
           onClick={openFormModal}
           className="relative z-10 group bg-white text-brand-primary px-10 py-5 rounded-2xl font-bold text-lg md:text-xl shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
         >
-          Subscribe to Newsletter
+          Berlangganan Informasi
         </button>
       </div>
     </section>

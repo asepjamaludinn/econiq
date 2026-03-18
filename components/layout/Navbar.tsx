@@ -2,16 +2,16 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import gsap from "gsap";
 import ContactModal from "@/components/ui/ContactModal";
 import FormModal from "@/components/ui/FormModal";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { IconMenuOpen } from "@/components/icons/IconMenuOpen";
-import { companyInfo } from "@/constants";
 import { useModalStore } from "@/store/useModalStore";
+import { useNavbarAnimations } from "@/hooks/useNavbarAnimations";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +49,8 @@ export default function Navbar() {
   const currentDotY =
     targetIndex !== -1 ? dotStartOffset + targetIndex * itemHeight : 0;
 
+  useNavbarAnimations(isOpen, menuListRef, overlayRef);
+
   const handleMouseEnter = () => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -70,74 +72,8 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    const isMobileOrTablet =
-      typeof window !== "undefined" && window.innerWidth < 1024;
-
-    if (isOpen) {
-      if (isMobileOrTablet) {
-        document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
-      }
-
-      if (menuListRef.current) {
-        gsap.to(menuListRef.current, {
-          height: "auto",
-          opacity: 1,
-          duration: 0.4,
-          ease: "power3.out",
-          display: "block",
-        });
-        gsap.fromTo(
-          ".nav-item-content",
-          { y: -5, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.3,
-            stagger: 0.05,
-            ease: "power2.out",
-            delay: 0.1,
-          },
-        );
-      }
-
-      if (overlayRef.current && isMobileOrTablet) {
-        gsap.to(overlayRef.current, {
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.out",
-          display: "block",
-        });
-      }
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-
-      if (menuListRef.current) {
-        gsap.to(menuListRef.current, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.in",
-          display: "none",
-        });
-      }
-
-      if (overlayRef.current) {
-        gsap.to(overlayRef.current, {
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.in",
-          display: "none",
-        });
-      }
-    }
-  }, [isOpen]);
-
   const handleMenuClick = (action: string | null) => {
     setIsOpen(false);
-
     if (action === "contact-modal") openContactModal();
   };
 
@@ -165,7 +101,6 @@ export default function Navbar() {
                 isOpen={isOpen}
                 className="w-8 lg:w-6 h-4 pointer-events-none z-30"
               />
-
               <span className="hidden lg:block text-white font-normal text-base tracking-tight z-20 pointer-events-none">
                 Menu
               </span>
@@ -182,13 +117,12 @@ export default function Navbar() {
               />
             </div>
 
-            {/* Icon Envelope untuk Mobile & Tablet dikanan Logo */}
             <div
               role="button"
               tabIndex={0}
               onClick={(e) => {
                 e.preventDefault();
-                e.stopPropagation(); // Mencegah ter-trigger-nya onClick menu dropdown
+                e.stopPropagation();
                 openFormModal();
               }}
               className="lg:hidden z-30 group flex items-center justify-center p-1 -mr-1 cursor-pointer"
@@ -200,89 +134,30 @@ export default function Navbar() {
           </button>
 
           <div ref={menuListRef} className="h-0 opacity-0 hidden pb-12 lg:pb-3">
-            <div className="relative flex flex-col mt-2 lg:mt-0 gap-0">
-              <div
-                className="hidden lg:block absolute left-[31px] w-[2px] bg-white rounded-full transition-all duration-300 ease-out"
-                style={{ top: "-12px", height: `calc(${currentDotY}px - 0px)` }}
-              />
-              <div
-                className="hidden lg:block absolute left-[31px] w-[2px] bg-white rounded-full transition-all duration-300 ease-out"
-                style={{ top: `calc(${currentDotY}px + 14px)`, bottom: "8px" }}
-              />
-              <div
-                className={`hidden lg:block absolute left-[28px] w-2 h-2 bg-white rounded-full transition-all duration-300 ease-out z-20 pointer-events-none ${targetIndex === -1 ? "opacity-0" : "opacity-100"}`}
-                style={{ transform: `translateY(${currentDotY}px)` }}
-              />
+            <DesktopMenu
+              navLinks={navLinks}
+              targetIndex={targetIndex}
+              currentDotY={currentDotY}
+              handleMenuClick={handleMenuClick}
+              setHoverIndex={setHoverIndex}
+            />
 
-              <div className="lg:hidden w-full flex justify-center mb-8 mt-1 nav-item-content pointer-events-none">
-                <span className="border border-white/20 text-white/80 rounded-full px-4 py-1 text-[10px] font-normal tracking-tight">
-                  Explore Eqonic
-                </span>
-              </div>
-
-              {navLinks.map((link, idx) => {
-                const isTargeted = targetIndex === idx;
-                return link.action ? (
-                  <button
-                    key={idx}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleMenuClick(link.action);
-                    }}
-                    onMouseEnter={() => setHoverIndex(idx)}
-                    onMouseLeave={() => setHoverIndex(null)}
-                    className="nav-item-content cursor-pointer group flex items-center justify-center lg:justify-start px-5 h-12 lg:h-8 mb-4 lg:mb-0 w-full bg-transparent border-none outline-none transition-colors relative z-10 text-center lg:text-left"
-                  >
-                    <div className="hidden lg:block w-6" />
-                    <span
-                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${isTargeted ? "text-white" : "text-white/60 group-hover:text-white"}`}
-                    >
-                      {link.name}
-                    </span>
-                  </button>
-                ) : (
-                  <Link
-                    key={idx}
-                    href={link.href}
-                    onClick={() => handleMenuClick(null)}
-                    onMouseEnter={() => setHoverIndex(idx)}
-                    onMouseLeave={() => setHoverIndex(null)}
-                    className="nav-item-content cursor-pointer group flex items-center justify-center lg:justify-start px-5 h-12 lg:h-8 mb-4 lg:mb-0 w-full transition-colors relative z-10 no-underline text-center lg:text-left"
-                  >
-                    <div className="hidden lg:block w-6" />
-                    <span
-                      className={`lg:ml-3.5 text-[30px] lg:text-[14px] font-medium lg:font-normal tracking-tight transition-colors duration-300 ${isTargeted ? "text-white" : "text-white/60 group-hover:text-white"}`}
-                    >
-                      {link.name}
-                    </span>
-                  </Link>
-                );
-              })}
-
-              <div className="lg:hidden flex flex-wrap items-center justify-center gap-3 mt-10 nav-item-content w-full px-5">
-                {companyInfo.socials.map((social) => {
-                  const Icon = social.Icon;
-                  return (
-                    <Link
-                      key={social.id}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white text-brand-primary w-7 h-7 flex justify-center items-center rounded-full hover:scale-110 transition-transform duration-300 shadow-sm"
-                      aria-label={social.name}
-                    >
-                      <Icon size={18} />
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
+            <MobileMenu
+              navLinks={navLinks}
+              targetIndex={targetIndex}
+              handleMenuClick={handleMenuClick}
+              setHoverIndex={setHoverIndex}
+            />
           </div>
         </div>
 
         {pathname !== "/" && (
           <div
-            className={`pointer-events-auto absolute lg:relative right-0 lg:right-auto top-0 transition-all duration-300 hidden lg:block ${isOpen ? "opacity-0 scale-90 pointer-events-none lg:-translate-x-4" : "opacity-100 scale-100 lg:translate-x-0"}`}
+            className={`pointer-events-auto absolute lg:relative right-0 lg:right-auto top-0 transition-all duration-300 hidden lg:block ${
+              isOpen
+                ? "opacity-0 scale-90 pointer-events-none lg:-translate-x-4"
+                : "opacity-100 scale-100 lg:translate-x-0"
+            }`}
           >
             <button
               onClick={() => router.back()}

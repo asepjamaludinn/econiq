@@ -44,7 +44,7 @@ export default function FeaturedArticle() {
       className="relative w-full pt-28 md:pt-36 lg:pt-40 pb-16 md:pb-20 px-5 md:px-6 lg:px-10 bg-white selection:bg-brand-secondary selection:text-white"
     >
       <h1 className="feat-text opacity-0 w-full text-center md:text-left lg:text-left text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-12 md:mb-12 tracking-tight">
-        News & Articles
+        Berita & Artikel
       </h1>
 
       <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-10">
@@ -68,7 +68,7 @@ export default function FeaturedArticle() {
 
         <div className="w-full lg:w-1/2 flex flex-col justify-between py-2 md:py-4">
           <div className="feat-text opacity-0 text-black font-normal text-sm md:text-md tracking-tight mb-6 lg:mb-0">
-            Published on {featured.date}
+            Dipublikasikan pada {featured.date}
           </div>
 
           <div className="flex flex-col max-w-full lg:max-w-[85%]">

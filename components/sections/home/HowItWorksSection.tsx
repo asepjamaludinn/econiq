@@ -48,10 +48,10 @@ export default function HowItWorksSection() {
               style={{ perspective: "1000px" }}
             >
               <div className="text-line text-line-1 block transform-gpu md:whitespace-nowrap">
-                Navigate Your
+                Navigasi Perjalanan
               </div>
               <div className="text-line text-line-2 block transform-gpu md:whitespace-nowrap">
-                Financial Journey
+                Finansialmu
               </div>
             </div>
           </h2>

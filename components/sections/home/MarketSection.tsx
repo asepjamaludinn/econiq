@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import { marketingImages, locationImages, teamImages } from "@/constants";
 import { useMarketAnimations } from "@/hooks/useMarketAnimations";
 import SliderControls from "@/components/ui/SliderControls";
+import MarketSlide from "@/components/ui/MarketSlide";
 
 export default function MarketingSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -45,100 +45,50 @@ export default function MarketingSection() {
       className="relative w-full h-[100vh] bg-gradient-to-t from-grad-start to-brand-tertiary text-white overflow-hidden z-[140] -mt-[5vw]"
       style={{ willChange: "transform" }}
     >
-      <div className="marketing-wrapper absolute inset-0 w-full h-full flex items-center justify-center max-w-[1600px] mx-auto pointer-events-none pb-12 lg:pb-0">
-        <div className="marketing-images-container absolute inset-0 z-10">
-          {marketingImages.map((image, index) => (
-            <div
-              key={`marketing-img-${index}`}
-              className={`absolute ${image.positionClasses} flex items-center justify-center`}
-            >
-              <div
-                className="zoom-image-wrapper opacity-0 relative w-full aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-2xl overflow-hidden"
-                style={{ willChange: "transform, opacity" }}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  aria-hidden="true"
-                  fill
-                  className="object-contain object-center"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          ref={textContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
-        >
-          <div className="marketing-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
-            <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
-              Global Awareness
-            </span>
-          </div>
+      <MarketSlide
+        textRef={textContainerRef}
+        images={marketingImages}
+        wrapperClassName="marketing-wrapper pointer-events-none"
+        imageContainerClassName="marketing-images-container absolute inset-0 z-10"
+        imageWrapperClassName="zoom-image-wrapper aspect-square md:aspect-[4/5] drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] rounded-2xl"
+        imageClassName="object-contain object-center"
+        badgeClassName="marketing-badge"
+        badgeText="KESADARAN GLOBAL"
+        titleContent={
           <h1 className="w-full px-2 md:px-4 text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] mb-4 md:mb-6">
             <div className="block w-full" style={{ perspective: "1000px" }}>
               <div
                 className="market-text-line market-text-line-1 block transform-gpu lg:whitespace-nowrap opacity-0"
                 style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
               >
-                Empowering Through
+                Memberdayakan Lewat
               </div>
               <div
                 className="market-text-line market-text-line-2 block transform-gpu lg:whitespace-nowrap opacity-0"
                 style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
               >
-                Knowledge
+                Pengetahuan
               </div>
             </div>
           </h1>
+        }
+        subtexts={[
+          "Memimpin gerakan literasi keuangan Web3 secara global.",
+          "Menjembatani kesenjangan antara teknologi dan masyarakat.",
+        ]}
+        subtextClassName="market-subtext-p"
+        subtextWrapperClassName="marketing-subtext lg:max-w-lg"
+      />
 
-          <div className="marketing-subtext flex flex-col items-center w-full max-w-sm lg:max-w-lg transform-gpu">
-            <p className="market-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              Leading the movement for Web3 financial literacy worldwide.
-            </p>
-            <p className="market-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              Bridging the gap between technology and the community.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. LOCATION SLIDE */}
-      <div className="location-wrapper absolute inset-0 w-full h-full flex items-center justify-center max-w-[1600px] mx-auto opacity-0 pointer-events-none pb-12 lg:pb-0">
-        <div className="location-images-container absolute inset-0 z-10">
-          {locationImages.map((image, index) => (
-            <div
-              key={`location-img-${index}`}
-              className={`absolute ${image.positionClasses} flex items-center justify-center`}
-            >
-              <div
-                className="location-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transform-gpu rounded-full overflow-hidden border-2 border-white/20"
-                style={{ willChange: "transform, opacity" }}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  aria-hidden="true"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          ref={locationTextContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
-        >
-          <div className="location-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
-            <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
-              Community Network
-            </span>
-          </div>
-
+      <MarketSlide
+        textRef={locationTextContainerRef}
+        images={locationImages}
+        wrapperClassName="location-wrapper opacity-0 pointer-events-none"
+        imageContainerClassName="location-images-container absolute inset-0 z-10"
+        imageWrapperClassName="location-image-wrapper aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] rounded-full border-2 border-white/20"
+        badgeClassName="location-badge"
+        badgeText="Jaringan Komunitas"
+        titleContent={
           <div
             className="w-full px-2 md:px-4 mb-4 md:mb-6"
             style={{ perspective: "1000px" }}
@@ -147,53 +97,25 @@ export default function MarketingSection() {
               className="location-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
-              Accessible Education
+              Edukasi Inklusif
             </h2>
           </div>
+        }
+        subtexts={[
+          "Bergabunglah dengan komunitas lokal kami untuk merasakan pembelajaran Web3 secara langsung di lingkungan Anda.",
+        ]}
+        subtextClassName="location-subtext-p"
+        subtextWrapperClassName="location-subtext"
+      />
 
-          <div className="location-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl transform-gpu">
-            <p className="location-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              Join our local community hubs to experience Web3 learning directly
-              in your neighborhood
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. TEAM SLIDE */}
-      <div className="team-wrapper absolute inset-0 w-full h-full flex items-center justify-center max-w-[1600px] mx-auto opacity-0 pointer-events-none pb-12 lg:pb-0">
-        <div className="absolute inset-0 z-10">
-          {teamImages.map((image, index) => (
-            <div
-              key={`team-img-${index}`}
-              className={`absolute ${image.positionClasses} flex items-center justify-center`}
-            >
-              <div
-                className="team-image-wrapper opacity-0 relative w-full aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] transform-gpu rounded-3xl overflow-hidden"
-                style={{ willChange: "transform, opacity" }}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  aria-hidden="true"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          ref={teamTextContainerRef}
-          className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-2xl lg:max-w-4xl pointer-events-auto transform-gpu"
-        >
-          <div className="team-badge border-[1px] md:border-2 border-white/10 text-white bg-transparent rounded-full px-4 py-1.5 md:px-5 md:py-1.5 mb-4 md:mb-6 flex items-center justify-center transform-gpu backdrop-blur-sm opacity-0">
-            <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-widest text-center">
-              Dedicated Mentors
-            </span>
-          </div>
-
+      <MarketSlide
+        textRef={teamTextContainerRef}
+        images={teamImages}
+        wrapperClassName="team-wrapper opacity-0 pointer-events-none"
+        imageWrapperClassName="team-image-wrapper aspect-square drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)] rounded-3xl"
+        badgeClassName="team-badge"
+        badgeText="MENTOR BERDEDIKASI"
+        titleContent={
           <div
             className="w-full px-2 md:px-4 mb-4 md:mb-6"
             style={{ perspective: "1000px" }}
@@ -202,20 +124,17 @@ export default function MarketingSection() {
               className="team-title block w-full text-center text-fluid-h2 font-black uppercase tracking-tight text-white leading-[1.05] transform-gpu opacity-0 lg:whitespace-nowrap"
               style={{ textShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
             >
-              Guided by Innovators
+              Dipandu Inovator
             </h2>
           </div>
-
-          <div className="team-subtext flex flex-col items-center w-full max-w-sm lg:max-w-xl transform-gpu">
-            <p className="team-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              Mentors dedicated to simplifying complex blockchain ecosystems for
-            </p>
-            <p className="team-subtext-p text-white/90 text-xs md:text-sm lg:text-base font-medium tracking-tight text-center leading-relaxed opacity-0">
-              the next generation of digital pioneers.
-            </p>
-          </div>
-        </div>
-      </div>
+        }
+        subtexts={[
+          "Mentor yang berdedikasi dalam menyederhanakan ekosistem blockchain",
+          "untuk generasi baru pelopor digital.",
+        ]}
+        subtextClassName="team-subtext-p"
+        subtextWrapperClassName="team-subtext"
+      />
 
       <div className="lg:hidden absolute top-[65%] md:top-[70%] -translate-y-1/2 left-0 w-full flex items-center justify-center z-[200] pointer-events-none">
         <SliderControls

@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { articlesData } from "@/constants";
-import { Facebook, Youtube, Instagram, Twitter } from "lucide-react";
 import ContentCTA from "@/components/sections/content/ContentCTA";
 import SimilarArticles from "@/components/sections/content/SimilarArticles";
+import ShareButtons from "@/components/ui/ShareButtons";
 import parse from "html-react-parser";
 
 export async function generateMetadata(props: {
@@ -81,17 +81,17 @@ export default async function ArticleDetailPage(props: {
                 )}
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[15px] lg:text-[16px] text-foreground font-medium tracking-tight">
-                    Curated by
+                    Dikurasi oleh
                   </span>
                   <span className="text-sm lg:text-base text-zinc-500 font-light tracking-tight">
-                    {article.authorName || "Tim Econiq"}
+                    {article.authorName || "Tim ECONIQ"}
                   </span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-0.5 text-right lg:text-left">
                 <span className="text-[15px] lg:text-[16px] text-foreground font-medium tracking-tight">
-                  Posted on
+                  Dipublikasikan pada
                 </span>
                 <span className="text-sm lg:text-base text-zinc-500 font-light tracking-tight">
                   {article.date}
@@ -102,7 +102,7 @@ export default async function ArticleDetailPage(props: {
             <div className="flex flex-row justify-between items-center lg:flex-col lg:items-start lg:gap-6 pb-6 border-b border-zinc-100 lg:border-none lg:pb-0">
               <div className="flex flex-col gap-0.5">
                 <span className="text-[15px] lg:text-[16px] text-foreground font-medium tracking-tight">
-                  Reading time
+                  Waktu Baca
                 </span>
                 <span className="text-sm lg:text-base text-zinc-500 font-light tracking-tight">
                   {article.readTime}
@@ -111,42 +111,10 @@ export default async function ArticleDetailPage(props: {
 
               <div className="flex flex-col gap-2 lg:gap-3 lg:pt-2 text-right lg:text-left">
                 <span className="lg:block text-[16px] text-foreground font-medium tracking-tight">
-                  Share on
+                  Bagikan
                 </span>
-                <div className="flex items-center justify-end lg:justify-start gap-2.5 lg:gap-3">
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-light transition-all"
-                  >
-                    <Twitter size={16} className="lg:w-[18px] lg:h-[18px]" />
-                  </a>
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-light transition-all"
-                  >
-                    <Facebook size={16} className="lg:w-[18px] lg:h-[18px]" />
-                  </a>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-light transition-all"
-                  >
-                    <Youtube size={16} className="lg:w-[18px] lg:h-[18px]" />
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-light transition-all"
-                  >
-                    <Instagram size={16} className="lg:w-[18px] lg:h-[18px]" />
-                  </a>
-                </div>
+
+                <ShareButtons />
               </div>
             </div>
           </aside>

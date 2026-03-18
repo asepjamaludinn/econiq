@@ -13,12 +13,10 @@ export async function POST(request: Request) {
     const validationResult = contactSchema.safeParse(body);
 
     if (!validationResult.success) {
-      const errorMessages = validationResult.error.issues.map(
-        (issue) => issue.message,
-      );
+      const fieldErrors = validationResult.error.flatten().fieldErrors;
 
       return NextResponse.json(
-        { message: "Validasi gagal", errors: errorMessages },
+        { message: "Validasi gagal", fieldErrors },
         { status: 400 },
       );
     }
@@ -29,8 +27,8 @@ export async function POST(request: Request) {
     const mailToAdmin = createAdminEmailPayload(name, email);
 
     await Promise.all([
-      sendMailWithRetry(mailToVisitor, 2, 300),
-      sendMailWithRetry(mailToAdmin, 2, 300),
+      sendMailWithRetry(mailToVisitor),
+      sendMailWithRetry(mailToAdmin),
     ]);
 
     return NextResponse.json({ message: "Success" }, { status: 200 });

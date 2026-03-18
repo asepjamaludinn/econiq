@@ -65,7 +65,7 @@ export default function FAQSection() {
           className="flex flex-col items-center text-center mb-16 md:mb-20"
         >
           <h2 className="text-[clamp(40px,7vw,100px)] font-black uppercase tracking-tight leading-[1.05] text-white mb-6">
-            Frequently <br /> Asked
+            Pertanyaan <br /> Umum
           </h2>
           <p className="text-white/80 text-sm md:text-lg max-w-xl text-center leading-relaxed tracking-tight">
             Punya pertanyaan seputar cara kerja, keamanan, atau integrasi aset

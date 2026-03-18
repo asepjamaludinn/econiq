@@ -6,6 +6,8 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import AnimatedSideModal from "./AnimatedSideModal";
 import type ReCAPTCHA_Type from "react-google-recaptcha";
+import { useModalStore } from "@/store/useModalStore";
+import InputField from "./InputField";
 
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
   ssr: false,
@@ -14,7 +16,7 @@ const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
       <div className="flex items-center gap-2 text-zinc-400">
         <Loader2 className="w-4 h-4 animate-spin" />
         <span className="text-xs font-bold tracking-wider uppercase">
-          Verifying Security...
+          Memverifikasi Keamanan...
         </span>
       </div>
     </div>
@@ -30,6 +32,8 @@ interface FormModalProps {
 }
 
 export default function FormModal({ isOpen, onClose }: FormModalProps) {
+  const { formErrors, setFormErrors, clearFormErrors } = useModalStore();
+
   const recaptchaRef = useRef<ReCAPTCHA_Type>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,19 +47,21 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       setTimeout(() => {
         setSubmitStatus("idle");
         setErrorMsg(null);
+        clearFormErrors();
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
         }
       }, 500);
     }
-  }, [isOpen]);
+  }, [isOpen, clearFormErrors]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    clearFormErrors();
 
     if (!captchaValue) {
-      setErrorMsg("Please complete the security verification.");
+      setErrorMsg("Harap selesaikan verifikasi keamanan.");
       setSubmitStatus("error");
       return;
     }
@@ -87,10 +93,16 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       } else {
         const errorData = await response.json();
 
-        if (errorData.errors && Array.isArray(errorData.errors)) {
-          setErrorMsg(errorData.errors.join(", "));
+        if (errorData.fieldErrors) {
+          setFormErrors({
+            name: errorData.fieldErrors.name?.[0],
+            email: errorData.fieldErrors.email?.[0],
+          });
+          setErrorMsg("Silakan periksa kembali isian form Anda.");
         } else {
-          setErrorMsg(errorData.message || "An unexpected error occurred.");
+          setErrorMsg(
+            errorData.message || "Terjadi kesalahan yang tidak terduga.",
+          );
         }
 
         setSubmitStatus("error");
@@ -98,7 +110,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     } catch (error) {
       console.error(error);
       setErrorMsg(
-        "Failed to connect to the server. Please check your network connection.",
+        "Gagal terhubung ke server. Harap periksa koneksi jaringan Anda.",
       );
       setSubmitStatus("error");
     } finally {
@@ -110,46 +122,45 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     <AnimatedSideModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Join ECONIQ"
+      title="Gabung ECONIQ"
       contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
     >
       <div className="modal-animate-item shrink-0">
-        <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-4 md:mb-4">
-          JOIN THE
+        <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[50px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
+          BERGABUNG DENGAN
           <br />
-          <span className="text-brand-secondary">NEXT GENERATION</span>
+          <span className="text-brand-secondary">GENERASI BARU</span>
           <br />
-          OF DIGITAL FINANCE
+          KEUANGAN DIGITAL
         </h2>
-        <p className="text-base sm:text-lg md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
-          Learn the fundamentals of Web3, blockchain, and digital finance. Leave
-          your details and our team will share more information with you.
+        <p className="text-sm sm:text-base md:text-md lg:text-md font-medium text-zinc-500 leading-snug max-w-lg">
+          Pelajari dasar-dasar Web3, blockchain, dan keuangan digital. Isi data
+          diri Anda dan tim kami akan segera membagikan informasi lebih lanjut.
         </p>
       </div>
 
       <form
-        className="flex flex-col gap-3 md:gap-4 mt-20 md:mt-20 lg:mt-2 shrink-0 pb-4"
+        className="flex flex-col gap-3 md:gap-4 mt-1 md:mt-2 shrink-0 pb-4"
         onSubmit={handleSubmit}
+        noValidate
       >
-        <div className="modal-animate-item">
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
-          />
-        </div>
+        <InputField
+          type="text"
+          name="name"
+          placeholder="Nama Lengkap"
+          error={formErrors.name}
+          clearError={() => setFormErrors({ ...formErrors, name: undefined })}
+          wrapperClassName="modal-animate-item"
+        />
 
-        <div className="modal-animate-item">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
-          />
-        </div>
+        <InputField
+          type="email"
+          name="email"
+          placeholder="Alamat Email"
+          error={formErrors.email}
+          clearError={() => setFormErrors({ ...formErrors, email: undefined })}
+          wrapperClassName="modal-animate-item"
+        />
 
         <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
           <input
@@ -163,13 +174,13 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             htmlFor="terms"
             className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-default"
           >
-            I accept the processing of my{" "}
+            Saya menyetujui pemrosesan{" "}
             <Link
               href="/privacy"
               onClick={(e) => e.stopPropagation()}
               className="text-brand-secondary font-medium hover:text-brand-primary hover:underline transition-all duration-300"
             >
-              personal data.
+              data pribadi saya.
             </Link>
           </label>
         </div>
@@ -191,18 +202,20 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
               className="mt-0.5 flex-shrink-0 text-green-600"
             />
             <div className="flex flex-col gap-1">
-              <span className="font-bold text-sm md:text-base">Thank you!</span>
+              <span className="font-bold text-sm md:text-base">
+                Terima kasih!
+              </span>
               <span className="font-medium text-xs md:text-sm text-green-600/90 leading-relaxed">
-                Your information has been sent. Please check your email inbox
-                (or spam folder) for the confirmation message.
+                Informasi Anda telah terkirim. Silakan periksa kotak masuk email
+                Anda (atau folder spam) untuk pesan konfirmasi.
               </span>
             </div>
           </div>
         )}
 
-        {submitStatus === "error" && (
+        {submitStatus === "error" && errorMsg && (
           <div className="modal-animate-item text-red-500 bg-red-50 p-3.5 md:p-4 rounded-xl border border-red-200 font-medium text-sm">
-            {errorMsg || "Oops! Something went wrong. Please try again later."}
+            {errorMsg}
           </div>
         )}
 
@@ -219,10 +232,10 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Sending...
+                Mengirim...
               </>
             ) : (
-              "Start Learning"
+              "Mulai Belajar"
             )}
 
             {!isSubmitting && (

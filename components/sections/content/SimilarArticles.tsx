@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArticleData } from "@/types";
+import ArticleCard from "@/components/ui/ArticleCard";
 
 interface SimilarArticlesProps {
   articles: ArticleData[];
@@ -14,44 +14,24 @@ export default function SimilarArticles({ articles }: SimilarArticlesProps) {
       <div className="flex items-end justify-between mb-10 md:mb-12">
         <div>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Similar Articles
+            Artikel Terkait
           </h2>
         </div>
         <Link
           href="/content"
           className="text-brand-secondary hover:text-brand-primary font-medium tracking-tight transition-colors hidden md:block"
         >
-          View all articles
+          Lihat Semua Artikel
         </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-12">
         {articles.map((simArticle) => (
-          <Link
+          <ArticleCard
             key={simArticle.id}
-            href={simArticle.slug}
-            className="group flex flex-col h-full cursor-pointer w-full"
-          >
-            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] rounded-lg overflow-hidden mb-5 bg-zinc-100">
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 z-10 transition-colors duration-300 pointer-events-none"></div>
-              <Image
-                src={simArticle.thumbnail}
-                alt={simArticle.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-              />
-            </div>
-
-            <div className="flex justify-between items-start gap-4 w-full px-1">
-              <h3 className="text-lg md:text-[22px] font-medium tracking-tight text-foreground leading-[1.3] group-hover:text-brand-primary transition-colors max-w-[75%]">
-                {simArticle.title}
-              </h3>
-              <span className="text-[13px] md:text-sm text-zinc-500 tracking-tight whitespace-nowrap mt-1">
-                {simArticle.date}
-              </span>
-            </div>
-          </Link>
+            article={simArticle}
+            variant="similar"
+          />
         ))}
       </div>
 
@@ -60,7 +40,7 @@ export default function SimilarArticles({ articles }: SimilarArticlesProps) {
           href="/content"
           className="block w-full text-center py-4 rounded-xl bg-brand-primary text-white font-medium tracking-tight shadow-[0_8px_25px_rgba(102,13,255,0.25)] hover:bg-brand-dark hover:shadow-[0_12px_30px_rgba(102,13,255,0.35)] hover:-translate-y-1 transition-all duration-300 active:scale-[0.98]"
         >
-          View all articles
+          Lihat Semua Artikel
         </Link>
       </div>
     </section>
