@@ -12,8 +12,8 @@ export const contactSchema = z.object({
     .string()
     .min(10, { message: "Pesan terlalu singkat (minimal 10 karakter)." })
     .max(500, { message: "Pesan terlalu panjang (maksimal 500 karakter)." }),
-  terms_agreed: z.literal(true, {
-    errorMap: () => ({ message: "Anda harus menyetujui kebijakan privasi." }),
+  terms_agreed: z.boolean().refine((val) => val === true, {
+    message: "Anda harus menyetujui kebijakan privasi.",
   }),
 });
 

@@ -38,10 +38,8 @@ export default function PrivacyPolicy() {
   return (
     <main
       ref={containerRef}
-      /* PERUBAHAN PADDING: Mengurangi padding di layar besar (lg dan xl) agar konten bisa melebar */
       className="min-h-screen bg-white text-foreground pt-32 pb-24 px-5 md:px-8 lg:px-10 xl:px-12"
     >
-      {/* KONTEM UTAMA: Bisa diganti max-w-full jika ingin benar-benar mentok kiri kanan */}
       <div className="max-w-[1400px] mx-auto w-full">
         {/* Header Section */}
         <div className="privacy-header mb-12 md:mb-16 border-b border-zinc-200 pb-8 md:pb-12">
@@ -61,7 +59,6 @@ export default function PrivacyPolicy() {
                 {section.title}
               </h2>
 
-              {/* PERUBAHAN: Menghapus max-w-[95%] agar teks mengisi penuh kontainernya */}
               <div className="text-zinc-600 leading-relaxed text-base md:text-lg lg:text-xl mb-5 w-full">
                 {parse(
                   section.content.replace(
@@ -72,7 +69,6 @@ export default function PrivacyPolicy() {
               </div>
 
               {section.list && (
-                /* PERUBAHAN: Menghapus max-w-[95%] dari list */
                 <ul className="list-disc pl-6 md:pl-8 text-zinc-600 space-y-3 text-base md:text-lg lg:text-xl w-full">
                   {section.list.map((item, idx) => (
                     <li key={idx} className="pl-2">
