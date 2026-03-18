@@ -4,10 +4,12 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import AnimatedSideModal from "./AnimatedSideModal";
 import type ReCAPTCHA_Type from "react-google-recaptcha";
-import { useModalStore } from "@/store/useModalStore";
-import InputField from "./InputField";
+import { contactSchema, ContactInput } from "@/lib/validations/contact";
+import { Button } from "./Button";
 
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
   ssr: false,
@@ -32,79 +34,72 @@ interface FormModalProps {
 }
 
 export default function FormModal({ isOpen, onClose }: FormModalProps) {
-  const { formErrors, setFormErrors, clearFormErrors } = useModalStore();
-
   const recaptchaRef = useRef<ReCAPTCHA_Type>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactInput>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      interest: "",
+      message: "",
+    },
+  });
 
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
         setSubmitStatus("idle");
         setErrorMsg(null);
-        clearFormErrors();
+        reset();
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
         }
       }, 500);
     }
-  }, [isOpen, clearFormErrors]);
+  }, [isOpen, reset]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    clearFormErrors();
-
+  const onSubmit = async (data: ContactInput) => {
     if (!captchaValue) {
-      setErrorMsg("Harap selesaikan verifikasi keamanan.");
+      setErrorMsg("Harap selesaikan verifikasi keamanan ReCAPTCHA.");
       setSubmitStatus("error");
       return;
     }
 
-    setIsSubmitting(true);
     setSubmitStatus("idle");
     setErrorMsg(null);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-        }),
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         setSubmitStatus("success");
-        form.reset();
+        reset();
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
         }
       } else {
         const errorData = await response.json();
-
-        if (errorData.fieldErrors) {
-          setFormErrors({
-            name: errorData.fieldErrors.name?.[0],
-            email: errorData.fieldErrors.email?.[0],
-          });
-          setErrorMsg("Silakan periksa kembali isian form Anda.");
-        } else {
-          setErrorMsg(
-            errorData.message || "Terjadi kesalahan yang tidak terduga.",
-          );
-        }
-
+        setErrorMsg(
+          errorData.message ||
+            "Terjadi kesalahan pada server. Silakan coba lagi.",
+        );
         setSubmitStatus("error");
       }
     } catch (error) {
@@ -113,8 +108,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
         "Gagal terhubung ke server. Harap periksa koneksi jaringan Anda.",
       );
       setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -123,7 +116,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       isOpen={isOpen}
       onClose={onClose}
       title="Gabung ECONIQ"
-      contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
+      contentClassName="px-5 md:px-10 lg:px-12 pb-12 pt-4 md:pt-6 flex flex-col gap-4 md:gap-6"
     >
       <div className="modal-animate-item shrink-0">
         <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[50px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
@@ -141,38 +134,119 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
 
       <form
         className="flex flex-col gap-3 md:gap-4 mt-1 md:mt-2 shrink-0 pb-4"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <InputField
-          type="text"
-          name="name"
-          placeholder="Nama Lengkap"
-          error={formErrors.name}
-          clearError={() => setFormErrors({ ...formErrors, name: undefined })}
-          wrapperClassName="modal-animate-item"
-        />
+        {/* Input Nama */}
+        <div className="modal-animate-item flex flex-col">
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="Nama Lengkap"
+            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors ${
+              errors.name
+                ? "border-red-500"
+                : "border-transparent focus:border-brand-secondary/40"
+            }`}
+          />
+          {errors.name && (
+            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
+              {errors.name.message}
+            </span>
+          )}
+        </div>
 
-        <InputField
-          type="email"
-          name="email"
-          placeholder="Alamat Email"
-          error={formErrors.email}
-          clearError={() => setFormErrors({ ...formErrors, email: undefined })}
-          wrapperClassName="modal-animate-item"
-        />
+        {/* Input Email */}
+        <div className="modal-animate-item flex flex-col">
+          <input
+            {...register("email")}
+            type="email"
+            placeholder="Alamat Email"
+            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors ${
+              errors.email
+                ? "border-red-500"
+                : "border-transparent focus:border-brand-secondary/40"
+            }`}
+          />
+          {errors.email && (
+            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
+              {errors.email.message}
+            </span>
+          )}
+        </div>
 
+        {/* Select Minat */}
+        <div className="modal-animate-item flex flex-col">
+          <select
+            {...register("interest")}
+            className={`w-full bg-brand-light text-foreground p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors appearance-none cursor-pointer ${
+              errors.interest
+                ? "border-red-500"
+                : "border-transparent focus:border-brand-secondary/40"
+            }`}
+            style={{
+              backgroundImage: `url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2352525b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>')`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 1rem center",
+              backgroundSize: "1.2em",
+            }}
+          >
+            <option value="" disabled hidden>
+              Topik yang Ingin Dipelajari
+            </option>
+            <option value="Dasar Web3 & Blockchain">
+              Dasar Web3 & Blockchain
+            </option>
+            <option value="Keamanan Crypto Wallet">
+              Keamanan Crypto Wallet
+            </option>
+            <option value="Green Blockchain">
+              Green Blockchain & Keberlanjutan
+            </option>
+            <option value="Smart Contract">
+              Smart Contract & Pengembangan
+            </option>
+            <option value="Lainnya">Lainnya / Umum</option>
+          </select>
+          {errors.interest && (
+            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
+              {errors.interest.message}
+            </span>
+          )}
+        </div>
+
+        {/* Textarea Pesan */}
+        <div className="modal-animate-item flex flex-col">
+          <textarea
+            {...register("message")}
+            placeholder="Tulis motivasi bergabung atau hal yang ingin Anda tanyakan..."
+            rows={4}
+            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors resize-none ${
+              errors.message
+                ? "border-red-500"
+                : "border-transparent focus:border-brand-secondary/40"
+            }`}
+          />
+          {errors.message && (
+            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
+              {errors.message.message}
+            </span>
+          )}
+        </div>
+
+        {/* Checkbox Persetujuan */}
         <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
           <input
+            {...register("terms_agreed")}
             type="checkbox"
             id="terms"
-            name="terms_agreed"
-            required
-            className="w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0"
+            className={`w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0 ${
+              errors.terms_agreed ? "outline outline-1 outline-red-500" : ""
+            }`}
           />
           <label
             htmlFor="terms"
-            className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-default"
+            className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-pointer"
           >
             Saya menyetujui pemrosesan{" "}
             <Link
@@ -184,7 +258,13 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             </Link>
           </label>
         </div>
+        {errors.terms_agreed && (
+          <span className="modal-animate-item text-red-500 text-sm mt-0 ml-8 font-medium">
+            {errors.terms_agreed.message}
+          </span>
+        )}
 
+        {/* ReCAPTCHA */}
         <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100 min-h-[78px]">
           {isOpen && (
             <ReCAPTCHA
@@ -195,6 +275,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           )}
         </div>
 
+        {/* Status Messages */}
         {submitStatus === "success" && (
           <div className="modal-animate-item flex items-start gap-3 text-green-700 bg-green-50 p-3.5 md:p-4 rounded-xl border border-green-200">
             <CheckCircle2
@@ -219,15 +300,14 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </div>
         )}
 
+        {/* Submit Button */}
         <div className="modal-animate-item mt-2 md:mt-4">
-          <button
+          <Button
             type="submit"
+            variant="secondary"
+            size="default"
             disabled={isSubmitting}
-            className={`group w-full font-bold py-3.5 md:py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
-              isSubmitting
-                ? "bg-brand-muted text-white cursor-not-allowed"
-                : "bg-brand-secondary hover:bg-brand-primary hover:shadow-lg text-white"
-            }`}
+            className="w-full group"
           >
             {isSubmitting ? (
               <>
@@ -235,33 +315,32 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
                 Mengirim...
               </>
             ) : (
-              "Mulai Belajar"
+              <>
+                Kirim Pendaftaran
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="overflow-visible"
+                >
+                  <path
+                    d="M5 12h14"
+                    className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
+                    style={{ transformOrigin: "19px 12px" }}
+                  />
+                  <path
+                    d="m12 5 7 7-7 7"
+                    className="transition-all duration-300 ease-out group-hover:translate-x-3"
+                  />
+                </svg>
+              </>
             )}
-
-            {!isSubmitting && (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="overflow-visible"
-              >
-                <path
-                  d="M5 12h14"
-                  className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
-                  style={{ transformOrigin: "19px 12px" }}
-                />
-                <path
-                  d="m12 5 7 7-7 7"
-                  className="transition-all duration-300 ease-out group-hover:translate-x-3"
-                />
-              </svg>
-            )}
-          </button>
+          </Button>
         </div>
       </form>
     </AnimatedSideModal>

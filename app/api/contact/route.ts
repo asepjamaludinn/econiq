@@ -16,15 +16,16 @@ export async function POST(request: Request) {
       const fieldErrors = validationResult.error.flatten().fieldErrors;
 
       return NextResponse.json(
-        { message: "Validasi gagal", fieldErrors },
+        { message: "Validasi gagal, silakan periksa input Anda.", fieldErrors },
         { status: 400 },
       );
     }
 
-    const { name, email } = validationResult.data;
+    const { name, email, interest, message } = validationResult.data;
 
     const mailToVisitor = createVisitorEmailPayload(name, email);
-    const mailToAdmin = createAdminEmailPayload(name, email);
+
+    const mailToAdmin = createAdminEmailPayload(name, email, interest, message);
 
     await Promise.all([
       sendMailWithRetry(mailToVisitor),

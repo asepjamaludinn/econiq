@@ -6,10 +6,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Unlock, TrendingUp, Zap, Globe } from "lucide-react";
-
 import { featuresData } from "@/constants";
 import CustomVideoPlayer from "@/components/ui/CustomVideoPlayer";
 import { SvgBadgeStores } from "@/components/icons/SvgBadgeStores";
+import { buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -176,12 +177,14 @@ export default function FeatureSection() {
             </h2>
 
             <div
-              className="reveal-item opacity-0 absolute pointer-events-none drop-shadow-2xl z-20 
-              w-20 h-20 -top-20 right-0 
-              sm:w-24 sm:h-24 sm:-top-6 sm:-right-12 
-              md:w-32 md:h-32 md:-top-30 md:-right-5
-              lg:w-36 lg:h-36 lg:-top-30 lg:-right-0
-              xl:w-44 xl:h-44 xl:-top-30 xl:right-5"
+              className={cn(
+                "reveal-item opacity-0 absolute pointer-events-none drop-shadow-2xl z-20",
+                "w-20 h-20 -top-20 right-0",
+                "sm:w-24 sm:h-24 sm:-top-6 sm:-right-12",
+                "md:w-32 md:h-32 md:-top-30 md:-right-5",
+                "lg:w-36 lg:h-36 lg:-top-30 lg:-right-0",
+                "xl:w-44 xl:h-44 xl:-top-30 xl:right-5",
+              )}
             >
               <SvgBadgeStores ref={badgeRef} countRef={countRef} />
             </div>
@@ -221,7 +224,10 @@ export default function FeatureSection() {
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item opacity-0">
           <Link
             href="/content"
-            className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-3xl font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight cursor-pointer"
+            className={cn(
+              buttonVariants({ variant: "glass", size: "lg" }),
+              "w-full sm:w-auto group gap-3",
+            )}
           >
             Mulai Belajar
             <svg

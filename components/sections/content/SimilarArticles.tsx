@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArticleData } from "@/types";
 import ArticleCard from "@/components/ui/ArticleCard";
+import { buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 interface SimilarArticlesProps {
   articles: ArticleData[];
@@ -35,10 +37,13 @@ export default function SimilarArticles({ articles }: SimilarArticlesProps) {
         ))}
       </div>
 
-      <div className="mt-10 block md:hidden">
+      <div className="mt-10 flex md:hidden w-full">
         <Link
           href="/content"
-          className="block w-full text-center py-4 rounded-xl bg-brand-primary text-white font-medium tracking-tight shadow-[0_8px_25px_rgba(102,13,255,0.25)] hover:bg-brand-dark hover:shadow-[0_12px_30px_rgba(102,13,255,0.35)] hover:-translate-y-1 transition-all duration-300 active:scale-[0.98]"
+          className={cn(
+            buttonVariants({ variant: "primary", size: "default" }),
+            "w-full",
+          )}
         >
           Lihat Semua Artikel
         </Link>

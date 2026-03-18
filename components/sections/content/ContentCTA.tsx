@@ -6,12 +6,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Mail } from "lucide-react";
 import { useModalStore } from "@/store/useModalStore";
+import { Button } from "@/components/ui/Button";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function ContentCTA() {
   const containerRef = useRef<HTMLDivElement>(null);
-
   const openFormModal = useModalStore((state) => state.openFormModal);
 
   useGSAP(
@@ -62,12 +62,14 @@ export default function ContentCTA() {
           Anda.
         </p>
 
-        <button
+        <Button
+          variant="white"
+          size="xl"
           onClick={openFormModal}
-          className="relative z-10 group bg-white text-brand-primary px-10 py-5 rounded-2xl font-bold text-lg md:text-xl shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+          className="relative z-10 group"
         >
           Berlangganan Informasi
-        </button>
+        </Button>
       </div>
     </section>
   );

@@ -31,7 +31,6 @@ export const sendMailWithRetry = async (
   }
 };
 
-// Helper untuk mendapatkan sapaan waktu
 const getGreeting = () => {
   const currentHour = parseInt(
     new Date().toLocaleString("en-US", {
@@ -49,7 +48,6 @@ const getGreeting = () => {
 
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-// Fungsi pembuat payload email untuk Visitor
 export const createVisitorEmailPayload = (name: string, email: string) => ({
   from: `"ECONIQ" <${process.env.EMAIL_USER}>`,
   to: email,
@@ -96,19 +94,38 @@ export const createVisitorEmailPayload = (name: string, email: string) => ({
   `,
 });
 
-// Fungsi pembuat payload email untuk Admin
-export const createAdminEmailPayload = (name: string, email: string) => ({
+export const createAdminEmailPayload = (
+  name: string,
+  email: string,
+  interest: string,
+  message: string,
+) => ({
   from: `"ECONIQ System" <${process.env.EMAIL_USER}>`,
   to: process.env.EMAIL_USER,
   subject: `[New Lead] Registrasi Baru dari ${name}`,
   html: `
     <div style="font-family: sans-serif; color: #171717; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f5; border-radius: 8px;">
-      <h3 style="color: #660DFF;">Notifikasi Sistem ECONIQ</h3>
-      <p>Ada pendaftar baru yang masuk melalui website:</p>
-      <div style="background-color: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #e5e5e5;">
-        <p style="margin: 5px 0;"><strong>Nama:</strong> ${name}</p>
-        <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p style="margin: 5px 0;"><strong>Waktu Daftar:</strong> ${new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })} WIB</p>
+      <h3 style="color: #660DFF; margin-top: 0;">Notifikasi Sistem ECONIQ</h3>
+      <p style="color: #3f3f46; font-size: 14px;">Ada pendaftar baru yang masuk melalui formulir website:</p>
+      
+      <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e5e5e5; margin-top: 15px;">
+        <p style="margin: 0 0 10px 0; font-size: 14px;"><strong>Nama:</strong><br/> ${name}</p>
+        <p style="margin: 0 0 10px 0; font-size: 14px;"><strong>Email:</strong><br/> <a href="mailto:${email}" style="color: #8644F7;">${email}</a></p>
+        <p style="margin: 0 0 10px 0; font-size: 14px;"><strong>Minat Belajar:</strong><br/> <span style="background-color: #f4effc; color: #5200CC; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 13px;">${interest}</span></p>
+        
+        <p style="margin: 15px 0 5px 0; font-size: 14px;"><strong>Pesan / Motivasi:</strong></p>
+        <div style="background-color: #fafafa; padding: 12px; border-left: 3px solid #8644F7; font-size: 14px; color: #52525b; line-height: 1.5; border-radius: 0 4px 4px 0;">
+          ${message.replace(/\n/g, "<br/>")}
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 20px 0 15px 0;" />
+        <p style="margin: 0; font-size: 12px; color: #a1a1aa;">
+          <strong>Waktu Daftar:</strong> ${new Date().toLocaleString("id-ID", {
+            timeZone: "Asia/Jakarta",
+            dateStyle: "full",
+            timeStyle: "long",
+          })} WIB
+        </p>
       </div>
     </div>
   `,

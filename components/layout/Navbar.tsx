@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { useLenis } from "lenis/react";
 import ContactModal from "@/components/ui/ContactModal";
 import FormModal from "@/components/ui/FormModal";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
@@ -15,6 +16,7 @@ import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const lenis = useLenis();
 
   const {
     isFormOpen,
@@ -51,6 +53,27 @@ export default function Navbar() {
 
   useNavbarAnimations(isOpen, menuListRef, overlayRef);
 
+  useEffect(() => {
+    const isMobileOrTablet =
+      typeof window !== "undefined" && window.innerWidth < 1024;
+
+    if (isOpen && isMobileOrTablet) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      lenis?.start();
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      lenis?.start();
+    };
+  }, [isOpen, lenis]);
+
   const handleMouseEnter = () => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -81,7 +104,7 @@ export default function Navbar() {
     <>
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black/60 z-[140] hidden lg:hidden"
+        className="fixed inset-0 bg-black/60 z-[140] hidden lg:hidden touch-none"
         onClick={() => setIsOpen(false)}
       />
 
@@ -90,7 +113,8 @@ export default function Navbar() {
           ref={menuRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="relative bg-brand-primary rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto"
+          // 5. Tambahkan overscroll-none
+          className="relative bg-brand-primary rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto overscroll-none"
         >
           <button
             onClick={() => setIsOpen(!isOpen)}

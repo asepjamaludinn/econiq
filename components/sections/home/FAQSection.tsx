@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -14,6 +14,8 @@ if (typeof window !== "undefined") {
 export default function FAQSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
+
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useGSAP(
     () => {
@@ -54,6 +56,10 @@ export default function FAQSection() {
     { scope: sectionRef },
   );
 
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -73,9 +79,15 @@ export default function FAQSection() {
           </p>
         </div>
 
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-3 md:gap-4">
           {faqData.map((faq, index) => (
-            <FAQItem key={index} question={faq.question} answer={faq.answer} />
+            <FAQItem
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openIndex === index}
+              onClick={() => handleToggle(index)}
+            />
           ))}
         </div>
       </div>

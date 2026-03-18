@@ -49,7 +49,7 @@ export const SvgBadgeStores = forwardRef<SVGSVGElement, SvgBadgeStoresProps>(
             style={{ whiteSpace: "pre" }}
           >
             <tspan x="84" y="105.08">
-              TOKO
+              TEMPAT
             </tspan>
           </text>
         </g>

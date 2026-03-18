@@ -133,8 +133,8 @@ export default function HeroSection() {
       <AnimatedLeaves />
 
       {/* 4. Headline */}
-      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] max-w-3xl lg:max-w-5xl xl:max-w-7xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-black uppercase tracking-normal leading-[1.1] text-white drop-shadow-lg">
+      <div className="absolute top-[18%] md:top-[12%] lg:top-[10%] left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] max-w-3xl lg:max-w-5xl xl:max-w-7xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
+        <h1 className="text-[clamp(32px,8vw,48px)] md:text-5xl lg:text-6xl xl:text-5xl font-black uppercase tracking-normal leading-[1.15] text-white drop-shadow-lg mt-8 md:mt-0">
           {heroData.titleLine1} <br className="hidden md:block" />
           <span className="text-white">{heroData.titleLine2}</span>
         </h1>

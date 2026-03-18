@@ -2,11 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
-
-interface CustomVideoPlayerProps {
-  src: string;
-  poster?: string;
-}
+import { CustomVideoPlayerProps } from "@/types";
 
 const formatTime = (timeInSeconds: number) => {
   const minutes = Math.floor(timeInSeconds / 60);
@@ -65,7 +61,7 @@ export default function CustomVideoPlayer({
     }
   };
 
-  const handleVolumeClick = (e: React.MouseEvent) => {
+  const handleVolumeClick = (e: React.SyntheticEvent) => {
     e.stopPropagation();
     if (videoRef.current) {
       const newMutedState = !isMuted;
@@ -77,8 +73,16 @@ export default function CustomVideoPlayer({
 
   return (
     <div
-      className="relative w-full h-full flex items-center justify-center cursor-pointer"
+      role="button"
+      tabIndex={0}
+      className="relative w-full h-full flex items-center justify-center cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-brand-primary"
       onClick={handleVideoClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleVideoClick();
+        }
+      }}
     >
       <video
         ref={videoRef}
@@ -94,7 +98,6 @@ export default function CustomVideoPlayer({
         className="w-full h-full object-cover pointer-events-none"
       >
         <source src={src.replace(".mp4", ".webm")} type="video/webm" />
-
         <source src={src} type="video/mp4" />
       </video>
 
@@ -138,8 +141,16 @@ export default function CustomVideoPlayer({
         </div>
 
         <div
+          role="button"
+          tabIndex={0}
           onClick={handleVolumeClick}
-          className="bg-white rounded-[20px] flex items-center justify-center h-12 w-12 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleVolumeClick(e);
+            }
+          }}
+          className="bg-white rounded-[20px] flex items-center justify-center h-12 w-12 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
         >
           {isMuted ? (
             <VolumeX

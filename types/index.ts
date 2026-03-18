@@ -1,4 +1,4 @@
-import { ElementType } from "react";
+import { ElementType, ReactNode, RefObject } from "react";
 
 export interface FeatureData {
   title: string;
@@ -36,4 +36,28 @@ export interface ArticleData {
   authorName?: string;
   authorAvatar?: string;
   content?: string;
+}
+
+export interface MarketSlideProps {
+  textRef: RefObject<HTMLDivElement | null>;
+  images: ImageData[];
+  badgeText: string;
+  titleContent: ReactNode;
+  subtexts: string[];
+  wrapperClassName: string;
+  imageContainerClassName?: string;
+  imageWrapperClassName: string;
+  imageClassName?: string;
+  badgeClassName: string;
+  subtextClassName: string;
+  subtextWrapperClassName?: string;
+}
+
+export interface CustomVideoPlayerProps {
+  src: string;
+  poster?: string;
+}
+
+export interface HangingSignProps {
+  text: string;
 }
