@@ -42,7 +42,7 @@ export default async function ArticleDetailPage(props: {
   const similarArticles = [...relatedByTopic, ...remainingArticles].slice(0, 2);
 
   return (
-    <main className="w-full min-h-screen bg-white pb-12 pt-32 selection:bg-brand-secondary selection:text-white">
+    <main className="w-full min-h-screen bg-white pt-32 selection:bg-brand-secondary selection:text-white">
       <article className="relative w-full px-5 md:px-6 lg:px-10">
         <h1 className="text-4xl md:text-[56px] lg:text-[64px] font-medium tracking-tight leading-[1.05] text-foreground mb-10 max-w-5xl animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100 fill-mode-both">
           {article.title}

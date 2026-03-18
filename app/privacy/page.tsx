@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-white text-foreground pt-32 pb-24 px-5 md:px-8 lg:px-10 xl:px-12"
+      className="min-h-screen bg-gradient-to-b from-white via-white via-80% to-grad-end text-foreground pt-32 pb-24 md:pb-32 px-5 md:px-8 lg:px-10 xl:px-12"
     >
       <div className="max-w-[1400px] mx-auto w-full">
         <div className="privacy-header mb-12 md:mb-16 border-b border-zinc-200 pb-8 md:pb-12">
@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
               )}
 
               {section.id === "contact-us" && (
-                <div className="bg-brand-light p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-brand-muted mt-8 max-w-fit">
+                <div className="bg-white/80 backdrop-blur-md p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-white mt-8 max-w-fit shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
                   <p className="text-foreground font-bold text-lg md:text-xl lg:text-2xl mb-2">
                     Email Resmi
                   </p>

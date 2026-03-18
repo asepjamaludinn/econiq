@@ -88,7 +88,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, captchaValue }),
       });
 
       if (response.ok) {
@@ -210,7 +210,10 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             Saya menyetujui pemrosesan{" "}
             <Link
               href="/privacy"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
               className="text-brand-secondary font-medium hover:text-brand-primary hover:underline transition-all duration-300"
             >
               data pribadi saya.
@@ -223,7 +226,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </span>
         )}
 
-        {/* ReCAPTCHA */}
         <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100 min-h-[78px]">
           {isOpen && (
             <ReCAPTCHA
@@ -234,7 +236,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           )}
         </div>
 
-        {/* Status Messages */}
         {submitStatus === "success" && (
           <div className="modal-animate-item flex items-start gap-3 text-green-700 bg-green-50 p-3.5 md:p-4 rounded-xl border border-green-200">
             <CheckCircle2
@@ -259,7 +260,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           </div>
         )}
 
-        {/* Submit Button */}
         <div className="modal-animate-item mt-2 md:mt-4">
           <Button
             type="submit"
