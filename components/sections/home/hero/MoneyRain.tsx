@@ -41,10 +41,10 @@ export default function MoneyRain() {
                 duration: gsap.utils.random(7, 12),
                 ease: "none",
                 onComplete: () => {
-                  activeTweens.delete(tween); // Hapus tween lama dari memori
+                  activeTweens.delete(tween);
                   const nextDelay = gsap.utils.random(2, 12);
                   const delayTween = gsap.delayedCall(nextDelay, dropUang);
-                  activeTweens.add(delayTween); // Lacak delay agar bisa dipause
+                  activeTweens.add(delayTween);
                 },
               },
             );
@@ -59,7 +59,6 @@ export default function MoneyRain() {
           activeTweens.add(initialDelay);
         });
 
-        // Toggle pause/play
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top bottom",

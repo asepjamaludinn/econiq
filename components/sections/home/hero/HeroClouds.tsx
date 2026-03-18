@@ -4,9 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 interface CloudData {
   id: number;
@@ -40,8 +37,8 @@ export default function HeroClouds() {
     }).map((_, i) => ({
       id: i,
       src: awanImages[Math.floor(Math.random() * awanImages.length)],
-      top: `${Math.random() * 10}%`,
-      left: `${Math.random() * 120 - 10}%`,
+      top: `${Math.random() * 60}%`,
+      left: `${Math.random() * 100 - 20}%`,
       width: Math.floor(Math.random() * 250) + 150,
       opacity: Number((Math.random() * 0.4 + 0.5).toFixed(2)),
     }));
@@ -51,27 +48,27 @@ export default function HeroClouds() {
 
   useGSAP(
     () => {
-      if (clouds.length === 0) return;
-      const awanElements = gsap.utils.toArray<HTMLDivElement>(".awan-terbang");
+      if (clouds.length === 0 || !containerRef.current) return;
 
-      const activeTweens = new Set<gsap.core.Tween>();
+      const awanElements = gsap.utils.toArray<HTMLDivElement>(
+        ".awan-terbang",
+        containerRef.current,
+      );
 
       awanElements.forEach((awan) => {
         const driftRight = () => {
-          const tween = gsap.to(awan, {
+          gsap.to(awan, {
             x: "150vw",
             duration: gsap.utils.random(50, 90),
             ease: "none",
             onComplete: () => {
-              activeTweens.delete(tween);
               gsap.set(awan, { x: "-50vw" });
               driftRight();
             },
           });
-          activeTweens.add(tween);
         };
 
-        const floatTween = gsap.to(awan, {
+        gsap.to(awan, {
           y: `+=${gsap.utils.random(-15, 15)}`,
           duration: gsap.utils.random(5, 10),
           repeat: -1,
@@ -79,21 +76,7 @@ export default function HeroClouds() {
           ease: "sine.inOut",
         });
 
-        activeTweens.add(floatTween);
         driftRight();
-      });
-
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        onToggle: (self) => {
-          if (self.isActive) {
-            activeTweens.forEach((t) => t.play());
-          } else {
-            activeTweens.forEach((t) => t.pause());
-          }
-        },
       });
     },
     { scope: containerRef, dependencies: [clouds] },
@@ -102,11 +85,11 @@ export default function HeroClouds() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-10"
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-hidden"
     >
-      {clouds.map((awan) => (
+      {clouds.map((awan, idx) => (
         <div
-          key={`awan-${awan.id}`}
+          key={`awan-${idx}`}
           className="awan-terbang absolute"
           style={{
             top: awan.top,
@@ -118,7 +101,7 @@ export default function HeroClouds() {
         >
           <Image
             src={awan.src}
-            alt={`Awan Tipe ${awan.id}`}
+            alt={`Awan Terbang ${idx}`}
             fill
             className="object-contain"
           />

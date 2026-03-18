@@ -23,7 +23,7 @@
 
   /* Fluid Typography */
   --text-fluid-h2: clamp(28px, 8vw, 58px);
-  --text-fluid-wallet: clamp(32px, 7vw, 120px);
+  --text-fluid-wallet: clamp(32px, 5vw, 120px);
   --text-fluid-step-sm: clamp(34px, 10vw, 70px);
   --text-fluid-step-md: clamp(50px, 7vw, 100px);
   --text-fluid-step-lg: clamp(70px, 7.5vw, 120px);
