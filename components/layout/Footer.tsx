@@ -2,10 +2,29 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import SocialLinks from "@/components/ui/SocialLinks";
+import dynamic from "next/dynamic";
+
+const HeroClouds = dynamic(
+  () => import("@/components/sections/home/hero/HeroClouds"),
+  { ssr: false },
+);
+
+gsap.registerPlugin(ScrollTrigger);
+
+const PineTree = ({ className, alt }: { className: string; alt: string }) => (
+  <div className={`absolute pointer-events-none ${className}`}>
+    <Image
+      src="/images/Pinus.svg"
+      alt={alt}
+      fill
+      className="object-contain object-bottom"
+    />
+  </div>
+);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -13,72 +32,27 @@ export default function Footer() {
   useGSAP(
     () => {
       gsap.fromTo(
-        ".burung-1",
-        { x: "-10vw", y: 0 },
-        {
-          x: "110vw",
-          y: -50,
-          duration: 30,
-          repeat: -1,
-          ease: "none",
-        },
-      );
-
-      gsap.to(".burung-1", {
-        y: "+=20",
-        duration: 2.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.fromTo(
-        ".burung-2",
-        { x: "110vw", y: 30 },
-        {
-          x: "-10vw",
-          y: -20,
-          duration: 40,
-          repeat: -1,
-          ease: "none",
-        },
-      );
-
-      gsap.to(".burung-2", {
-        y: "-=25",
-        duration: 3.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.fromTo(
         ".mobil-grup",
         { x: "-200px" },
         {
           x: "110vw",
           duration: 25,
-          repeat: -1,
           ease: "none",
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 80%",
+            once: true,
+          },
         },
       );
 
-      gsap.to(".ban-depan, .ban-belakang-1, .ban-belakang-2", {
+      gsap.to(".ban-mobil", {
         rotation: 360,
         duration: 1.5,
         repeat: -1,
         ease: "none",
         transformOrigin: "50% 50%",
         force3D: true,
-      });
-
-      gsap.to(".plang-petunjuk", {
-        rotation: 2,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        transformOrigin: "50% 100%",
       });
     },
     { scope: footerRef },
@@ -89,7 +63,6 @@ export default function Footer() {
       ref={footerRef}
       className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden bg-brand-primary text-white pt-20 pb-10"
     >
-      {/* 1. Background Dasar Footer (Langit) */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <Image
           src="/images/bg-footer.svg"
@@ -99,29 +72,11 @@ export default function Footer() {
           priority
         />
       </div>
-
-      {/* 2. Burung Terbang (Area Atas) */}
-      <div className="absolute top-[10%] md:top-[15%] left-0 w-full h-[50%] z-[5] pointer-events-none">
-        <div className="burung-1 absolute top-[10%] left-0 w-16 h-16 md:w-24 md:h-24 opacity-80">
-          <Image
-            src="/images/burung1.svg"
-            alt="Burung Terbang"
-            fill
-            className="object-contain"
-          />
-        </div>
-        <div className="burung-2 absolute top-[30%] right-0 w-12 h-12 md:w-20 md:h-20 opacity-60">
-          <Image
-            src="/images/burung2.svg"
-            alt="Burung Terbang"
-            fill
-            className="object-contain"
-          />
-        </div>
+      <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
+        <HeroClouds />
       </div>
 
-      {/* 3. Bukit (Background / Midground) */}
-      <div className="absolute bottom-[15vh] md:bottom-[25vh] lg:bottom-[30vh] left-0 w-full h-[45vh] md:h-[70vh] z-10 pointer-events-none">
+      <div className="absolute bottom-[40vh] md:bottom-[35vh] lg:bottom-[30vh] left-0 w-full h-[30vh] md:h-[45vh] lg:h-[70vh] z-10 pointer-events-none">
         <Image
           src="/images/bukit.svg"
           alt="Bukit Footer"
@@ -131,8 +86,20 @@ export default function Footer() {
         />
       </div>
 
-      {/* 4. Jalan (Foreground Paling Depan) */}
-      <div className="absolute -bottom-3 left-0 w-full h-[20vh] md:h-[30vh] lg:h-[50vh] z-20 pointer-events-none">
+      <PineTree
+        alt="Pohon Pinus Kiri"
+        className="bottom-[50vh] md:bottom-[50vh] lg:bottom-[45vh] left-[15%] w-12 h-24 md:w-20 md:h-40 lg:w-32 lg:h-64 z-15"
+      />
+      <PineTree
+        alt="Pohon Pinus Tengah Kanan"
+        className="bottom-[50vh] md:bottom-[50vh] lg:bottom-[40vh] right-[38%] w-10 h-20 md:w-16 md:h-32 lg:w-24 lg:h-48 z-15 opacity-90"
+      />
+      <PineTree
+        alt="Pohon Pinus Kanan"
+        className="bottom-[45vh] md:bottom-[45vh] lg:bottom-[48vh] right-[32%] md:right-[25%] lg:right-[32%] w-14 h-28 md:w-24 md:h-48 lg:w-40 lg:h-60 z-15"
+      />
+
+      <div className="absolute bottom-[33vh] md:bottom-[27vh] lg:-bottom-3 left-0 w-full h-[15vh] md:h-[20vh] lg:h-[50vh] z-20 pointer-events-none">
         <Image
           src="/images/jalan-footer.svg"
           alt="Jalan Footer"
@@ -142,7 +109,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="absolute plang-petunjuk bottom-[22vh] md:bottom-[32vh] lg:bottom-[50vh] right-[10%] w-20 h-32 md:w-32 md:h-48 z-23 pointer-events-none flex justify-center origin-bottom">
+      <div className="absolute plang-petunjuk bottom-[50vh] md:bottom-[48vh] lg:bottom-[50vh] right-[0%] md:right-[5%] xl:right-[10%] w-12 h-20 md:w-16 md:h-28 lg:w-32 lg:h-48 z-25 pointer-events-none flex justify-center origin-bottom animate-swing">
         <Image
           src="/images/Plang.svg"
           alt="Plang Petunjuk Jalan"
@@ -151,8 +118,7 @@ export default function Footer() {
         />
       </div>
 
-      {/* 5. Bawah Jalan (Tanah / Bagian Bawah Aspal) */}
-      <div className="absolute bottom-[5vh] md:-bottom[10vh] lg:-bottom-[12vh] left-0 w-full h-[50vh] z-[30] pointer-events-none">
+      <div className="absolute -bottom-[5vh] md:-bottom-[4vh] lg:-bottom-[12vh] left-0 w-full h-[50vh] md:h-[40vh] lg:h-[50vh] z-30 pointer-events-none">
         <Image
           src="/images/bawahjalan.svg"
           alt="Bawah Jalan"
@@ -161,8 +127,27 @@ export default function Footer() {
         />
       </div>
 
-      <div className="absolute bottom-[15vh] md:bottom-[20vh] lg:bottom-[35vh] left-0 w-72 h-36 md:w-[400px] md:h-[200px] z-25 mobil-grup pointer-events-none">
-        {/* Tubuh Mobil */}
+      <PineTree
+        alt="Pohon Pinus Foreground"
+        className="bottom-[30vh] md:bottom-[6vh] lg:-bottom-[10vh] left-[30%] w-16 h-32 md:w-24 md:h-48 lg:w-40 lg:h-[28rem] z-30"
+      />
+
+      <div className="hidden lg:block absolute bottom-[35vh] left-0 w-[400px] h-[200px] z-25 mobil-grup pointer-events-none">
+        <div
+          className="absolute z-[-1]"
+          style={{
+            bottom: "-20px",
+            left: "5%",
+            width: "90%",
+            height: "40px",
+            background:
+              "radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 70%)",
+            borderRadius: "50%",
+            filter: "blur(6px)",
+            transform: "scaleY(0.5)",
+          }}
+        />
+
         <div className="absolute inset-0">
           <Image
             src="/images/mobil.svg"
@@ -172,46 +157,40 @@ export default function Footer() {
           />
         </div>
 
-        {/* Ban Depan */}
-        <div className="absolute bottom-[15px] md:-bottom-[5px] right-[45px] md:right-[35px] w-7 h-7 md:w-13 md:h-13 flex items-center justify-center">
+        <div className="absolute -bottom-[5px] right-[35px] w-13 h-13 flex items-center justify-center">
           <img
             src="/images/bandepan.svg"
             alt="Ban Depan"
-            className="ban-depan w-full h-full object-contain"
+            className="ban-mobil w-full h-full object-contain"
           />
         </div>
-
-        {/* Ban Belakang 1 */}
-        <div className="absolute bottom-[15px] md:-bottom-[5px] left-[32px] md:left-[30px] w-7 h-7 md:w-13 md:h-13 flex items-center justify-center">
+        <div className="absolute -bottom-[5px] left-[30px] w-13 h-13 flex items-center justify-center">
           <img
             src="/images/banbelakang1.svg"
             alt="Ban Belakang 1"
-            className="ban-belakang-1 w-full h-full object-contain"
+            className="ban-mobil w-full h-full object-contain"
           />
         </div>
-
-        {/* Ban Belakang 2 */}
-        <div className="absolute bottom-[15px] md:-bottom-[5px] left-[75px] md:left-[85px] w-7 h-7 md:w-13 md:h-13 flex items-center justify-center">
+        <div className="absolute -bottom-[5px] left-[85px] w-13 h-13 flex items-center justify-center">
           <img
             src="/images/banbelakang2.svg"
             alt="Ban Belakang 2"
-            className="ban-belakang-2 w-full h-full object-contain"
+            className="ban-mobil w-full h-full object-contain"
           />
         </div>
       </div>
 
-      {/* --- LAYER CONTENT --- */}
-      <div className="relative z-30 max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 flex flex-col mt-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 lg:gap-12 mb-12 md:mb-16 bg-black/10 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none backdrop-blur-sm md:backdrop-blur-none border border-white/10 md:border-transparent"></div>
-
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left drop-shadow-md">
-          <p className="text-white/80 font-medium text-sm tracking-tight">
+      <div className="relative z-60 max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 flex flex-col mt-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left drop-shadow-md">
+          <p className="order-2 lg:order-1 text-white/80 font-medium text-sm tracking-tight">
             © {new Date().getFullYear()} ECONIQ. Seluruh hak cipta dilindungi.
           </p>
 
-          <SocialLinks />
+          <div className="order-1 lg:order-2">
+            <SocialLinks />
+          </div>
 
-          <p className="text-white/80 font-medium text-sm tracking-tight">
+          <p className="order-3 lg:order-3 text-white/80 font-medium text-sm tracking-tight">
             Didesain & Dikembangkan oleh Bismillah Win
           </p>
         </div>

@@ -55,7 +55,6 @@ export default function TenantInteraction() {
 
   return (
     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] md:w-[100%] xl:w-[50%] aspect-[3/4] z-30 pointer-events-none">
-      {/* 1. Base Tenant */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[60%] flex justify-center items-end">
         <Image
           src="/images/Tenant.svg"
@@ -66,7 +65,6 @@ export default function TenantInteraction() {
         />
       </div>
 
-      {/* 2. Bagian Atap Tenant */}
       <div
         className="absolute top-[50%] left-1/2 -translate-x-1/2 w-[80%] h-[30%]"
         style={{ perspective: "800px" }}
@@ -98,12 +96,10 @@ export default function TenantInteraction() {
         </div>
       </div>
 
-      {/* 3. Bagian Depan Penutup Tenant */}
       <div
         className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[77%] h-[30%] pointer-events-auto"
         style={{ perspective: "800px" }}
       >
-        {/* Shadow Penutup Depan */}
         <div
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{
@@ -122,7 +118,6 @@ export default function TenantInteraction() {
           </div>
         </div>
 
-        {/* Gambar Penutup Depan Utama */}
         <div
           ref={penutupTenantRef}
           className="absolute inset-0 w-full h-full cursor-pointer md:cursor-default"

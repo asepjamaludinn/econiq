@@ -23,7 +23,6 @@ export default function NotFound() {
         </p>
       </div>
 
-      {/* Aksi & Kontak */}
       <div className="flex flex-col items-center gap-10 z-10">
         <Link
           href="/"

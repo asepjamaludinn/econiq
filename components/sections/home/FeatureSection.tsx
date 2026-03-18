@@ -27,7 +27,6 @@ export default function FeatureSection() {
 
   useGSAP(
     () => {
-      // 1. Animasi Background
       gsap.set(bgRef.current, {
         transformOrigin: "center center",
       });
@@ -45,7 +44,6 @@ export default function FeatureSection() {
         ease: "none",
       });
 
-      // 2. Animasi Reveal Teks dan Item
       let mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px)", () => {
@@ -103,7 +101,6 @@ export default function FeatureSection() {
         });
       });
 
-      // 3. Animasi Counter Angka Acak Berbasis Scroll
       gsap.to(
         { val: 0 },
         {
@@ -131,7 +128,6 @@ export default function FeatureSection() {
         },
       );
 
-      // 4. Animasi Rotasi Badge
       gsap.set(badgeRef.current, {
         rotation: -12,
         scale: 0.9,

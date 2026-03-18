@@ -41,7 +41,6 @@ export default function PrivacyPolicy() {
       className="min-h-screen bg-white text-foreground pt-32 pb-24 px-5 md:px-8 lg:px-10 xl:px-12"
     >
       <div className="max-w-[1400px] mx-auto w-full">
-        {/* Header Section */}
         <div className="privacy-header mb-12 md:mb-16 border-b border-zinc-200 pb-8 md:pb-12">
           <div className="flex items-center gap-3 mb-6"></div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-[80px] font-black tracking-tighter leading-[0.95] mb-6">

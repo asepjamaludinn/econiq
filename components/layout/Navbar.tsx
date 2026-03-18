@@ -113,7 +113,6 @@ export default function Navbar() {
           ref={menuRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          // 5. Tambahkan overscroll-none
           className="relative bg-brand-primary rounded-md lg:rounded-[15px] shadow-[0_8px_25px_rgba(102,13,255,0.3)] flex flex-col overflow-hidden w-full max-w-[360px] md:max-w-[320px] lg:max-w-none lg:w-fit pointer-events-auto overscroll-none"
         >
           <button

@@ -190,7 +190,6 @@ export default function AnimatedSideModal({
         aria-hidden="true"
       />
 
-      {/* Custom Cursor */}
       {isDesktopEnvironment && (
         <div
           ref={customCursorRef}
@@ -216,7 +215,6 @@ export default function AnimatedSideModal({
         </div>
       )}
 
-      {/* Modal Content */}
       <div
         ref={modalRef}
         role="dialog"

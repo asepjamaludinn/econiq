@@ -1,8 +1,8 @@
-import { forwardRef, RefObject } from "react";
+import { forwardRef, Ref } from "react";
 
 interface SvgBadgeStoresProps {
   className?: string;
-  countRef?: RefObject<SVGTSpanElement | null>;
+  countRef?: Ref<SVGTSpanElement>;
 }
 
 export const SvgBadgeStores = forwardRef<SVGSVGElement, SvgBadgeStoresProps>(
@@ -34,7 +34,8 @@ export const SvgBadgeStores = forwardRef<SVGSVGElement, SvgBadgeStoresProps>(
             letterSpacing="-0.04em"
             style={{ whiteSpace: "pre" }}
           >
-            <tspan ref={countRef as any} x="84" y="87.08">
+            {/* Sekarang aman tanpa 'as any' */}
+            <tspan ref={countRef} x="84" y="87.08">
               000+
             </tspan>
           </text>

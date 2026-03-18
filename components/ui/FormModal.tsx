@@ -10,6 +10,9 @@ import AnimatedSideModal from "./AnimatedSideModal";
 import type ReCAPTCHA_Type from "react-google-recaptcha";
 import { contactSchema, ContactInput } from "@/lib/validations/contact";
 import { Button } from "./Button";
+import InputField from "./InputField";
+import SelectField from "./SelectField";
+import TextAreaField from "./TextAreaField";
 
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
   ssr: false,
@@ -45,6 +48,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     register,
     handleSubmit,
     reset,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
@@ -137,102 +141,56 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        {/* Input Nama */}
-        <div className="modal-animate-item flex flex-col">
-          <input
-            {...register("name")}
-            type="text"
-            placeholder="Nama Lengkap"
-            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors ${
-              errors.name
-                ? "border-red-500"
-                : "border-transparent focus:border-brand-secondary/40"
-            }`}
-          />
-          {errors.name && (
-            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
-              {errors.name.message}
-            </span>
-          )}
-        </div>
+        <InputField
+          {...register("name")}
+          type="text"
+          placeholder="Nama Lengkap"
+          error={errors.name?.message}
+          clearError={() => clearErrors("name")}
+          wrapperClassName="modal-animate-item"
+        />
 
-        {/* Input Email */}
-        <div className="modal-animate-item flex flex-col">
-          <input
-            {...register("email")}
-            type="email"
-            placeholder="Alamat Email"
-            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors ${
-              errors.email
-                ? "border-red-500"
-                : "border-transparent focus:border-brand-secondary/40"
-            }`}
-          />
-          {errors.email && (
-            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
-              {errors.email.message}
-            </span>
-          )}
-        </div>
+        <InputField
+          {...register("email")}
+          type="email"
+          placeholder="Alamat Email"
+          error={errors.email?.message}
+          clearError={() => clearErrors("email")}
+          wrapperClassName="modal-animate-item"
+        />
 
-        {/* Select Minat */}
-        <div className="modal-animate-item flex flex-col">
-          <select
-            {...register("interest")}
-            className={`w-full bg-brand-light text-foreground p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors appearance-none cursor-pointer ${
-              errors.interest
-                ? "border-red-500"
-                : "border-transparent focus:border-brand-secondary/40"
-            }`}
-            style={{
-              backgroundImage: `url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2352525b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>')`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "right 1rem center",
-              backgroundSize: "1.2em",
-            }}
-          >
-            <option value="" disabled hidden>
-              Topik yang Ingin Dipelajari
-            </option>
-            <option value="Dasar Web3 & Blockchain">
-              Dasar Web3 & Blockchain
-            </option>
-            <option value="Keamanan Crypto Wallet">
-              Keamanan Crypto Wallet
-            </option>
-            <option value="Green Blockchain">
-              Green Blockchain & Keberlanjutan
-            </option>
-            <option value="Smart Contract">
-              Smart Contract & Pengembangan
-            </option>
-            <option value="Lainnya">Lainnya / Umum</option>
-          </select>
-          {errors.interest && (
-            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
-              {errors.interest.message}
-            </span>
-          )}
-        </div>
+        <SelectField
+          {...register("interest")}
+          error={errors.interest?.message}
+          clearError={() => clearErrors("interest")}
+          wrapperClassName="modal-animate-item"
+          placeholderText="Topik yang Ingin Dipelajari"
+          options={[
+            {
+              value: "Dasar Web3 & Blockchain",
+              label: "Dasar Web3 & Blockchain",
+            },
+            {
+              value: "Keamanan Crypto Wallet",
+              label: "Keamanan Crypto Wallet",
+            },
+            {
+              value: "Green Blockchain",
+              label: "Green Blockchain & Keberlanjutan",
+            },
+            { value: "Smart Contract", label: "Smart Contract & Pengembangan" },
+            { value: "Lainnya", label: "Lainnya / Umum" },
+          ]}
+        />
 
-        {/* Textarea Pesan */}
-        <div className="modal-animate-item flex flex-col">
-          <textarea
-            {...register("message")}
-            placeholder="Tulis motivasi bergabung atau hal yang ingin Anda tanyakan..."
-            rows={4}
-            className={`w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border transition-colors resize-none ${
-              errors.message
-                ? "border-red-500"
-                : "border-transparent focus:border-brand-secondary/40"
-            }`}
-          />
-          {errors.message && (
-            <span className="text-red-500 text-sm mt-1.5 ml-1 font-medium">
-              {errors.message.message}
-            </span>
-          )}
-        </div>
+        <TextAreaField
+          {...register("message")}
+          placeholder="Tulis motivasi bergabung atau hal yang ingin Anda tanyakan..."
+          rows={4}
+          error={errors.message?.message}
+          clearError={() => clearErrors("message")}
+          wrapperClassName="modal-animate-item"
+        />
 
         {/* Checkbox Persetujuan */}
         <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
@@ -240,6 +198,7 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             {...register("terms_agreed")}
             type="checkbox"
             id="terms"
+            onChange={() => clearErrors("terms_agreed")}
             className={`w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0 ${
               errors.terms_agreed ? "outline outline-1 outline-red-500" : ""
             }`}
