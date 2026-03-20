@@ -25,7 +25,7 @@ export default function AboutBigTypography() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 75%", // Animasi mulai saat section masuk 75% viewport
+            start: "top 75%",
             toggleActions: "play none none reverse",
           },
         }
@@ -37,13 +37,13 @@ export default function AboutBigTypography() {
   return (
     <section 
       ref={containerRef} 
-      className="py-32 md:py-48 bg-zinc-900 flex justify-center items-center px-6"
+      className="py-32 md:py-48 bg-transparent flex justify-center items-center px-6"
     >
       <h2 
         ref={textRef}
         className="text-5xl md:text-8xl lg:text-[110px] font-black uppercase text-center leading-[0.9] tracking-tighter"
       >
-        <span className="text-white">TRANSACT</span> <br />
+        <span>TRANSACT</span> <br />
         <span className="text-transparent bg-clip-text bg-linear-to-r from-[#B36EE6] to-[#660DFF]">
           ANYWHERE, ANYTIME
         </span>

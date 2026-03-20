@@ -54,7 +54,7 @@ export default function AboutInvestment() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full py-32 md:py-48 flex items-center overflow-hidden bg-[linear-gradient(to_bottom,var(--color-zinc-900),#000000)] lg:bg-[linear-gradient(to_right,var(--color-zinc-900)_40%,#000000_100%)]"
+      className="relative w-full py-32 md:py-48 flex items-center overflow-hidden bg-transparent"
     >
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-0 relative z-10">
         <div ref={textRef} className="relative z-30 flex flex-col justify-center pr-0 lg:pr-12">
@@ -64,12 +64,12 @@ export default function AboutInvestment() {
               HIGH YIELD.
             </span>
           </h2>
-          <p className="text-white/70 text-xl font-medium max-w-md leading-relaxed">
+          <p className="opacity-70 text-xl font-medium max-w-md leading-relaxed">
             Econiq removes the friction of traditional finance. Deploy your assets into our ecosystem with minimal fees and maximize your returns instantly.
           </p>
         </div>
         <div className="relative flex justify-center lg:justify-start items-center lg:-ml-16 xl:-ml-24">
-          <div ref={imageRef} className="relative z-20 w-full max-w-100 aspect-square rounded-[40px] bg-linear-to-br from-[#660DFF]/20 to-black/80 border border-white/10 backdrop-blur-xl shadow-[0_0_50px_rgba(102,13,255,0.3)] flex justify-center items-center">
+          <div ref={imageRef} className="relative z-20 w-full max-w-100 aspect-square rounded-[40px] bg-linear-to-br from-[#660DFF]/20 to-black/80 border border-current/10 backdrop-blur-xl shadow-[0_0_50px_rgba(102,13,255,0.3)] flex justify-center items-center">
              <Image 
                 src="/images/BitCoin.svg" 
                 alt="High Yield Asset" 
@@ -82,7 +82,6 @@ export default function AboutInvestment() {
              </div>
           </div>
         </div>
-
       </div>
     </section>
   );

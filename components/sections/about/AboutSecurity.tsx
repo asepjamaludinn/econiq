@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function AboutSecurity() {
   return (
-    <section className="py-32 bg-zinc-900 text-white text-center px-6 relative overflow-hidden">
+    <section className="py-32 bg-transparent text-center px-6 relative overflow-hidden">
       <div className="absolute w-150 h-150 bg-[#660DFF]/20 blur-[120px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <motion.div
@@ -18,11 +18,11 @@ export default function AboutSecurity() {
           Powered by <br /> <span className="text-[#B36EE6]">Modern Technology</span>
         </h2>
 
-        <div className="w-full h-75 md:h-112.5 bg-black/40 border border-white/10 rounded-[40px] flex flex-col items-center justify-center backdrop-blur-lg shadow-2xl">
-           <div className="w-20 h-20 bg-white/5 border border-white/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
+        <div className="w-full h-75 md:h-112.5 bg-black/10 border border-current/10 rounded-[40px] flex flex-col items-center justify-center backdrop-blur-lg shadow-2xl">
+           <div className="w-20 h-20 bg-black/5 border border-current/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
               <div className="w-10 h-10 bg-[#660DFF] rounded-full blur-sm" />
            </div>
-           <p className="text-white/50 font-bold uppercase tracking-widest text-sm">Infrastructure Visual</p>
+           <p className="opacity-50 font-bold uppercase tracking-widest text-sm">Infrastructure Visual</p>
         </div>
       </motion.div>
     </section>

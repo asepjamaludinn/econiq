@@ -10,7 +10,7 @@ export default function AboutTimeline() {
   ]
 
   return (
-    <section className="py-32 bg-black text-white px-6 relative border-t border-white/5">
+    <section className="py-32 bg-transparent px-6 relative border-t border-current/10">
       <h2 className="text-4xl md:text-6xl font-black text-center mb-24 uppercase tracking-wide">
         Our Journey
       </h2>
@@ -32,13 +32,13 @@ export default function AboutTimeline() {
             >
               <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-[#B36EE6] rounded-full -translate-x-1.75 md:-translate-x-1/2 mt-2 md:mt-0 shadow-[0_0_15px_#B36EE6]" />
               <div className="w-full md:w-5/12 pl-16 md:pl-0 flex flex-col">
-                <span className={`text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-linear-to-br from-white to-white/30 mb-2 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
+                <span className={`text-5xl md:text-6xl font-black opacity-40 mb-2 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
                   {i.year}
                 </span>
                 <h3 className={`text-xl font-bold text-[#B36EE6] mb-2 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
                   {i.title}
                 </h3>
-                <p className={`text-white/60 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
+                <p className={`opacity-60 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
                   {i.desc}
                 </p>
               </div>
