@@ -34,16 +34,15 @@ export default function AboutPage() {
         scrub: 1.5, 
       },
     });
-    tl.to(mainRef.current, { backgroundColor: "#1A0B2E", color: "#FFFFFF", duration: 1.5, ease: "power1.inOut" }) 
-      .to(mainRef.current, { backgroundColor: "#0b1021", color: "#FFFFFF", duration: 1.5, ease: "power1.inOut" });
+    tl.to(mainRef.current, { backgroundColor: "#1A0B2E", duration: 1.5, ease: "power1.inOut" }) 
+      .to(mainRef.current, { backgroundColor: "#0b1021", duration: 1.5, ease: "power1.inOut" });
 
   }, { scope: mainRef });
 
   return (
     <main 
-      ref={mainRef}
-      className="relative w-full min-h-screen overflow-hidden transition-colors duration-500"
-      style={{ backgroundColor: "#FDFBF7", color: "#000000" }}
+      ref={mainRef} 
+      className="relative w-full min-h-screen overflow-hidden transition-colors duration-500 bg-zinc-900 text-white"
     >
       <AboutHero />
       <AboutBigTypography />

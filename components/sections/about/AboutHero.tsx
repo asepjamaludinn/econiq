@@ -92,17 +92,6 @@ export default function AboutHero() {
       >
         <div className="absolute top-1/4 left-1/4 w-60 h-60 bg-[#660DFF]/30 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-60 h-60 bg-[#B36EE6]/20 blur-[100px] rounded-full pointer-events-none" />
-
-        <header className="w-full flex justify-between items-center px-6 md:px-12 py-6 relative z-20 text-white">
-           <div className="font-black text-xl tracking-widest">ECONIQ</div>
-           <div className="flex items-center gap-4">
-              <button className="hover:text-[#B36EE6] transition-colors"><Search size={20}/></button>
-              <button className="border border-[#660DFF] bg-[#660DFF]/10 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-[#660DFF] transition-all">
-                 Ecosystem
-              </button>
-           </div>
-        </header>
-
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-center px-4">
           <p className="text-[#B36EE6] font-bold tracking-widest uppercase mb-4 text-sm md:text-base border border-[#B36EE6]/30 px-4 py-1.5 rounded-full">
             The Digital Frontier
