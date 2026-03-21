@@ -4,18 +4,29 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLenis } from "lenis/react";
 
 export default function SplashScreen() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(true);
 
+  const lenis = useLenis();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    if (lenis) {
+      lenis.stop();
+    }
 
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+
+      if (lenis) lenis.start();
     };
-  }, []);
+  }, [lenis]);
 
   useGSAP(
     () => {
@@ -28,11 +39,17 @@ export default function SplashScreen() {
         ease: "power4.inOut",
         onComplete: () => {
           document.body.style.overflow = "";
+          document.documentElement.style.overflow = "";
+
+          if (lenis) {
+            lenis.start();
+          }
+
           setShow(false);
         },
       });
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [lenis] },
   );
 
   if (!show) return null;
@@ -40,7 +57,7 @@ export default function SplashScreen() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-999999 flex items-center justify-center bg-[#660DFF] w-screen h-screen"
+      className="fixed inset-0 z-999 flex items-center justify-center bg-brand-primary w-screen h-screen"
     >
       <Image
         src="/images/Logo.svg"
