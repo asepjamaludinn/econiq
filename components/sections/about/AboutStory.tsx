@@ -28,12 +28,12 @@ export default function AboutStory() {
           viewport={{ once: true }}
           className="relative w-full aspect-square md:aspect-4/5 bg-white/[0.02] rounded-[40px] overflow-hidden border border-white/5 backdrop-blur-2xl shadow-2xl"
         >
-          <Image alt='' src="/images/abstract3d.jpg" fill className="object-cover opacity-90 mix-blend-overlay" />
+          <Image alt='Ilustrasi Jaringan Edukasi' src="/images/abstract3d.jpg" fill className="object-cover opacity-90 mix-blend-overlay" />
           <div className="absolute inset-0 bg-brand-primary/20 mix-blend-overlay pointer-events-none" />
           <div className="absolute inset-0 bg-black/40" />
           
-          <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg" />
-          <div className="absolute top-10 right-10 w-20 h-20 bg-brand-tertiary/10 backdrop-blur-xl rounded-full border border-white/10 shadow-lg" />
+          <div className="absolute bottom-10 left-10 w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg" />
+          <div className="absolute top-10 right-10 w-16 h-16 md:w-20 md:h-20 bg-brand-tertiary/10 backdrop-blur-xl rounded-full border border-white/10 shadow-lg" />
         </motion.div>
 
         <motion.div
@@ -43,18 +43,18 @@ export default function AboutStory() {
           viewport={{ once: true }}
           className="flex flex-col"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-wide text-white">
-            Misi Kami
+          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-wide text-white leading-tight">
+            Misi Edukasi <br className="hidden md:block" /> Kami
           </h2>
           
           <div className="w-16 h-1 bg-gradient-to-r from-brand-tertiary to-brand-primary mb-10 rounded-full" />
 
           <p className="text-lg md:text-xl text-white/60 mb-6 leading-relaxed font-medium">
-            Econiq bertujuan untuk mendemokratisasi <i>financial technology</i> dengan membangun infrastruktur ekonomi modern yang mudah diakses, transparan, dan aman.
+            Econiq hadir sebagai pusat edukasi interaktif untuk mendemokratisasi pengetahuan <i>Web3</i> dan literasi finansial digital bagi semua kalangan.
           </p>
 
           <p className="text-lg md:text-xl text-white/60 leading-relaxed font-medium">
-            Kami menghubungkan <i>finance</i> tradisional dengan sistem yang terdesentralisasi untuk membuka peluang yang <i>scalable</i> bagi pengguna di seluruh dunia.
+            Kami menyederhanakan konsep <i>blockchain</i> yang rumit menjadi modul pembelajaran yang terstruktur, mudah diakses, dan relevan dengan perkembangan teknologi masa depan.
           </p>
         </motion.div>
 
