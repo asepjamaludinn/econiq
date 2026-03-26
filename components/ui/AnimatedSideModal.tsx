@@ -28,8 +28,9 @@ export default function AnimatedSideModal({
 
   const [isHoveringOverlay, setIsHoveringOverlay] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
-
   const [isDesktopEnvironment, setIsDesktopEnvironment] = useState(false);
+
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setIsDesktopEnvironment(window.matchMedia("(pointer: fine)").matches);
@@ -37,10 +38,16 @@ export default function AnimatedSideModal({
 
   useEffect(() => {
     if (isOpen) {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      if (lenis) lenis.stop();
+
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${currentScrollY}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       document.body.style.touchAction = "none";
-      lenis?.stop();
 
       const tl = gsap.timeline();
       tl.to(overlayRef.current, {
@@ -68,10 +75,16 @@ export default function AnimatedSideModal({
         "-=0.5",
       );
     } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       document.body.style.touchAction = "";
-      lenis?.start();
+
+      window.scrollTo(0, scrollY);
+
+      if (lenis) lenis.start();
 
       const tl = gsap.timeline();
       tl.to(modalRef.current, { x: "100%", duration: 0.6, ease: "power3.in" });
@@ -83,12 +96,15 @@ export default function AnimatedSideModal({
     }
 
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       document.body.style.touchAction = "";
-      lenis?.start();
+      if (lenis) lenis.start();
     };
-  }, [isOpen, lenis]);
+  }, [isOpen, lenis, scrollY]);
 
   useEffect(() => {
     if (isOpen && customCursorRef.current && isDesktopEnvironment) {
@@ -139,6 +155,7 @@ export default function AnimatedSideModal({
       };
     }
   }, [isOpen, isDesktopEnvironment]);
+
   useEffect(() => {
     if (!isOpen || !modalRef.current) return;
 
@@ -178,16 +195,16 @@ export default function AnimatedSideModal({
 
   return (
     <>
-      {/* Overlay */}
       <div
         ref={overlayRef}
         onClick={onClose}
         onMouseEnter={() => setIsHoveringOverlay(true)}
         onMouseLeave={() => setIsHoveringOverlay(false)}
-        className={`fixed inset-0 bg-black/50 z-[900] opacity-0 pointer-events-none ${
+        className={`fixed inset-0 bg-black/50 z-[900] opacity-0 pointer-events-none touch-none ${
           isDesktopEnvironment ? "cursor-none" : ""
         }`}
         aria-hidden="true"
+        data-lenis-prevent="true"
       />
 
       {isDesktopEnvironment && (
