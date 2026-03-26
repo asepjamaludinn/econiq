@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import SocialLinks from "@/components/ui/SocialLinks";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 
 const HeroClouds = dynamic(
   () => import("@/components/sections/home/hero/HeroClouds"),
@@ -28,6 +29,7 @@ const PineTree = ({ className, alt }: { className: string; alt: string }) => (
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useGSAP(
     () => {
@@ -55,7 +57,8 @@ export default function Footer() {
         force3D: true,
       });
     },
-    { scope: footerRef },
+
+    { scope: footerRef, dependencies: [pathname] },
   );
 
   return (
@@ -63,6 +66,7 @@ export default function Footer() {
       ref={footerRef}
       className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden bg-brand-primary text-white pt-20 pb-10"
     >
+      {/* 1. Background Dasar & Awan */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <Image
           src="/images/bg-footer.svg"
@@ -76,6 +80,7 @@ export default function Footer() {
         <HeroClouds />
       </div>
 
+      {/* 2. Bukit */}
       <div className="absolute bottom-[40vh] md:bottom-[35vh] lg:bottom-[30vh] left-0 w-full h-[30vh] md:h-[45vh] lg:h-[70vh] z-10 pointer-events-none">
         <Image
           src="/images/bukit.svg"
@@ -86,6 +91,7 @@ export default function Footer() {
         />
       </div>
 
+      {/* 3. Pohon Pinus Background */}
       <PineTree
         alt="Pohon Pinus Kiri"
         className="bottom-[50vh] md:bottom-[50vh] lg:bottom-[45vh] left-[15%] w-12 h-24 md:w-20 md:h-40 lg:w-32 lg:h-64 z-15"
@@ -99,6 +105,7 @@ export default function Footer() {
         className="bottom-[45vh] md:bottom-[45vh] lg:bottom-[48vh] right-[32%] md:right-[25%] lg:right-[32%] w-14 h-28 md:w-24 md:h-48 lg:w-40 lg:h-60 z-15"
       />
 
+      {/* 4. Jalan */}
       <div className="absolute bottom-[33vh] md:bottom-[27vh] lg:-bottom-3 left-0 w-full h-[15vh] md:h-[20vh] lg:h-[50vh] z-20 pointer-events-none">
         <Image
           src="/images/jalan-footer.svg"
@@ -109,6 +116,7 @@ export default function Footer() {
         />
       </div>
 
+      {/* 5. Plang Petunjuk  */}
       <div className="absolute plang-petunjuk bottom-[50vh] md:bottom-[48vh] lg:bottom-[50vh] right-[0%] md:right-[5%] xl:right-[10%] w-12 h-20 md:w-16 md:h-28 lg:w-32 lg:h-48 z-25 pointer-events-none flex justify-center origin-bottom animate-swing">
         <Image
           src="/images/Plang.svg"
@@ -118,7 +126,8 @@ export default function Footer() {
         />
       </div>
 
-      <div className="absolute -bottom-[5vh] md:-bottom-[4vh] lg:-bottom-[14vh] left-0 w-full h-[50vh] md:h-[40vh] lg:h-[51vh] z-30 pointer-events-none">
+      {/* 6. Bawah Jalan */}
+      <div className="absolute -bottom-[5vh] md:-bottom-[4vh] lg:-bottom-[12vh] left-0 w-full h-[50vh] md:h-[40vh] lg:h-[50vh] z-30 pointer-events-none">
         <Image
           src="/images/bawahjalan.svg"
           alt="Bawah Jalan"
@@ -127,12 +136,15 @@ export default function Footer() {
         />
       </div>
 
+      {/* 7. Pohon Pinus Foreground */}
       <PineTree
         alt="Pohon Pinus Foreground"
         className="bottom-[30vh] md:bottom-[6vh] lg:-bottom-[10vh] left-[30%] w-16 h-32 md:w-24 md:h-48 lg:w-40 lg:h-[28rem] z-30"
       />
 
+      {/* 8. Grup Mobil */}
       <div className="hidden lg:block absolute bottom-[35vh] left-0 w-[400px] h-[200px] z-25 mobil-grup pointer-events-none">
+        {/* Shadow Mobil */}
         <div
           className="absolute z-[-1]"
           style={{
@@ -157,6 +169,7 @@ export default function Footer() {
           />
         </div>
 
+        {/* Ban Mobil */}
         <div className="absolute -bottom-[5px] right-[35px] w-13 h-13 flex items-center justify-center">
           <img
             src="/images/bandepan.svg"
