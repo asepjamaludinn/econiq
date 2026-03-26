@@ -111,7 +111,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen h-[100dvh] flex flex-col items-center justify-start overflow-hidden bg-brand-secondary md:bg-transparent"
+      className="relative w-full h-screen flex flex-col items-center justify-start overflow-hidden bg-brand-secondary md:bg-transparent"
     >
       <div className="hidden md:block absolute inset-0 w-full h-full z-0">
         <Image
@@ -144,7 +144,7 @@ export default function HeroSection() {
             alt="Rumah Kiri"
             aria-hidden="true"
             fill
-            className="object-contain object-left-bottom"
+            className="object-contain object-bottom-left"
             priority
           />
         </div>
@@ -154,7 +154,7 @@ export default function HeroSection() {
             alt="Rumah Kanan"
             aria-hidden="true"
             fill
-            className="object-contain object-right-bottom"
+            className="object-contain object-bottom-right"
             priority
           />
         </div>
@@ -170,7 +170,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kiri"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-left-bottom"
+              className="object-cover xl:object-contain object-bottom-left"
               priority
             />
           </div>
@@ -181,7 +181,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kanan"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-right-bottom"
+              className="object-cover xl:object-contain object-bottom-right"
               priority
             />
           </div>
@@ -206,7 +206,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-[80px] aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
+      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-20 aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
         <CatAnimation />
       </div>
 
@@ -239,7 +239,7 @@ export default function HeroSection() {
 
       <div
         ref={arrowRef}
-        className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-[80] animate-bounce pointer-events-none"
+        className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-80 animate-bounce pointer-events-none"
       >
         <div className="w-12 h-12 md:w-14 md:h-14 bg-brand-primary rounded-[14px] md:rounded-[18px] flex items-center justify-center">
           <ArrowDown size={28} strokeWidth={2.5} className="text-white" />
