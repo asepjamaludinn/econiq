@@ -102,31 +102,29 @@ export default function CustomVideoPlayer({
       </video>
 
       {/* Video Controls Wrapper */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20 w-full max-w-[90%] justify-center pointer-events-none">
         <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden flex items-center ${
-            showControls
-              ? "max-w-[500px] opacity-100"
-              : "max-w-0 opacity-0 pointer-events-none"
+          className={`transition-all duration-500 ease-in-out overflow-hidden flex items-center pointer-events-auto ${
+            showControls ? "max-w-[400px] opacity-100" : "max-w-0 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="bg-white rounded-[20px] flex items-center h-12 px-5 shadow-lg gap-4 w-max">
+          <div className="bg-white/95 backdrop-blur rounded-[15px] flex items-center h-10 md:h-11 px-4 shadow-xl gap-4 w-max border border-white/20">
             <button
               onClick={togglePlay}
               className="cursor-pointer text-brand-primary hover:opacity-80 transition-opacity flex-shrink-0"
             >
               {isPlaying ? (
-                <Pause size={20} fill="currentColor" strokeWidth={0} />
+                <Pause size={18} fill="currentColor" strokeWidth={0} />
               ) : (
-                <Play size={20} fill="currentColor" strokeWidth={0} />
+                <Play size={18} fill="currentColor" strokeWidth={0} />
               )}
             </button>
 
             <div
               ref={progressBarRef}
               onClick={handleSeek}
-              className="w-32 sm:w-48 h-1.5 bg-brand-primary/20 rounded-full cursor-pointer relative"
+              className="w-24 sm:w-40 h-1 bg-brand-primary/20 rounded-full cursor-pointer relative"
             >
               <div
                 className="absolute top-0 left-0 h-full bg-brand-primary rounded-full"
@@ -134,7 +132,7 @@ export default function CustomVideoPlayer({
               />
             </div>
 
-            <span className="text-brand-primary font-bold text-sm tabular-nums flex-shrink-0">
+            <span className="text-brand-primary font-bold text-[12px] tabular-nums flex-shrink-0">
               {formatTime(currentTime)}
             </span>
           </div>
@@ -144,24 +142,18 @@ export default function CustomVideoPlayer({
           role="button"
           tabIndex={0}
           onClick={handleVolumeClick}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handleVolumeClick(e);
-            }
-          }}
-          className="bg-white rounded-[20px] flex items-center justify-center h-12 w-12 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          className="bg-white/95 backdrop-blur rounded-[15px] flex items-center justify-center h-10 w-10 md:h-11 md:w-11 shadow-lg cursor-pointer hover:scale-105 transition-transform flex-shrink-0 pointer-events-auto border border-white/20"
         >
           {isMuted ? (
             <VolumeX
               className="text-brand-primary"
-              size={20}
+              size={18}
               strokeWidth={2.5}
             />
           ) : (
             <Volume2
               className="text-brand-primary"
-              size={20}
+              size={18}
               strokeWidth={2.5}
             />
           )}

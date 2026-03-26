@@ -68,7 +68,7 @@ export default function ContentCTA() {
             onClick={openFormModal}
             className="relative z-10 group shadow-xl"
           >
-            Berlangganan Informasi
+            Mulai Belajar
           </Button>
         </div>
       </div>
