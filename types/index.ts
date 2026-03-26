@@ -61,3 +61,17 @@ export interface CustomVideoPlayerProps {
 export interface HangingSignProps {
   text: string;
 }
+
+export type AboutFeatureData = {
+  icon: ElementType;
+  title: string;
+  desc: string;
+  colorA: string;
+  colorB: string;
+};
+
+export interface TimelineItemData {
+  year: string;
+  title: string;
+  desc: string;
+}
