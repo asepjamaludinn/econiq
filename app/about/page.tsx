@@ -1,33 +1,28 @@
-"use client";
-
+import type { Metadata } from "next";
 import AboutHero from "@/components/sections/about/AboutHero";
-import AboutBigTypography from "@/components/sections/about/AboutBigTypography";
+import ContentCTA from "@/components/sections/content/ContentCTA";
 import AboutProductShowcase from "@/components/sections/about/AboutProductShowcase";
-import AboutInvestment from "@/components/sections/about/AboutInvestment";
 import AboutMonitoring from "@/components/sections/about/AboutMonitoring";
-import AboutStory from "@/components/sections/about/AboutStory";
-import AboutFeatures from "@/components/sections/about/AboutFeatures";
-import AboutSecurity from "@/components/sections/about/AboutSecurity";
+import AboutPlatform from "@/components/sections/about/AboutPlatform";
 import AboutMarquee from "@/components/sections/about/AboutMarquee";
 import AboutTimeline from "@/components/sections/about/AboutTimeline";
-import AboutCTA from "@/components/sections/about/AboutCTA";
+
+export const metadata: Metadata = {
+  title: "About Us | Eqonic",
+  description:
+    "Kenali lebih jauh tentang Eqonic dan misi kami dalam membangun literasi keuangan digital Web3.",
+};
 
 export default function AboutPage() {
   return (
-    <main className="relative w-full min-h-screen bg-zinc-900 text-white selection:bg-brand-secondary selection:text-white pb-0">
+    <main className="w-full min-h-screen bg-white overflow-hidden">
       <AboutHero />
-      <AboutBigTypography />
       <AboutProductShowcase />
-      <AboutInvestment />
       <AboutMonitoring />
-      <AboutStory />
-      <AboutFeatures />
-      <AboutSecurity />
+      <AboutPlatform />
       <AboutMarquee />
-      <div className="w-full bg-gradient-to-b from-zinc-900 via-zinc-900/60 to-grad-end">
-        <AboutTimeline />
-        <AboutCTA />
-      </div>
+      <AboutTimeline />
+      <ContentCTA />
     </main>
   );
 }
