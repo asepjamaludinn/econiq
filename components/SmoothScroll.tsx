@@ -22,7 +22,6 @@ export default function SmoothScroll({
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
     }
-
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
@@ -36,7 +35,7 @@ export default function SmoothScroll({
       lenisRef.current.lenis.scrollTo(0, { immediate: true });
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 800); 
+      }, 500); 
     }
   }, [pathname]);
 
@@ -45,7 +44,7 @@ export default function SmoothScroll({
       ref={lenisRef}
       autoRaf={false}
       root
-      options={{ lerp: 0.08, duration: 1.5, syncTouch: true }}
+      options={{ lerp: 0.09, duration: 1.5, syncTouch: true, smoothWheel: true }}
     >
       {children}
     </ReactLenis>

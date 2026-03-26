@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 if (typeof window !== "undefined") {
@@ -12,119 +12,112 @@ if (typeof window !== "undefined") {
 
 export default function AboutProductShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
-  const textElementsRef = useRef<(HTMLElement | null)[]>([]);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-
-      gsap.fromTo(
-        textElementsRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 60%", 
-          },
-        }
-      );
-
-      mm.add("(min-width: 1024px)", () => {
-        imagesRef.current.forEach((img, index) => {
-          if (!img) return;
-          const speed = parseFloat(img.getAttribute("data-speed") || "1");
-          
-          gsap.to(img, {
-            yPercent: -30 * speed,
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.5,
-            },
-          });
-
-          gsap.to(img, {
-            y: "+=15",
-            duration: 2 + index * 0.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            force3D: true,
-          });
-        });
-      });
-
-      return () => mm.revert();
-    },
-    { scope: containerRef }
-  );
-
-  const addToImages = (el: HTMLDivElement | null) => {
-    if (el && !imagesRef.current.includes(el)) imagesRef.current.push(el);
-  };
+  const textRefs = useRef<HTMLElement[]>([]);
+  const imageRefs = useRef<HTMLDivElement[]>([]);
 
   const addToText = (el: HTMLElement | null) => {
-    if (el && !textElementsRef.current.includes(el)) textElementsRef.current.push(el);
+    if (el && !textRefs.current.includes(el)) {
+      textRefs.current.push(el);
+    }
   };
 
+  const addToImages = (el: HTMLDivElement | null) => {
+    if (el && !imageRefs.current.includes(el)) {
+      imageRefs.current.push(el);
+    }
+  };
+
+  useGSAP(() => {
+    imageRefs.current.forEach((img) => {
+      const speed = img.getAttribute("data-speed") || "1";
+      gsap.to(img, {
+        yPercent: -20 * parseFloat(speed),
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+
+    textRefs.current.forEach((text, i) => {
+      gsap.from(text, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: text,
+          start: "top 85%",
+        },
+      });
+    });
+  }, { scope: containerRef });
+
   return (
-    <section ref={containerRef} className="relative w-full bg-transparent px-6 md:px-12 py-24 pb-48">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start relative">
+    <section ref={containerRef} className="py-24 md:py-48 px-6 bg-transparent relative z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
         
-        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-6 relative pt-10 pb-32">
-          <div ref={addToImages} data-speed="1.2" className="mt-32 relative group will-change-transform">
-            <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-[#B36EE6] shadow-lg">
-              24/7 Uptime
+        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-6 relative pt-4 md:pt-10 pb-16 md:pb-32">
+          
+          <div ref={addToImages} data-speed="1.2" className="mt-12 md:mt-32 relative group transform-gpu h-[250px] md:h-auto">
+            <div className="absolute top-2 left-2 md:top-4 md:left-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-bold text-brand-tertiary shadow-lg">
+              Uptime 24/7
             </div>
-            <div className="w-full aspect-4/5 bg-black/10 border border-current/10 rounded-4xl flex justify-center items-center overflow-hidden hover:border-[#660DFF]/50 transition-colors duration-500">
-              <Image src="/images/Dompet.svg" alt="Wallet" width={150} height={150} className="group-hover:scale-110 transition-transform duration-700 ease-out drop-shadow-2xl" />
+            
+            <div className="w-full h-full md:h-80 bg-zinc-800 rounded-2xl md:rounded-[32px] overflow-hidden relative border border-white/10 shadow-2xl">
+              
+              <Image 
+                src="/images/Dompet.svg"
+                alt="Econiq Feature 1" 
+                fill 
+                className="object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
+              />
+              
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/40 to-transparent mix-blend-overlay pointer-events-none" />
             </div>
           </div>
 
-          <div ref={addToImages} data-speed="0.7" className="relative group will-change-transform">
-             <div className="absolute top-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-[#B36EE6] shadow-lg">
-              Instant Sync
+          <div ref={addToImages} data-speed="0.7" className="relative group transform-gpu h-[250px] md:h-auto">
+             <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-bold text-brand-tertiary shadow-lg">
+              Sync Instan
             </div>
-            <div className="w-full aspect-square bg-linear-to-br from-[#660DFF]/10 to-transparent border border-[#660DFF]/20 rounded-4xl flex justify-center items-center overflow-hidden hover:border-[#B36EE6]/50 transition-colors duration-500">
-               <Image src="/images/BitCoin.svg" alt="Crypto" width={120} height={120} className="group-hover:scale-110 transition-transform duration-700 ease-out drop-shadow-2xl" />
-            </div>
-          </div>
 
-          <div ref={addToImages} data-speed="1.6" className="col-span-2 relative group mt-12 will-change-transform">
-            <div className="w-full h-72 bg-black/10 backdrop-blur-md border border-current/10 rounded-4xl flex justify-center items-center overflow-hidden hover:border-[#660DFF]/50 transition-colors duration-500 shadow-2xl">
-               <Image src="/images/card.svg" alt="Card" width={220} height={220} className="group-hover:scale-110 transition-transform duration-700 ease-out opacity-90 drop-shadow-2xl" />
+            <div className="w-full h-full md:h-96 bg-zinc-800 rounded-2xl md:rounded-[32px] overflow-hidden relative border border-white/10 shadow-2xl">
+               
+               <Image 
+                src="/images/BitCoin.svg" 
+                alt="Econiq Feature 2" 
+                fill 
+                className="object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
+              />
+
+               <div className="absolute inset-0 bg-gradient-to-bl from-brand-tertiary/40 to-transparent mix-blend-overlay pointer-events-none" />
             </div>
           </div>
         </div>
 
-        <div className="w-full lg:w-1/2 lg:sticky lg:top-40 flex flex-col justify-center">
+        <div className="w-full lg:w-1/2 lg:sticky lg:top-40 flex flex-col justify-center self-start">
           <div className="max-w-lg">
-            <div ref={addToText} className="w-16 h-1 bg-linear-to-r from-[#B36EE6] to-[#660DFF] mb-10 rounded-full" />
+            <div ref={addToText} className="w-16 h-1 bg-gradient-to-r from-brand-tertiary to-brand-primary mb-8 md:mb-10 rounded-full" />
             
-            <h3 ref={addToText} className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.1] mb-8">
-              Empowering Your <br/> 
-              <span className="opacity-50">
-                Digital Assets
+            <h3 ref={addToText} className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.1] mb-6 md:mb-8 text-white">
+              Memberdayakan <br/> 
+              <span className="text-white/50">
+                Digital Assets Kamu
               </span>
             </h3>
             
-            <p ref={addToText} className="opacity-70 text-lg md:text-xl leading-relaxed mb-10 font-medium">
-              Seamlessly connect your physical and digital economy. Our infrastructure ensures high-speed execution, top-tier security, and real-time monitoring directly from your dashboard.
+            <p ref={addToText} className="text-white/70 text-base md:text-xl leading-relaxed mb-8 md:mb-10 font-medium">
+              Hubungkan ekonomi fisik dan digitalmu secara mulus. Infrastruktur kami menjamin <i>execution</i> berkecepatan tinggi, keamanan <i>top-tier</i>, dan <i>real-time monitoring</i> langsung dari <i>dashboard</i> kamu.
             </p>
             
-            <ul className="space-y-6">
-              {['Smart Contract Integration', 'Cross-border Payments', 'Decentralized Identity'].map((item, i) => (
-                <li key={i} ref={addToText} className="flex items-center gap-4 opacity-90 font-bold text-lg">
-                  <div className="w-3 h-3 rounded-full bg-linear-to-tr from-[#660DFF] to-[#B36EE6] shadow-[0_0_10px_#B36EE6]" />
+            <ul className="space-y-4 md:space-y-6">
+              {['Integrasi Smart Contract', 'Pembayaran Cross-border', 'Decentralized Identity'].map((item, i) => (
+                <li key={i} ref={addToText} className="flex items-center gap-4 text-white/90 font-bold text-base md:text-lg">
+                  <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-tr from-brand-primary to-brand-tertiary shadow-[0_0_10px_var(--color-brand-tertiary)]" />
                   {item}
                 </li>
               ))}

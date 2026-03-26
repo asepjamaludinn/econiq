@@ -1,10 +1,5 @@
 "use client";
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
 import AboutHero from "@/components/sections/about/AboutHero";
 import AboutBigTypography from "@/components/sections/about/AboutBigTypography";
 import AboutProductShowcase from "@/components/sections/about/AboutProductShowcase";
@@ -17,32 +12,9 @@ import AboutMarquee from "@/components/sections/about/AboutMarquee";
 import AboutTimeline from "@/components/sections/about/AboutTimeline";
 import AboutCTA from "@/components/sections/about/AboutCTA";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function AboutPage() {
-  const mainRef = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-
-    tl.to(mainRef.current, { backgroundColor: "#1A0B2E", duration: 1, ease: "none" })
-      .to(mainRef.current, { backgroundColor: "#660dff", duration: 1, ease: "power2.inOut" });
-  }, { scope: mainRef });
-
   return (
-    <main 
-      ref={mainRef} 
-      className="relative z-20 w-full min-h-screen overflow-x-hidden bg-zinc-900 text-white"
-    >
+    <main className="relative w-full min-h-screen bg-zinc-900 text-white selection:bg-brand-secondary selection:text-white pb-0">
       <AboutHero />
       <AboutBigTypography />
       <AboutProductShowcase />
@@ -52,11 +24,10 @@ export default function AboutPage() {
       <AboutFeatures />
       <AboutSecurity />
       <AboutMarquee />
-      <AboutTimeline />
-      <div className="relative z-10 pb-20">
+      <div className="w-full bg-gradient-to-b from-zinc-900 via-zinc-900/60 to-grad-end">
+        <AboutTimeline />
         <AboutCTA />
       </div>
-      <div className="absolute -bottom-40 left-0 w-full h-40 bg-linear-to-b from-brand-primary to-transparent z-50 pointer-events-none" />
     </main>
   );
 }
