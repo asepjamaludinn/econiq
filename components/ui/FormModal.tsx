@@ -105,6 +105,11 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
             "Terjadi kesalahan pada server. Silakan coba lagi.",
         );
         setSubmitStatus("error");
+
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+          setCaptchaValue(null);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -112,6 +117,11 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
         "Gagal terhubung ke server. Harap periksa koneksi jaringan Anda.",
       );
       setSubmitStatus("error");
+
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+        setCaptchaValue(null);
+      }
     }
   };
 
@@ -192,7 +202,6 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
           wrapperClassName="modal-animate-item"
         />
 
-        {/* Checkbox Persetujuan */}
         <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
           <input
             {...register("terms_agreed")}
