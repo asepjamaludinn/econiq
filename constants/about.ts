@@ -1,5 +1,5 @@
 import { BookOpen, ShieldCheck, LineChart } from "lucide-react";
-import { ElementType } from "react";
+import { AboutFeatureData, TimelineItemData } from "@/types";
 
 export const cryptoLogos = [
   { name: "Bitcoin", src: "/images/BTC.svg" },
@@ -10,14 +10,6 @@ export const cryptoLogos = [
   { name: "Polygon", src: "/images/polygon.svg" },
   { name: "Shiba Inu", src: "/images/Shiba Inu.svg" },
 ];
-
-export type AboutFeatureData = {
-  icon: ElementType;
-  title: string;
-  desc: string;
-  colorA: string;
-  colorB: string;
-};
 
 export const aboutMonitoringFeatures: AboutFeatureData[] = [
   {
@@ -52,12 +44,6 @@ export const marqueeItems = [
   "BLOCKCHAIN",
   "INOVASI",
 ];
-
-export interface TimelineItemData {
-  year: string;
-  title: string;
-  desc: string;
-}
 
 export const aboutTimelineSteps: TimelineItemData[] = [
   {
