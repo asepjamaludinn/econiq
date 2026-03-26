@@ -111,9 +111,8 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen h-[100dvh] flex flex-col items-center justify-start overflow-hidden bg-brand-secondary md:bg-transparent"
+      className="relative w-full h-screen flex flex-col items-center justify-start overflow-hidden bg-brand-secondary md:bg-transparent"
     >
-      {/* 1. Latar Belakang (Langit) */}
       <div className="hidden md:block absolute inset-0 w-full h-full z-0">
         <Image
           src="/images/Biru langit.svg"
@@ -125,22 +124,19 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* 2. Partikel & Dekorasi (Awan/Daun)  */}
       <div className="hidden md:block">
         <HeroClouds />
       </div>
 
       <AnimatedLeaves />
 
-      {/* 4. Headline */}
-      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] max-w-3xl lg:max-w-5xl xl:max-w-7xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-black uppercase tracking-normal leading-[1.1] text-white drop-shadow-lg">
+      <div className="absolute top-[18%] md:top-[12%] lg:top-[10%] left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] max-w-3xl lg:max-w-5xl xl:max-w-7xl z-50 pointer-events-none flex flex-col items-center justify-center text-center">
+        <h1 className="text-[clamp(32px,8vw,48px)] md:text-5xl lg:text-6xl xl:text-5xl font-black uppercase tracking-normal leading-[1.15] text-white drop-shadow-lg mt-8 md:mt-0">
           {heroData.titleLine1} <br className="hidden md:block" />
           <span className="text-white">{heroData.titleLine2}</span>
         </h1>
       </div>
 
-      {/* 5. Midground (Rumah & Bangunan) */}
       <div className="nempel-jalan absolute bottom-[10%] w-full h-full z-20">
         <div className="hidden xl:block absolute bottom-0 -left-[14.8%] w-[40%] h-[80%] z-20 pointer-events-none">
           <Image
@@ -148,7 +144,7 @@ export default function HeroSection() {
             alt="Rumah Kiri"
             aria-hidden="true"
             fill
-            className="object-contain object-left-bottom"
+            className="object-contain object-bottom-left"
             priority
           />
         </div>
@@ -158,7 +154,7 @@ export default function HeroSection() {
             alt="Rumah Kanan"
             aria-hidden="true"
             fill
-            className="object-contain object-right-bottom"
+            className="object-contain object-bottom-right"
             priority
           />
         </div>
@@ -174,7 +170,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kiri"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-left-bottom"
+              className="object-cover xl:object-contain object-bottom-left"
               priority
             />
           </div>
@@ -185,7 +181,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kanan"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-right-bottom"
+              className="object-cover xl:object-contain object-bottom-right"
               priority
             />
           </div>
@@ -194,7 +190,6 @@ export default function HeroSection() {
         <TenantInteraction />
       </div>
 
-      {/* 6. Foreground (Jalan) */}
       <div
         className="absolute bottom-0 left-0 w-full h-[10%] z-40 pointer-events-none"
         style={{ perspective: "1000px" }}
@@ -211,8 +206,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* 7. Karakter & Animasi */}
-      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-[80px] aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
+      <div className="hidden md:flex nempel-jalan absolute bottom-4 left-[14%] w-20 aspect-[1/1.2] z-40 pointer-events-none flex-col items-center">
         <CatAnimation />
       </div>
 
@@ -220,7 +214,6 @@ export default function HeroSection() {
         <WalkingMan />
       </div>
 
-      {/* 8. Pagar & Overlay */}
       <div
         ref={pagarRef}
         className="absolute bottom-0 left-0 w-full h-[15%] xl:h-[20%] z-60 pointer-events-none origin-bottom will-change-transform"
@@ -244,10 +237,9 @@ export default function HeroSection() {
         <div className="absolute top-full left-0 w-full h-[50vh] bg-brand-tertiary"></div>
       </div>
 
-      {/* 9. Arrow Down */}
       <div
         ref={arrowRef}
-        className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-[80] animate-bounce pointer-events-none"
+        className="absolute bottom-[4%] md:bottom-[6%] inset-x-0 mx-auto w-fit z-80 animate-bounce pointer-events-none"
       >
         <div className="w-12 h-12 md:w-14 md:h-14 bg-brand-primary rounded-[14px] md:rounded-[18px] flex items-center justify-center">
           <ArrowDown size={28} strokeWidth={2.5} className="text-white" />

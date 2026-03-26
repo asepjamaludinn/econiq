@@ -1,6 +1,4 @@
-interface HangingSignProps {
-  text: string;
-}
+import { HangingSignProps } from "@/types";
 
 export default function HangingSign({ text }: HangingSignProps) {
   return (

@@ -8,6 +8,9 @@ import { useGSAP } from "@gsap/react";
 import { Unlock, TrendingUp, Zap, Globe } from "lucide-react";
 import { featuresData } from "@/constants";
 import CustomVideoPlayer from "@/components/ui/CustomVideoPlayer";
+import { SvgBadgeStores } from "@/components/icons/SvgBadgeStores";
+import { buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -24,7 +27,6 @@ export default function FeatureSection() {
 
   useGSAP(
     () => {
-      // 1. Animasi Background
       gsap.set(bgRef.current, {
         transformOrigin: "center center",
       });
@@ -42,7 +44,6 @@ export default function FeatureSection() {
         ease: "none",
       });
 
-      // 2. Animasi Reveal Teks dan Item
       let mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px)", () => {
@@ -100,7 +101,6 @@ export default function FeatureSection() {
         });
       });
 
-      // 3. Animasi Counter Angka Acak Berbasis Scroll
       gsap.to(
         { val: 0 },
         {
@@ -128,7 +128,6 @@ export default function FeatureSection() {
         },
       );
 
-      // 4. Animasi Rotasi Badge
       gsap.set(badgeRef.current, {
         rotation: -12,
         scale: 0.9,
@@ -167,66 +166,23 @@ export default function FeatureSection() {
         >
           <div className="relative inline-block w-full text-left sm:text-center mb-6 sm:mb-8 -mt-10 sm:mt-0">
             <h2 className="text-[44px] md:text-[64px] lg:text-[80px] xl:text-[96px] leading-[1.05] md:leading-[1.1] font-black uppercase tracking-normal text-white drop-shadow-md relative z-10">
-              <div className="reveal-item opacity-0">THE NEXT GENERATION</div>
-              <div className="reveal-item opacity-0">OF DIGITAL FINANCE</div>
-              <div className="reveal-item opacity-0">STARTS WITH</div>
+              <div className="reveal-item opacity-0">GENERASI BARU</div>
+              <div className="reveal-item opacity-0">KEUANGAN DIGITAL</div>
+              <div className="reveal-item opacity-0">DIMULAI DARI</div>
               <div className="reveal-item opacity-0">ECONIQ</div>
             </h2>
 
             <div
-              className="reveal-item opacity-0 absolute pointer-events-none drop-shadow-2xl z-20 
-              w-20 h-20 -top-4 right-0 
-              sm:w-24 sm:h-24 sm:-top-6 sm:-right-12 
-              md:w-32 md:h-32 md:-top-30 md:-right-5
-              lg:w-36 lg:h-36 lg:-top-35 lg:-right-5
-              xl:w-44 xl:h-44 xl:-top-30 xl:-right-10"
+              className={cn(
+                "reveal-item opacity-0 absolute pointer-events-none drop-shadow-2xl z-20",
+                "w-20 h-20 -top-20 right-0",
+                "sm:w-24 sm:h-24 sm:-top-6 sm:-right-12",
+                "md:w-32 md:h-32 md:-top-30 md:-right-5",
+                "lg:w-36 lg:h-36 lg:-top-30 lg:-right-0",
+                "xl:w-44 xl:h-44 xl:-top-30 xl:right-5",
+              )}
             >
-              <svg
-                ref={badgeRef}
-                viewBox="0 0 168 168"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full"
-                style={{ opacity: 0.95 }}
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g>
-                  <path
-                    d="M84 -3.67176e-06C130.392 -1.6439e-06 168 37.6081 168 84C168 130.392 130.392 168 84 168L-7.34351e-06 168L-3.67176e-06 84C-1.6439e-06 37.6081 37.6081 -5.69961e-06 84 -3.67176e-06Z"
-                    fill="white"
-                  />
-                  <circle cx="84" cy="84" r="48" fill="#660DFF" />
-                  <text
-                    fill="white"
-                    xmlSpace="preserve"
-                    fontFamily="sans-serif"
-                    fontSize="32"
-                    fontWeight="900"
-                    textAnchor="middle"
-                    letterSpacing="-0.04em"
-                    style={{ whiteSpace: "pre" }}
-                  >
-                    <tspan ref={countRef} x="84" y="87.08">
-                      000+
-                    </tspan>
-                  </text>
-                  <text
-                    fill="white"
-                    xmlSpace="preserve"
-                    fontFamily="sans-serif"
-                    fontSize="12"
-                    fontWeight="bold"
-                    textAnchor="middle"
-                    letterSpacing="0.05em"
-                    style={{ whiteSpace: "pre" }}
-                  >
-                    <tspan x="84" y="105.08">
-                      STORES
-                    </tspan>
-                  </text>
-                </g>
-              </svg>
+              <SvgBadgeStores ref={badgeRef} countRef={countRef} />
             </div>
           </div>
 
@@ -261,13 +217,15 @@ export default function FeatureSection() {
           })}
         </div>
 
-        {/* Hapus will-change-transform dari class */}
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 w-full reveal-item opacity-0">
           <Link
             href="/content"
-            className="group flex items-center justify-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white px-8 py-4 rounded-3xl font-normal text-lg hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto shadow-lg tracking-tight cursor-pointer"
+            className={cn(
+              buttonVariants({ variant: "glass", size: "lg" }),
+              "w-full sm:w-auto group gap-3",
+            )}
           >
-            Learn More
+            Mulai Belajar
             <svg
               width="24"
               height="24"

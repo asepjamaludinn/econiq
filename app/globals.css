@@ -23,7 +23,7 @@
 
   /* Fluid Typography */
   --text-fluid-h2: clamp(28px, 8vw, 58px);
-  --text-fluid-wallet: clamp(32px, 7vw, 120px);
+  --text-fluid-wallet: clamp(32px, 5vw, 120px);
   --text-fluid-step-sm: clamp(34px, 10vw, 70px);
   --text-fluid-step-md: clamp(50px, 7vw, 100px);
   --text-fluid-step-lg: clamp(70px, 7.5vw, 120px);
@@ -151,4 +151,21 @@ html {
 }
 .animate-sway-leaves {
   animation: sway-leaves 7s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.pause-marquee:hover .animate-marquee {
+  animation-play-state: paused;
 }

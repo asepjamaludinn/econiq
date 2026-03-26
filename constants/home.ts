@@ -5,26 +5,26 @@ import { SvgGrow } from "@/components/icons/SvgGrow";
 import { FeatureData, StepData, ImageData, FAQItemData } from "@/types";
 
 export const heroData = {
-  titleLine1: "Know Your Money.",
-  titleLine2: "Grow Your Money.",
+  titleLine1: "Kenali Uangmu.",
+  titleLine2: "Kembangkan Uangmu.",
 };
 
 export const featuresData: FeatureData[] = [
   {
-    title: "Beginner Friendly",
-    desc: "Start learning digital finance safely. Eqonic provides intuitive content and step-by-step guides to help you understand Web3 without technical barriers.",
+    title: "Ramah Pemula",
+    desc: "Mulai perjalananmu di dunia keuangan digital dengan aman. ECONIQ menyediakan panduan bertahap tanpa hambatan teknis.",
   },
   {
-    title: "Financial Literacy",
-    desc: "Understand the core of Web3 economics. Learn how decentralized finance works and its impact on the real-world digital economy.",
+    title: "Literasi Finansial",
+    desc: "Pahami dasar ekonomi Web3 dan bagaimana sistem keuangan terdesentralisasi bekerja di dunia nyata.",
   },
   {
-    title: "Trusted Knowledge Base",
-    desc: "Build a strong foundation with verified and accurate information. We help you navigate the Web3 space safely and avoid digital scams or misinformation.",
+    title: "Pusat Pengetahuan Terpercaya",
+    desc: "Bangun fondasi kuat dengan informasi yang terverifikasi. Kami membantumu menjelajahi Web3 secara aman dan terhindar dari penipuan digital.",
   },
   {
-    title: "Insightful Reading",
-    desc: "Engage with dynamic articles that make complex blockchain concepts, smart contracts, and digital finance easy to understand for everyone.",
+    title: "Bacaan Berwawasan",
+    desc: "Pelajari konsep kompleks seperti blockchain dan smart contract dengan cara yang sederhana dan mudah dipahami.",
   },
 ];
 
@@ -46,26 +46,26 @@ export const sumberUangData: string[] = [
 export const stepsData: StepData[] = [
   {
     num: "01",
-    title: "Discover Trends",
-    desc: "Begin your journey by discovering the latest news and trends in Web3, blockchain, and digital finance.",
+    title: "Temukan Tren",
+    desc: "Awali perjalananmu dengan menemukan berita dan tren terbaru seputar Web3, blockchain, dan keuangan digital.",
     Icon: SvgWallet,
   },
   {
     num: "02",
-    title: "Learn & Explore",
-    desc: "Access comprehensive articles to understand Web3 fundamentals, blockchain security, and digital financial literacy from the basics.",
+    title: "Pelajari & Eksplorasi",
+    desc: "Akses artikel komprehensif untuk memahami dasar-dasar Web3, keamanan blockchain, dan literasi keuangan digital dari tahap paling awal.",
     Icon: SvgLearn,
   },
   {
     num: "03",
-    title: "Analytical Thinking",
-    desc: "Read our daily insights to learn how to analyze crypto market movements and technological shifts in real-time.",
+    title: "Berpikir Analitis",
+    desc: "Baca wawasan harian kami untuk mempelajari cara memahami dinamika pasar kripto dan perkembangan teknologi secara lebih kritis.",
     Icon: SvgTrack,
   },
   {
     num: "04",
-    title: "Empower Economy",
-    desc: "Apply your financial knowledge to make smarter decisions and contribute to a more innovative and sustainable digital economy.",
+    title: "Berdayakan Ekonomi",
+    desc: "Terapkan pengetahuan finansialmu untuk membuat keputusan yang lebih cerdas dan berkontribusi pada ekonomi digital yang lebih inovatif dan berkelanjutan.",
     Icon: SvgGrow,
   },
 ];
@@ -73,19 +73,19 @@ export const stepsData: StepData[] = [
 export const marketingImages: ImageData[] = [
   {
     src: "/images/feed1.webp",
-    alt: "Feed 1",
+    alt: "Umpan 1",
     positionClasses:
       "top-[2%] md:top-[8%] lg:top-[12%] left-[-5%] md:left-[2%] lg:left-[5%] w-[180px] md:w-[280px] lg:w-[320px] -rotate-[12deg]",
   },
   {
     src: "/images/feed2.webp",
-    alt: "Feed 2",
+    alt: "Umpan 2",
     positionClasses:
       "bottom-[8%] md:bottom-[3%] lg:bottom-[8%] left-[10%] md:left-[0%] lg:left-[20%] w-[160px] md:w-[250px] lg:w-[200px] rotate-[6deg]",
   },
   {
     src: "/images/feed3.webp",
-    alt: "Feed 3",
+    alt: "Umpan 3",
     positionClasses:
       "top-[15%] md:top-[10%] lg:top-[18%] right-[-5%] md:-right-[5%] lg:right-[5%] w-[180px] md:w-[280px] lg:w-[280px] rotate-[15deg]",
   },
@@ -94,31 +94,31 @@ export const marketingImages: ImageData[] = [
 export const locationImages: ImageData[] = [
   {
     src: "/images/store1.png",
-    alt: "Store 1",
+    alt: "Toko 1",
     positionClasses:
       "top-[5%] md:top-[10%] left-[2%] md:left-[5%] lg:left-[8%] w-[120px] md:w-[180px] lg:w-[220px]",
   },
   {
     src: "/images/store2.png",
-    alt: "Store 2",
+    alt: "Toko 2",
     positionClasses:
       "bottom-[12%] md:bottom-[15%] left-[5%] md:left-[10%] lg:left-[15%] w-[100px] md:w-[160px] lg:w-[180px]",
   },
   {
     src: "/images/store3.png",
-    alt: "Store 3",
+    alt: "Toko 3",
     positionClasses:
       "top-[15%] md:top-[12%] right-[2%] md:right-[5%] lg:right-[8%] w-[110px] md:w-[170px] lg:w-[200px]",
   },
   {
     src: "/images/store4.png",
-    alt: "Store 4",
+    alt: "Toko 4",
     positionClasses:
       "bottom-[10%] md:bottom-[8%] right-[8%] md:right-[15%] lg:right-[10%] w-[130px] md:w-[190px] lg:w-[240px]",
   },
   {
     src: "/images/store5.png",
-    alt: "Store 5",
+    alt: "Toko 5",
     positionClasses:
       "top-[30%] md:top-[10%] lg:top-[10%] left-[5%] md:left-[40%] lg:left-[45%] w-[90px] md:w-[140px] lg:w-[160px]",
   },
@@ -141,41 +141,40 @@ export const teamImages: ImageData[] = [
 
 export const faqData: FAQItemData[] = [
   {
-    question: "What is Eqonic's vision in supporting the INNOVATE theme?",
+    question: "Apa visi Eqonic dalam mendukung tema INNOVATE?",
     answer:
-      "In line with the INNOVATE spirit (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic serves as a digital education innovation. We navigate society through the complexities of Web3 finance via a secure, validated, and optimized platform to advance technological literacy.",
+      "Sejalan dengan semangat INNOVATE (Impel Novelty, Navigate, Optimize, Validate, Advance Technological Endeavors), Eqonic hadir sebagai inovasi edukasi digital. Kami menavigasi masyarakat melalui kompleksitas keuangan Web3 via platform yang aman, tervalidasi, dan optimal untukmembantu lebih banyak orang memahami Web3 secara mudah dan terbuka.",
   },
   {
-    question: "Why does Eqonic focus purely on educational articles and news?",
+    question: "Mengapa Eqonic hanya berfokus pada artikel edukasi dan berita?",
     answer:
-      "We believe that education is the first line of defense. The Web3 space is full of complex technologies and potential misinformation. By providing a comprehensive and verified knowledge base, we empower beginners to build a strong foundation and critical thinking skills before they enter the real digital economy.",
+      "Kami percaya bahwa pendidikan adalah garis pertahanan pertama. Ruang Web3 penuh dengan teknologi kompleks dan potensi misinformasi. Dengan menyediakan basis pengetahuan yang komprehensif dan terverifikasi, kami memberdayakan pemula untuk membangun fondasi yang kuat dan keterampilan berpikir kritis sebelum mereka memasuki ekonomi digital yang sesungguhnya.",
   },
   {
     question:
-      "Does this platform only discuss Economics, or does it touch on sustainability issues?",
+      "Apakah platform ini hanya membahas Ekonomi, atau juga menyentuh isu keberlanjutan (lingkungan)?",
     answer:
-      "Eqonic covers both! Besides financial articles, Eqonic Academy also highlights the Environment sub-theme by providing education on 'Green Blockchain' (low-carbon emission crypto networks) and how decentralized technology can be used to fund global climate and health initiatives.",
+      "Eqonic mencakup keduanya! Selain artikel keuangan, Akademi Eqonic juga menyoroti subtema Lingkungan dengan menyediakan edukasi tentang 'Green Blockchain' (jaringan kripto rendah emisi karbon) dan bagaimana teknologi terdesentralisasi dapat digunakan untuk mendanai inisiatif iklim dan kesehatan global.",
   },
   {
-    question: "How does this platform impact the wider community?",
+    question: "Bagaimana platform ini berdampak pada masyarakat luas?",
     answer:
-      "The website is not just an information medium, but a tool for empowerment. By democratizing access to Web3 knowledge for free, Eqonic aims to increase public awareness, foster critical thinking among the younger generation, and prepare society for the transition to an inclusive digital economy.",
+      "Website ini bukan sekadar media informasi, melainkan alat untuk pemberdayaan. Dengan membuka akses pengetahuan Web3 untuk semua orang secara gratis dan mudah dipahami secara gratis, Eqonic bertujuan untuk meningkatkan kesadaran publik, menumbuhkan pemikiran kritis di kalangan generasi muda, dan mempersiapkan masyarakat menuju transisi ekonomi digital yang inklusif.",
   },
   {
-    question: "Do I need to connect a crypto wallet or pay to use Eqonic?",
+    question:
+      "Apakah saya perlu menghubungkan crypto wallet atau membayar untuk menggunakan Eqonic?",
     answer:
-      "Absolutely not. Eqonic is a 100% free educational platform. We will never ask you to connect your real crypto wallet, make deposits, or purchase tokens. Our sole purpose is to provide safe, risk-free financial literacy for everyone.",
+      "Tentu saja tidak. Eqonic adalah platform edukasi yang 100% gratis. Kami tidak akan pernah meminta Anda untuk menghubungkan crypto wallet asli, melakukan deposit, atau membeli token. Satu-satunya tujuan kami adalah menyediakan literasi keuangan yang aman dan bebas risiko bagi siapa saja.",
   },
-
   {
-    question: "I am an absolute beginner. Where should I start?",
+    question: "Saya benar-benar pemula. Dari mana saya harus mulai?",
     answer:
-      "We recommend starting with our 'Web3 Basics' and 'Internet Evolution' articles. These foundational pieces are designed without complex technical jargon, making it easy to grasp the core concepts before diving into advanced topics like Smart Contracts or Crypto Wallets.",
+      "Kami merekomendasikan untuk memulai dengan artikel 'Dasar-dasar Web3' dan 'Evolusi Internet'. Artikel fundamental ini dirancang tanpa jargon teknis yang rumit, sehingga memudahkan Anda untuk memahami konsep inti sebelum mendalami topik lanjutan seperti Smart Contract atau Crypto Wallet.",
   },
-
   {
-    question: "How often is the educational content updated?",
+    question: "Seberapa sering konten edukasi diperbarui?",
     answer:
-      "Our team of experts continuously monitors the rapid changes in the Web3 and digital finance landscape. We update our knowledge base and publish new insights weekly to ensure our community always receives the most accurate and validated information.",
+      "Tim ahli kami terus memantau perubahan cepat dalam lanskap Web3 dan keuangan digital. Kami memperbarui basis pengetahuan kami dan menerbitkan wawasan baru setiap minggu untuk memastikan komunitas kami selalu menerima informasi yang paling akurat dan tervalidasi.",
   },
 ];

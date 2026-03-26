@@ -4,8 +4,15 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import AnimatedSideModal from "./AnimatedSideModal";
 import type ReCAPTCHA_Type from "react-google-recaptcha";
+import { contactSchema, ContactInput } from "@/lib/validations/contact";
+import { Button } from "./Button";
+import InputField from "./InputField";
+import SelectField from "./SelectField";
+import TextAreaField from "./TextAreaField";
 
 const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
   ssr: false,
@@ -14,7 +21,7 @@ const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
       <div className="flex items-center gap-2 text-zinc-400">
         <Loader2 className="w-4 h-4 animate-spin" />
         <span className="text-xs font-bold tracking-wider uppercase">
-          Verifying Security...
+          Memverifikasi Keamanan...
         </span>
       </div>
     </div>
@@ -32,77 +39,79 @@ interface FormModalProps {
 export default function FormModal({ isOpen, onClose }: FormModalProps) {
   const recaptchaRef = useRef<ReCAPTCHA_Type>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactInput>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      interest: "",
+      message: "",
+    },
+  });
 
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
         setSubmitStatus("idle");
         setErrorMsg(null);
+        reset();
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
         }
       }, 500);
     }
-  }, [isOpen]);
+  }, [isOpen, reset]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit = async (data: ContactInput) => {
     if (!captchaValue) {
-      setErrorMsg("Please complete the security verification.");
+      setErrorMsg("Harap selesaikan verifikasi keamanan ReCAPTCHA.");
       setSubmitStatus("error");
       return;
     }
 
-    setIsSubmitting(true);
     setSubmitStatus("idle");
     setErrorMsg(null);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-        }),
+        body: JSON.stringify({ ...data, captchaValue }),
       });
 
       if (response.ok) {
         setSubmitStatus("success");
-        form.reset();
+        reset();
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
           setCaptchaValue(null);
         }
       } else {
         const errorData = await response.json();
-
-        if (errorData.errors && Array.isArray(errorData.errors)) {
-          setErrorMsg(errorData.errors.join(", "));
-        } else {
-          setErrorMsg(errorData.message || "An unexpected error occurred.");
-        }
-
+        setErrorMsg(
+          errorData.message ||
+            "Terjadi kesalahan pada server. Silakan coba lagi.",
+        );
         setSubmitStatus("error");
       }
     } catch (error) {
       console.error(error);
       setErrorMsg(
-        "Failed to connect to the server. Please check your network connection.",
+        "Gagal terhubung ke server. Harap periksa koneksi jaringan Anda.",
       );
       setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -110,69 +119,112 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
     <AnimatedSideModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Join ECONIQ"
-      contentClassName="px-5 md:px-10 lg:px-12 pb-8 md:pb-10 pt-4 md:pt-6 flex-grow flex flex-col gap-4 md:gap-6 overflow-y-auto"
+      title="Gabung ECONIQ"
+      contentClassName="px-5 md:px-10 lg:px-12 pb-12 pt-4 md:pt-6 flex flex-col gap-4 md:gap-6"
     >
       <div className="modal-animate-item shrink-0">
-        <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[64px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
-          JOIN THE
+        <h2 className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[50px] font-black uppercase tracking-tighter text-foreground leading-[0.9] mb-2 md:mb-4">
+          BERGABUNG DENGAN
           <br />
-          <span className="text-brand-secondary">NEXT GENERATION</span>
+          <span className="text-brand-secondary">GENERASI BARU</span>
           <br />
-          OF DIGITAL FINANCE
+          KEUANGAN DIGITAL
         </h2>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-500 leading-snug max-w-lg">
-          Learn the fundamentals of Web3, blockchain, and digital finance. Leave
-          your details and our team will share more information with you.
+        <p className="text-sm sm:text-base md:text-md lg:text-md font-medium text-zinc-500 leading-snug max-w-lg">
+          Pelajari dasar-dasar Web3, blockchain, dan keuangan digital. Isi data
+          diri Anda dan tim kami akan segera membagikan informasi lebih lanjut.
         </p>
       </div>
 
       <form
         className="flex flex-col gap-3 md:gap-4 mt-1 md:mt-2 shrink-0 pb-4"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
       >
-        <div className="modal-animate-item">
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
-          />
-        </div>
+        <InputField
+          {...register("name")}
+          type="text"
+          placeholder="Nama Lengkap"
+          error={errors.name?.message}
+          clearError={() => clearErrors("name")}
+          wrapperClassName="modal-animate-item"
+        />
 
-        <div className="modal-animate-item">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-            className="w-full bg-brand-light text-foreground placeholder:text-zinc-400 p-3.5 md:p-4 rounded-xl font-medium outline-none border border-transparent focus:border-brand-secondary/40 transition-colors"
-          />
-        </div>
+        <InputField
+          {...register("email")}
+          type="email"
+          placeholder="Alamat Email"
+          error={errors.email?.message}
+          clearError={() => clearErrors("email")}
+          wrapperClassName="modal-animate-item"
+        />
 
+        <SelectField
+          {...register("interest")}
+          error={errors.interest?.message}
+          clearError={() => clearErrors("interest")}
+          wrapperClassName="modal-animate-item"
+          placeholderText="Topik yang Ingin Dipelajari"
+          options={[
+            {
+              value: "Dasar Web3 & Blockchain",
+              label: "Dasar Web3 & Blockchain",
+            },
+            {
+              value: "Keamanan Crypto Wallet",
+              label: "Keamanan Crypto Wallet",
+            },
+            {
+              value: "Green Blockchain",
+              label: "Green Blockchain & Keberlanjutan",
+            },
+            { value: "Smart Contract", label: "Smart Contract & Pengembangan" },
+            { value: "Lainnya", label: "Lainnya / Umum" },
+          ]}
+        />
+
+        <TextAreaField
+          {...register("message")}
+          placeholder="Tulis motivasi bergabung atau hal yang ingin Anda tanyakan..."
+          rows={4}
+          error={errors.message?.message}
+          clearError={() => clearErrors("message")}
+          wrapperClassName="modal-animate-item"
+        />
+
+        {/* Checkbox Persetujuan */}
         <div className="modal-animate-item flex items-start sm:items-center gap-3 mt-1 md:mt-2">
           <input
+            {...register("terms_agreed")}
             type="checkbox"
             id="terms"
-            name="terms_agreed"
-            required
-            className="w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0"
+            onChange={() => clearErrors("terms_agreed")}
+            className={`w-5 h-5 mt-0.5 sm:mt-0 accent-brand-secondary cursor-pointer rounded border-brand-secondary/30 shrink-0 ${
+              errors.terms_agreed ? "outline outline-1 outline-red-500" : ""
+            }`}
           />
           <label
             htmlFor="terms"
-            className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-default"
+            className="text-xs sm:text-sm md:text-base text-zinc-600 cursor-pointer"
           >
-            I accept the processing of my{" "}
+            Saya menyetujui pemrosesan{" "}
             <Link
               href="/privacy"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
               className="text-brand-secondary font-medium hover:text-brand-primary hover:underline transition-all duration-300"
             >
-              personal data.
+              data pribadi saya.
             </Link>
           </label>
         </div>
+        {errors.terms_agreed && (
+          <span className="modal-animate-item text-red-500 text-sm mt-0 ml-8 font-medium">
+            {errors.terms_agreed.message}
+          </span>
+        )}
 
         <div className="modal-animate-item mt-1 md:mt-2 origin-left scale-[0.85] sm:scale-100 min-h-[78px]">
           {isOpen && (
@@ -191,64 +243,63 @@ export default function FormModal({ isOpen, onClose }: FormModalProps) {
               className="mt-0.5 flex-shrink-0 text-green-600"
             />
             <div className="flex flex-col gap-1">
-              <span className="font-bold text-sm md:text-base">Thank you!</span>
+              <span className="font-bold text-sm md:text-base">
+                Terima kasih!
+              </span>
               <span className="font-medium text-xs md:text-sm text-green-600/90 leading-relaxed">
-                Your information has been sent. Please check your email inbox
-                (or spam folder) for the confirmation message.
+                Informasi Anda telah terkirim. Silakan periksa kotak masuk email
+                Anda (atau folder spam) untuk pesan konfirmasi.
               </span>
             </div>
           </div>
         )}
 
-        {submitStatus === "error" && (
+        {submitStatus === "error" && errorMsg && (
           <div className="modal-animate-item text-red-500 bg-red-50 p-3.5 md:p-4 rounded-xl border border-red-200 font-medium text-sm">
-            {errorMsg || "Oops! Something went wrong. Please try again later."}
+            {errorMsg}
           </div>
         )}
 
         <div className="modal-animate-item mt-2 md:mt-4">
-          <button
+          <Button
             type="submit"
+            variant="secondary"
+            size="default"
             disabled={isSubmitting}
-            className={`group w-full font-bold py-3.5 md:py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.98] ${
-              isSubmitting
-                ? "bg-brand-muted text-white cursor-not-allowed"
-                : "bg-brand-secondary hover:bg-brand-primary hover:shadow-lg text-white"
-            }`}
+            className="w-full group"
           >
             {isSubmitting ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Sending...
+                Mengirim...
               </>
             ) : (
-              "Start Learning"
+              <>
+                Kirim Pendaftaran
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="overflow-visible"
+                >
+                  <path
+                    d="M5 12h14"
+                    className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
+                    style={{ transformOrigin: "19px 12px" }}
+                  />
+                  <path
+                    d="m12 5 7 7-7 7"
+                    className="transition-all duration-300 ease-out group-hover:translate-x-3"
+                  />
+                </svg>
+              </>
             )}
-
-            {!isSubmitting && (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="overflow-visible"
-              >
-                <path
-                  d="M5 12h14"
-                  className="transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:scale-x-[1.8]"
-                  style={{ transformOrigin: "19px 12px" }}
-                />
-                <path
-                  d="m12 5 7 7-7 7"
-                  className="transition-all duration-300 ease-out group-hover:translate-x-3"
-                />
-              </svg>
-            )}
-          </button>
+          </Button>
         </div>
       </form>
     </AnimatedSideModal>

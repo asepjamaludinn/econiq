@@ -38,6 +38,8 @@ export default function AnimatedSideModal({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
       lenis?.stop();
 
       const tl = gsap.timeline();
@@ -67,6 +69,8 @@ export default function AnimatedSideModal({
       );
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.touchAction = "";
       lenis?.start();
 
       const tl = gsap.timeline();
@@ -80,6 +84,8 @@ export default function AnimatedSideModal({
 
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.touchAction = "";
       lenis?.start();
     };
   }, [isOpen, lenis]);
@@ -184,7 +190,6 @@ export default function AnimatedSideModal({
         aria-hidden="true"
       />
 
-      {/* Custom Cursor */}
       {isDesktopEnvironment && (
         <div
           ref={customCursorRef}
@@ -210,16 +215,15 @@ export default function AnimatedSideModal({
         </div>
       )}
 
-      {/* Modal Content */}
       <div
         ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="fixed top-0 right-0 h-full bg-white z-[1000] flex flex-col translate-x-full overflow-y-auto w-full md:w-[600px] lg:w-[650px] xl:w-[750px] rounded-tl-[20px] rounded-bl-[20px] md:rounded-tl-[30px] md:rounded-bl-[30px] shadow-[-20px_0_60px_rgba(0,0,0,0.15)]"
+        className="fixed top-0 right-0 h-[100dvh] max-h-[100dvh] bg-white z-[1000] flex flex-col translate-x-full overflow-hidden w-full md:w-[600px] lg:w-[650px] xl:w-[750px] rounded-tl-[20px] rounded-bl-[20px] md:rounded-tl-[30px] md:rounded-bl-[30px] shadow-[-20px_0_60px_rgba(0,0,0,0.15)]"
         style={{ willChange: "transform" }}
       >
-        <div className="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-zinc-100 modal-animate-item sticky top-0 bg-white z-20">
+        <div className="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-zinc-100 modal-animate-item shrink-0 bg-white z-20">
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
@@ -242,7 +246,12 @@ export default function AnimatedSideModal({
           </div>
         </div>
 
-        <div className={contentClassName}>{children}</div>
+        <div
+          className={`flex-1 overflow-y-auto overscroll-none touch-pan-y ${contentClassName || ""}`}
+          data-lenis-prevent="true"
+        >
+          {children}
+        </div>
       </div>
     </>
   );

@@ -48,10 +48,10 @@ export default function HowItWorksSection() {
               style={{ perspective: "1000px" }}
             >
               <div className="text-line text-line-1 block transform-gpu md:whitespace-nowrap">
-                Navigate Your
+                Navigasi Perjalanan
               </div>
               <div className="text-line text-line-2 block transform-gpu md:whitespace-nowrap">
-                Financial Journey
+                Finansialmu
               </div>
             </div>
           </h2>
@@ -89,7 +89,6 @@ export default function HowItWorksSection() {
               ))}
             </div>
 
-            {/* KOLOM KANAN  */}
             <div className="relative w-full h-[400px] lg:h-[500px]">
               {stepsData.map((step, index) => {
                 const DesktopStepIcon = step.Icon;
@@ -113,7 +112,6 @@ export default function HowItWorksSection() {
               </div>
 
               <div className="flex items-center justify-between w-full mb-4 sm:mb-6 md:mb-8 border-b border-white/20 pb-4 md:pb-6 gap-1.5 sm:gap-3">
-                {/* KIRI */}
                 <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
                   {stepsData.map(
                     (step, index) =>
@@ -131,7 +129,6 @@ export default function HowItWorksSection() {
                   )}
                 </div>
 
-                {/* TENGAH */}
                 <div className="flex items-center gap-2.5 sm:gap-4 flex-grow justify-start min-w-0">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-[1.5px] border-white bg-white/20 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <span className="font-bold text-white text-base sm:text-lg md:text-xl">
@@ -144,7 +141,6 @@ export default function HowItWorksSection() {
                   </h3>
                 </div>
 
-                {/* KANAN */}
                 <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
                   {stepsData.map(
                     (step, index) =>

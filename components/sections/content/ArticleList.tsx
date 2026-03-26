@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { articlesData } from "@/constants";
+import ArticleCard from "@/components/ui/ArticleCard";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +48,7 @@ export default function ArticleList() {
     <section className="w-full py-6 md:py-24 px-8 md:px-8 lg:px-12 max-w-[1500px] mx-auto bg-white">
       <div className="flex flex-col items-center mb-12 lg:mb-16">
         <span className="px-6 py-2 text-md font-normal tracking-tight uppercase bg-brand-primary text-white rounded-full">
-          More From Our Articles
+          Jelajahi Artikel Lainnya
         </span>
       </div>
 
@@ -58,42 +57,13 @@ export default function ArticleList() {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 md:gap-x-12 lg:gap-x-18 gap-y-16 justify-items-center"
       >
         {filteredArticles.map((article) => (
-          <Link
+          <ArticleCard
             key={article.id}
-            href={article.slug}
-            className="article-card opacity-0 group flex flex-col h-full cursor-pointer w-[500px] max-w-full"
-          >
-            <div className="relative w-[500px] max-w-full h-[350px] md:h-[300px] lg:h-[340px] rounded-xs overflow-hidden mb-6 bg-zinc-100">
-              <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/5 z-10 transition-colors duration-300 pointer-events-none"></div>
-
-              <Image
-                src={article.thumbnail}
-                alt={article.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-              />
-            </div>
-
-            <div className="flex items-center gap-6 text-[13px] text-zinc-500 font-normal mb-3">
-              <span className="text-zinc-800">{article.topic}</span>
-              <span className="text-zinc-800 tracking-tight">
-                {article.date}
-              </span>
-            </div>
-
-            <h3 className="text-[22px] md:text-[26px] font-medium tracking-tight text-foreground leading-[1.2] group-hover:text-brand-primary transition-colors line-clamp-3">
-              {article.title}
-            </h3>
-          </Link>
+            article={article}
+            className="article-card opacity-0"
+          />
         ))}
       </div>
-
-      {filteredArticles.length === 0 && (
-        <div className="w-full py-20 text-center text-zinc-400 font-medium">
-          No articles found in this category.
-        </div>
-      )}
     </section>
   );
 }

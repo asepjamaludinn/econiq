@@ -72,17 +72,17 @@ export default function WalletSection() {
           <div className="border-[2px] border-brand-accent text-brand-accent bg-transparent rounded-full px-4 md:px-5 py-1 mb-6 md:mb-10 flex items-center gap-2">
             <MdVerified className="w-4 h-4 md:w-5 md:h-5" />
             <span className="text-[10px] md:text-sm font-extrabold uppercase tracking-widest">
-              WEB3 LITERACY
+              LITERASI WEB3
             </span>
           </div>
 
           <h2 className="text-fluid-wallet font-black uppercase tracking-tight leading-[1.1] text-white mb-4 md:mb-8 relative z-20 whitespace-normal md:whitespace-nowrap ">
-            Learn, Adapt, Innovate
+            Pelajari, Adaptasi, Inovasi
           </h2>
 
           <p className="text-white text-sm md:text-xl mt-2 relative z-20 max-w-2xl px-2 tracking-tight">
-            Understand how to manage Web3 assets safely through our interactive
-            learning ecosystem.
+            Pahami cara mengelola aset Web3 dengan aman melalui ekosistem
+            pembelajaran interaktif kami.
           </p>
         </div>
 
