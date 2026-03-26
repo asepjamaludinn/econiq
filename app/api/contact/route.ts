@@ -7,8 +7,7 @@ import {
 } from "@/lib/email/mailer";
 
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
-
-const RATE_LIMIT = 50;
+const RATE_LIMIT = 3;
 const TIME_WINDOW = 60 * 60 * 1000;
 
 function checkRateLimit(ip: string): boolean {
@@ -71,19 +70,18 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log(
-      "[DEBUG] Token ReCAPTCHA yang diterima (potongan):",
-      captchaValue.substring(0, 20) + "...",
+    const verifyRes = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${secretKey}&response=${captchaValue}`,
+      },
     );
 
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaValue}`;
-
-    const verifyRes = await fetch(verifyUrl, {
-      method: "POST",
-    });
-
     const verifyData = await verifyRes.json();
-    console.log("[DEBUG] Hasil dari Google:", verifyData);
 
     if (!verifyData.success) {
       console.warn("[ReCAPTCHA Verification Failed]:", verifyData);
