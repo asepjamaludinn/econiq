@@ -28,12 +28,12 @@ export default function AboutSecurity() {
           viewport={{ once: true }}
           className="relative w-full aspect-square md:aspect-4/5 bg-white/[0.02] rounded-[40px] overflow-hidden border border-white/5 backdrop-blur-2xl shadow-2xl"
         >
-          <Image alt="" src="/images/blockchain3d.jpg" fill className="object-cover opacity-90 mix-blend-overlay" />
+          <Image alt="Infrastruktur Edukasi" src="/images/blockchain3d.jpg" fill className="object-cover opacity-90 mix-blend-overlay" />
           <div className="absolute inset-0 bg-brand-primary/20 mix-blend-overlay pointer-events-none" />
           <div className="absolute inset-0 bg-black/40" />
           
-          <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg" />
-          <div className="absolute top-10 right-10 w-20 h-20 bg-brand-tertiary/10 backdrop-blur-xl rounded-full border border-white/10 shadow-lg" />
+          <div className="absolute bottom-10 left-10 w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-lg" />
+          <div className="absolute top-10 right-10 w-16 h-16 md:w-20 md:h-20 bg-brand-tertiary/10 backdrop-blur-xl rounded-full border border-white/10 shadow-lg" />
         </motion.div>
 
         <motion.div
@@ -43,18 +43,18 @@ export default function AboutSecurity() {
           viewport={{ once: true }}
           className="flex flex-col"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-wide text-white">
-            Ditenagai oleh <br /> <span className="text-brand-tertiary">Teknologi Modern</span>
+          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-wide text-white leading-tight">
+            Platform Edukasi <br className="hidden md:block" /> <span className="text-brand-tertiary">Modern</span>
           </h2>
           
           <div className="w-16 h-1 bg-gradient-to-r from-brand-tertiary to-brand-primary mb-10 rounded-full" />
 
           <p className="text-lg md:text-xl text-white/60 mb-6 leading-relaxed font-medium">
-            Infrastruktur Econiq menjamin keamanan <i>top-tier</i> dan <i>real-time monitoring</i> langsung dari <i>dashboard</i> Anda.
+            Sistem manajemen pembelajaran Econiq dirancang untuk memberikan pengalaman belajar yang <i>seamless</i> tanpa hambatan teknis.
           </p>
 
           <p className="text-lg md:text-xl text-white/60 leading-relaxed font-medium">
-            Kami menggunakan enkripsi military-grade terbaik yang mengamankan digital assets Anda di seluruh jaringan blockchain.
+            Kami mengubah visualisasi data yang kompleks dan konsep kriptografi menjadi materi visual yang ramah dan mudah dicerna oleh pelajar.
           </p>
         </motion.div>
 

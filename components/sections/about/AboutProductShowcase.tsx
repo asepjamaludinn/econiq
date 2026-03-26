@@ -42,7 +42,7 @@ export default function AboutProductShowcase() {
       });
     });
 
-    textRefs.current.forEach((text, i) => {
+    textRefs.current.forEach((text) => {
       gsap.from(text, {
         y: 50,
         opacity: 0,
@@ -60,40 +60,36 @@ export default function AboutProductShowcase() {
     <section ref={containerRef} className="py-24 md:py-48 px-6 bg-transparent relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
         
-        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-6 relative pt-4 md:pt-10 pb-16 md:pb-32">
+        <div className="w-full lg:w-1/2 flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-6 relative pt-4 md:pt-10 pb-16 md:pb-32">
           
-          <div ref={addToImages} data-speed="1.2" className="mt-12 md:mt-32 relative group transform-gpu h-[250px] md:h-auto">
+          <div ref={addToImages} data-speed="1.2" className="mt-0 md:mt-32 relative group transform-gpu h-[250px] md:h-auto">
             <div className="absolute top-2 left-2 md:top-4 md:left-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-bold text-brand-tertiary shadow-lg">
-              Uptime 24/7
+              Akses 24/7
             </div>
             
             <div className="w-full h-full md:h-80 bg-zinc-800 rounded-2xl md:rounded-[32px] overflow-hidden relative border border-white/10 shadow-2xl">
-              
               <Image 
                 src="/images/Dompet.svg"
-                alt="Econiq Feature 1" 
+                alt="Modul Econiq" 
                 fill 
                 className="object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
               />
-              
               <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/40 to-transparent mix-blend-overlay pointer-events-none" />
             </div>
           </div>
 
           <div ref={addToImages} data-speed="0.7" className="relative group transform-gpu h-[250px] md:h-auto">
              <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-bold text-brand-tertiary shadow-lg">
-              Sync Instan
+              Simulasi Praktis
             </div>
 
             <div className="w-full h-full md:h-96 bg-zinc-800 rounded-2xl md:rounded-[32px] overflow-hidden relative border border-white/10 shadow-2xl">
-               
                <Image 
                 src="/images/BitCoin.svg" 
-                alt="Econiq Feature 2" 
+                alt="Simulasi Transaksi" 
                 fill 
                 className="object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
               />
-
                <div className="absolute inset-0 bg-gradient-to-bl from-brand-tertiary/40 to-transparent mix-blend-overlay pointer-events-none" />
             </div>
           </div>
@@ -106,18 +102,18 @@ export default function AboutProductShowcase() {
             <h3 ref={addToText} className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.1] mb-6 md:mb-8 text-white">
               Memberdayakan <br/> 
               <span className="text-white/50">
-                Digital Assets Kamu
+                Literasi Digital
               </span>
             </h3>
             
             <p ref={addToText} className="text-white/70 text-base md:text-xl leading-relaxed mb-8 md:mb-10 font-medium">
-              Hubungkan ekonomi fisik dan digitalmu secara mulus. Infrastruktur kami menjamin <i>execution</i> berkecepatan tinggi, keamanan <i>top-tier</i>, dan <i>real-time monitoring</i> langsung dari <i>dashboard</i> kamu.
+              Pahami ekosistem digital secara komprehensif. Platform edukasi kami menyediakan modul interaktif, simulasi nyata, dan evaluasi pemahaman langsung dari <i>dashboard</i> belajarmu.
             </p>
             
             <ul className="space-y-4 md:space-y-6">
-              {['Integrasi Smart Contract', 'Pembayaran Cross-border', 'Decentralized Identity'].map((item, i) => (
+              {['Fundamental Blockchain', 'Simulasi Smart Contract', 'Keamanan Transaksi Web3'].map((item, i) => (
                 <li key={i} ref={addToText} className="flex items-center gap-4 text-white/90 font-bold text-base md:text-lg">
-                  <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-tr from-brand-primary to-brand-tertiary shadow-[0_0_10px_var(--color-brand-tertiary)]" />
+                  <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-tr from-brand-primary to-brand-tertiary shadow-[0_0_10px_var(--color-brand-tertiary)] flex-shrink-0" />
                   {item}
                 </li>
               ))}

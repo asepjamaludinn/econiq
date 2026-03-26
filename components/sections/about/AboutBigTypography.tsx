@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 
 const textsToCycle = [
-  "KAPAN PUN, DI MANA PUN.",
-  "AMAN, TRANSPARAN, DESENTRALISASI.",
-  "MASA DEPAN EKONOMI DIGITAL.",
-  "DITENAGAI OLEH SMART CONTRACTS.",
+  "BELAJAR KRIPTO DARI DASAR.",
+  "PAHAMI RISIKO, KELOLA DENGAN BIJAK.",
+  "LITERASI WEB3 UNTUK SEMUA.",
+  "DATA JELAS, KEPUTUSAN LEBIH CERDAS.",
 ];
 
 export default function AboutBigTypography() {
@@ -62,10 +62,8 @@ export default function AboutBigTypography() {
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none transform-gpu -z-10" />
 
-      <h2 
-        className="text-5xl md:text-8xl lg:text-[110px] font-black uppercase text-center leading-[0.9] tracking-tighter text-white drop-shadow-2xl"
-      >
-        <span>TRANSAKSI</span> <br />
+      <h2 className="text-[clamp(2.5rem,8vw,6.875rem)] font-black uppercase text-center leading-[0.9] tracking-tighter break-words ...">
+        <span>EDUKASI</span> <br />
         <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-tertiary to-brand-primary">
           <motion.span>{displayText}</motion.span>
           <span className="text-brand-primary animate-pulse ml-1">|</span>
