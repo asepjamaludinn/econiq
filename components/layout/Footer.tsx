@@ -118,7 +118,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="absolute -bottom-[5vh] md:-bottom-[4vh] lg:-bottom-[12vh] left-0 w-full h-[50vh] md:h-[40vh] lg:h-[50vh] z-30 pointer-events-none">
+      <div className="absolute -bottom-[5vh] md:-bottom-[4vh] lg:-bottom-[14vh] left-0 w-full h-[50vh] md:h-[40vh] lg:h-[51vh] z-30 pointer-events-none">
         <Image
           src="/images/bawahjalan.svg"
           alt="Bawah Jalan"
