@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export default function NotFound() {
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-brand-light/50 to-white px-6 overflow-hidden selection:bg-brand-secondary selection:text-white">
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-white via-white via-80% to-grad-end px-6 overflow-hidden selection:bg-brand-secondary selection:text-white">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
