@@ -7,7 +7,7 @@ import {
 } from "@/lib/email/mailer";
 
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
-const RATE_LIMIT = 3;
+const RATE_LIMIT = 50;
 const TIME_WINDOW = 60 * 60 * 1000;
 
 function checkRateLimit(ip: string): boolean {
@@ -69,6 +69,11 @@ export async function POST(request: Request) {
         { status: 500 },
       );
     }
+
+    console.log(
+      "[DEBUG] Token ReCAPTCHA yang diterima (potongan):",
+      captchaValue.substring(0, 20) + "...",
+    );
 
     const verifyRes = await fetch(
       "https://www.google.com/recaptcha/api/siteverify",
