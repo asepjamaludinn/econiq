@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SplashScreen from "@/components/SplashScreen"; // 1. Import komponennya
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${plusJakartaSans.variable} font-sans antialiased`}>
         <SmoothScroll>
+          <SplashScreen />
           <Navbar />
           {children}
           <Footer />

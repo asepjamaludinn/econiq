@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import SplashScreen from "@/components/SplashScreen";
 import HeroSection from "@/components/sections/home/HeroSection";
 
 const SectionSkeleton = () => (
@@ -44,8 +43,6 @@ const FAQSection = dynamic(
 export default function Home() {
   return (
     <>
-      <SplashScreen />
-
       <main className="relative w-full overflow-hidden bg-zinc-900">
         <HeroSection />
         <WalletSection />
