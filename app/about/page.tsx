@@ -16,7 +16,6 @@ import AboutSecurity from "@/components/sections/about/AboutSecurity";
 import AboutMarquee from "@/components/sections/about/AboutMarquee";
 import AboutTimeline from "@/components/sections/about/AboutTimeline";
 import AboutCTA from "@/components/sections/about/AboutCTA";
-import FooterNightScene from "@/components/sections/about/FooterNightScene";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -31,18 +30,18 @@ export default function AboutPage() {
         trigger: mainRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.5, 
+        scrub: true,
       },
     });
-    tl.to(mainRef.current, { backgroundColor: "#1A0B2E", duration: 1.5, ease: "power1.inOut" }) 
-      .to(mainRef.current, { backgroundColor: "#0b1021", duration: 1.5, ease: "power1.inOut" });
 
+    tl.to(mainRef.current, { backgroundColor: "#1A0B2E", duration: 1, ease: "none" })
+      .to(mainRef.current, { backgroundColor: "#660dff", duration: 1, ease: "power2.inOut" });
   }, { scope: mainRef });
 
   return (
     <main 
       ref={mainRef} 
-      className="relative w-full min-h-screen overflow-hidden transition-colors duration-500 bg-zinc-900 text-white"
+      className="relative z-20 w-full min-h-screen overflow-x-hidden bg-zinc-900 text-white"
     >
       <AboutHero />
       <AboutBigTypography />
@@ -54,8 +53,10 @@ export default function AboutPage() {
       <AboutSecurity />
       <AboutMarquee />
       <AboutTimeline />
-      <AboutCTA />
-      <FooterNightScene />
+      <div className="relative z-10 pb-20">
+        <AboutCTA />
+      </div>
+      <div className="absolute -bottom-40 left-0 w-full h-40 bg-linear-to-b from-brand-primary to-transparent z-50 pointer-events-none" />
     </main>
   );
 }

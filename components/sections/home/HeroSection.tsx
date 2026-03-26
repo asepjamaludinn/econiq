@@ -144,7 +144,7 @@ export default function HeroSection() {
             alt="Rumah Kiri"
             aria-hidden="true"
             fill
-            className="object-contain object-left-bottom"
+            className="object-contain object-bottom-left"
             priority
           />
         </div>
@@ -154,7 +154,7 @@ export default function HeroSection() {
             alt="Rumah Kanan"
             aria-hidden="true"
             fill
-            className="object-contain object-right-bottom"
+            className="object-contain object-bottom-right"
             priority
           />
         </div>
@@ -170,7 +170,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kiri"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-left-bottom"
+              className="object-cover xl:object-contain object-bottom-left"
               priority
             />
           </div>
@@ -181,7 +181,7 @@ export default function HeroSection() {
               alt="Hiasan Tembok Kanan"
               aria-hidden="true"
               fill
-              className="object-cover xl:object-contain object-right-bottom"
+              className="object-cover xl:object-contain object-bottom-right"
               priority
             />
           </div>
