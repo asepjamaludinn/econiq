@@ -30,24 +30,18 @@ export default function AnimatedSideModal({
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isDesktopEnvironment, setIsDesktopEnvironment] = useState(false);
 
-  // State untuk menyimpan posisi scroll terakhir (mencegah layout jump)
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setIsDesktopEnvironment(window.matchMedia("(pointer: fine)").matches);
   }, []);
 
-  // --- EFEK KUNCI SCROLL & ANIMASI ---
   useEffect(() => {
     if (isOpen) {
-      // 1. Simpan posisi scroll saat ini
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
-
-      // 2. Hentikan Lenis Smooth Scroll
       if (lenis) lenis.stop();
 
-      // 3. Kunci Body (Solusi ampuh untuk Mobile & Desktop)
       document.body.style.position = "fixed";
       document.body.style.top = `-${currentScrollY}px`;
       document.body.style.width = "100%";
@@ -81,7 +75,6 @@ export default function AnimatedSideModal({
         "-=0.5",
       );
     } else {
-      // 1. Kembalikan posisi Body seperti semula
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
@@ -89,10 +82,8 @@ export default function AnimatedSideModal({
       document.documentElement.style.overflow = "";
       document.body.style.touchAction = "";
 
-      // 2. Kembalikan posisi scroll yang sempat disimpan
       window.scrollTo(0, scrollY);
 
-      // 3. Jalankan kembali Lenis Smooth Scroll
       if (lenis) lenis.start();
 
       const tl = gsap.timeline();
@@ -104,7 +95,6 @@ export default function AnimatedSideModal({
       );
     }
 
-    // Cleanup function untuk berjaga-jaga jika komponen unmount
     return () => {
       document.body.style.position = "";
       document.body.style.top = "";
@@ -116,7 +106,6 @@ export default function AnimatedSideModal({
     };
   }, [isOpen, lenis, scrollY]);
 
-  // --- EFEK CUSTOM CURSOR DI DESKTOP ---
   useEffect(() => {
     if (isOpen && customCursorRef.current && isDesktopEnvironment) {
       gsap.set(customCursorRef.current, { xPercent: -50, yPercent: -50 });
@@ -167,7 +156,6 @@ export default function AnimatedSideModal({
     }
   }, [isOpen, isDesktopEnvironment]);
 
-  // --- EFEK FOCUS TRAP & ACCESSIBILITY ---
   useEffect(() => {
     if (!isOpen || !modalRef.current) return;
 
@@ -207,7 +195,6 @@ export default function AnimatedSideModal({
 
   return (
     <>
-      {/* Overlay dengan pengunci lenis dan touch */}
       <div
         ref={overlayRef}
         onClick={onClose}
@@ -220,7 +207,6 @@ export default function AnimatedSideModal({
         data-lenis-prevent="true"
       />
 
-      {/* Custom Cursor */}
       {isDesktopEnvironment && (
         <div
           ref={customCursorRef}
@@ -246,7 +232,6 @@ export default function AnimatedSideModal({
         </div>
       )}
 
-      {/* Modal Content */}
       <div
         ref={modalRef}
         role="dialog"
@@ -278,7 +263,6 @@ export default function AnimatedSideModal({
           </div>
         </div>
 
-        {/* Konten Scrollable */}
         <div
           className={`flex-1 overflow-y-auto overscroll-none touch-pan-y ${contentClassName || ""}`}
           data-lenis-prevent="true"

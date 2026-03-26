@@ -77,7 +77,10 @@ export async function POST(request: Request) {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `secret=${secretKey}&response=${captchaValue}`,
+        body: new URLSearchParams({
+          secret: secretKey,
+          response: captchaValue,
+        }).toString(),
       },
     );
 
